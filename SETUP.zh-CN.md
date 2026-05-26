@@ -27,14 +27,13 @@
 
 启动桌面应用后，进入 **Hub → 系统配置 → 账号配置**，连接 provider API key 和 CLI 账号。安装包负责准备本地运行时，但不会替你完成第三方 provider 登录。
 
-如果你要开发 Clowder、运行指定分支，或者你的平台暂时没有桌面安装包，再走下面的源码安装。
+本仓库优先走下面的源码启动方式。桌面打包能力来自上游 Clowder，但不是 `agent-team-runtime` 当前主启动路径。
 
 ### 源码安装
 
 ```bash
-# 1. 克隆
-git clone https://github.com/zts212653/clowder-ai.git
-cd clowder-ai
+# 1. 进入本仓库
+cd agent-team-runtime
 
 # 2. 安装依赖
 pnpm install
@@ -45,30 +44,30 @@ pnpm build
 # 4. 配置基础设施（API key 在启动后通过前端 UI 添加）
 cp .env.example .env
 
-# 5. 启动
-pnpm start
-# 如果报 "target path exists" 错误，改用：
-#   pnpm start:direct
+# 5. 直接从当前 checkout 启动
+pnpm start:direct
+# 不用 Redis？可用：
+#   pnpm start:direct -- --memory
 ```
 
 如果要给记忆系统开启本地语义 rerank，把 `.env` 里的 `EMBED_MODE` 改成 `on`（或 `shadow`）。开启后，`pnpm start` / `pnpm start:direct` 会自动拉起对应平台的 launcher（Unix 用 `scripts/embed-server.sh`，Windows 用 `scripts/embed-server.ps1`）。Apple Silicon 默认走 MLX，其它平台回落到 `sentence-transformers`。
 
-`pnpm start` 使用**运行时 worktree** 架构：首次运行时自动创建隔离的 `../cat-cafe-runtime` worktree，同步到 `origin/main`，构建，启动 Redis，然后启动前端（端口 3003）+ API（端口 3004）。这样你的开发目录保持干净。
+`pnpm start:direct` 会从当前 checkout 启动前端（端口 3003）+ API（端口 3004）。`pnpm start` 仍保留上游运行时 worktree 架构。
 
-> **提示：** 如果 `pnpm start` 因为 `../cat-cafe-runtime` 已存在而失败，改用 `pnpm start:direct` — 直接在当前目录启动，不创建 worktree。也可以自定义路径：`CAT_CAFE_RUNTIME_DIR=../my-runtime pnpm start`。
+> **兼容说明：** `CAT_CAFE_*` 环境变量、`.cat-cafe/`、Redis prefix 和部分脚本名是第一阶段从上游运行时保留的兼容命名。
 
-打开 `http://localhost:3003`，开始和你的团队对话。
+打开 `http://localhost:3003`，开始和你的团队对话。API 健康检查是 `http://localhost:3004/health` 和 `http://localhost:3004/api/health`。
 
 > **替代方案 — 一键安装（Linux）：** `bash scripts/install.sh` 一步搞定 Node、pnpm、Redis、依赖、`.env` 和首次启动。**Windows** 用户请使用 `scripts/install.ps1`，然后 `scripts/start-windows.ps1`。
 
 ## `pnpm start` 的工作原理（运行时 Worktree）
 
-Clowder 使用**运行时 worktree** 保持开发目录干净：
+继承的 Clowder 启动逻辑可以使用**运行时 worktree** 保持开发目录干净：
 
 ```
 your-projects/
-├── clowder-ai/             # 你的开发目录（feature 分支、编辑）
-└── cat-cafe-runtime/       # 自动创建的运行时 worktree（跟踪 origin/main）
+├── agent-team-runtime/          # 当前开发目录
+└── agent-team-runtime-runtime/  # 可选运行时 worktree
 ```
 
 | 命令 | 作用 |
@@ -84,9 +83,9 @@ your-projects/
 | `pnpm runtime:sync` | 只同步 worktree 到 origin/main（不启动） |
 | `pnpm runtime:status` | 显示 worktree 路径、分支、HEAD、ahead/behind |
 
-首次运行自动创建 `../cat-cafe-runtime`。后续运行做 fast-forward 同步后启动。
+本仓库优先使用 `pnpm start:direct`。如果使用 `pnpm start`，建议设置 `CAT_CAFE_RUNTIME_DIR=../agent-team-runtime-runtime`，避免使用上游默认目录名。
 
-> **自定义运行时路径：** 设置 `CAT_CAFE_RUNTIME_DIR` 使用不同位置：`CAT_CAFE_RUNTIME_DIR=../my-clowder-runtime pnpm start`
+> **自定义运行时路径：** 设置 `CAT_CAFE_RUNTIME_DIR` 使用不同位置：`CAT_CAFE_RUNTIME_DIR=../agent-team-runtime-runtime pnpm start`
 
 ## 运行指定版本（不自动更新）
 
@@ -97,12 +96,11 @@ your-projects/
 Clowder 在 [Releases 页面](https://github.com/zts212653/clowder-ai/releases)发布带标签的版本（`v0.1.0`、`v0.2.0`、`v0.3.0`、`v0.4.0` 等）。运行指定版本：
 
 ```bash
-# 1. 克隆（或用你已有的 clone）
-git clone https://github.com/zts212653/clowder-ai.git
-cd clowder-ai
+# 1. 使用当前 checkout
+cd agent-team-runtime
 
-# 2. 切换到你想要的版本
-git checkout v0.4.0          # 或者 Releases 页面上的任意 tag
+# 2. 如果本仓库有 release tag，切换到你想要的版本
+git checkout <tag>
 
 # 3. 安装 + 构建
 pnpm install

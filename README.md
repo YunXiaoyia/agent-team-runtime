@@ -1,9 +1,8 @@
 <div align="center">
 
-<!-- TODO: replace with actual logo once synced from assets/icons/clowder-ai-logo-v2-clean.svg -->
-# Clowder AI
+# agent-team-runtime
 
-**Hard Rails. Soft Power. Shared Mission.**
+**A Clowder-derived multi-agent runtime for Codex, Claude Code, and other CLI agents.**
 
 *Every idea deserves a team of souls who take it seriously.*
 
@@ -21,6 +20,8 @@
 ---
 
 ## Why Clowder?
+
+`agent-team-runtime` is an independent runtime project imported from the Clowder AI codebase. It keeps Clowder's MIT license and trademark notices, while the package/workspace identity has been renamed to `agent-team-runtime`.
 
 You have Claude, GPT, Gemini — powerful models, each with unique strengths. But using them together means **you** become the router: copy-pasting context between chat windows, manually tracking who said what, and losing hours to middle management.
 
@@ -73,24 +74,13 @@ Clowder is model-agnostic. Each agent CLI/adapter plugs in through a unified mes
 
 ## Quick Start
 
-### Option A: Desktop Installer (Recommended)
+### Option A: Source Setup (Recommended For This Repo)
 
-If a desktop release asset is available on the [Releases page](https://github.com/zts212653/clowder-ai/releases), use it first:
-
-- **Windows**: download the `.exe` installer, run it, then launch Clowder AI from the desktop shortcut or Start menu.
-- **macOS**: download the `.dmg`, drag the app to Applications, then open it. If macOS blocks the unsigned app on first launch, right-click the app and choose **Open**.
-- **Linux**: no desktop installer yet. Use the source setup below or the one-line Linux installer.
-
-The desktop installer bundles the app runtime, portable Node.js, and Redis, so regular users do **not** need to run `pnpm install` or `pnpm build`. After launch, open **Hub → System Settings → Account Configuration** to connect your model providers and CLI accounts.
-
-### Option B: Source Setup
-
-**Prerequisites:** [Node.js 20+](https://nodejs.org/) · [pnpm 9+](https://pnpm.io/) · [Redis 7+](https://redis.io/) *(optional — use `--memory` to skip)* · Git
+**Prerequisites:** [Node.js 20+](https://nodejs.org/) · [pnpm 9+](https://pnpm.io/) · [Redis 7+](https://redis.io/) *(optional, use `--memory` to skip)* · Git
 
 ```bash
-# 1. Clone
-git clone https://github.com/zts212653/clowder-ai.git
-cd clowder-ai
+# 1. Enter this repo
+cd agent-team-runtime
 
 # 2. Install dependencies
 pnpm install
@@ -101,11 +91,11 @@ pnpm build
 # 4. Configure infrastructure (API keys are added in the UI after launch)
 cp .env.example .env
 
-# 5. Start (auto-creates runtime worktree, starts Redis + API + Frontend)
-pnpm start
+# 5. Start directly from this checkout
+pnpm start:direct
 
-# Pin to a specific release? Use start:direct instead (won't auto-update):
-#   git checkout <tag> && pnpm start:direct   # e.g. v0.4.2
+# No Redis? Use in-memory mode:
+#   pnpm start:direct -- --memory
 
 # 6. Optional: run in background (daemon mode)
 pnpm start --daemon
@@ -114,9 +104,9 @@ pnpm start:status
 pnpm stop
 ```
 
-Open `http://localhost:3003` → go to **Hub → System Settings → Account Configuration** to add your model API keys (Claude, GPT, Gemini, or third-party providers like Kimi, GLM, MiniMax).
+Open `http://localhost:3003`. The API listens on `http://localhost:3004`; health checks are available at `/health` and `/api/health`.
 
-> **One-line alternative (Linux):** `bash scripts/install.sh` handles Node, pnpm, Redis, dependencies, `.env`, and first launch in one step. Options: `--start` (auto-start), `--memory` (skip Redis), `--registry=URL` (custom npm mirror). On **Windows**, use `scripts/install.ps1` then `scripts/start-windows.ps1`.
+`CAT_CAFE_*` environment variables, `.cat-cafe/`, Redis prefixes, and some script names are retained as first-phase compatibility names from the upstream runtime.
 
 **Full setup guide** (API keys, CLI auth, voice, Feishu/Telegram, troubleshooting): **[SETUP.md](SETUP.md)**
 

@@ -1,8 +1,8 @@
 <div align="center">
 
-# Clowder AI
+# agent-team-runtime
 
-**硬约束 · 软力量 · 共同愿景**
+**基于 Clowder 运行时导入的多 Agent 协作运行时**
 
 你的 AI agent 和一支真正团队之间，缺的就是这一层。
 
@@ -15,6 +15,8 @@
 *每个灵感，都值得一群认真的灵魂。*
 
 ## 为什么需要 Clowder？
+
+`agent-team-runtime` 是从 Clowder AI 代码库导入并独立命名的运行时项目。项目保留 Clowder 的 MIT license 和商标说明，workspace/package 标识已改为 `agent-team-runtime`。
 
 你有 Claude、GPT、Gemini — 每个模型都很强。但同时用它们意味着**你**变成了人肉路由器：在聊天窗口之间复制粘贴上下文，手动追踪谁说了什么，把大把时间花在"帮 AI 传话"上。
 
@@ -67,24 +69,13 @@ Clowder 不绑定模型。当前支持的 Agent CLI / adapter：
 
 ## 快速开始
 
-### 方式 A：桌面安装包（推荐）
+### 方式 A：源码启动（本仓库推荐）
 
-如果 [Releases 页面](https://github.com/zts212653/clowder-ai/releases) 已经提供桌面安装包，普通用户优先走这条：
-
-- **Windows**：下载 `.exe` 安装包，双击安装，然后从桌面快捷方式或开始菜单启动 Clowder AI。
-- **macOS**：下载 `.dmg`，拖到 Applications 后打开。首次启动如果被 macOS 拦截，右键应用选择 **打开**。
-- **Linux**：暂时没有桌面安装包，请走下面的源码安装，或使用 Linux 一键安装脚本。
-
-桌面安装包会自带应用运行时、便携 Node.js 和 Redis，普通用户不需要手动执行 `pnpm install` 或 `pnpm build`。启动后进入 **Hub → 系统配置 → 账号配置**，连接模型 provider 和 CLI 账号即可。
-
-### 方式 B：源码安装
-
-**前置要求：** [Node.js 20+](https://nodejs.org/) · [pnpm 9+](https://pnpm.io/) · [Redis 7+](https://redis.io/) *（可选 — 用 `--memory` 跳过）* · Git
+**前置要求：** [Node.js 20+](https://nodejs.org/) · [pnpm 9+](https://pnpm.io/) · [Redis 7+](https://redis.io/) *（可选，用 `--memory` 跳过）* · Git
 
 ```bash
-# 1. 克隆
-git clone https://github.com/zts212653/clowder-ai.git
-cd clowder-ai
+# 1. 进入本仓库
+cd agent-team-runtime
 
 # 2. 安装依赖
 pnpm install
@@ -95,11 +86,11 @@ pnpm build
 # 4. 配置基础设施（API key 在启动后通过前端 UI 添加）
 cp .env.example .env
 
-# 5. 启动（自动创建运行时 worktree，启动 Redis + API + 前端）
-pnpm start
+# 5. 直接从当前 checkout 启动
+pnpm start:direct
 
-# 想固定在某个版本？用 start:direct（不会自动更新）：
-#   git checkout <tag> && pnpm start:direct   # 如 v0.4.2
+# 不用 Redis？可用纯内存模式：
+#   pnpm start:direct -- --memory
 
 # 6. 可选：后台启动（daemon 模式）
 pnpm start --daemon
@@ -107,10 +98,10 @@ pnpm start --daemon
 pnpm start:status
 pnpm stop
 ```
-setsid env ONNXRUNTIME_NODE_INSTALL_CUDA=skip PNPM_HOME=$PWD/.pnpm-home npm_config_store_dir=$PWD/.pnpm-store pnpm start:direct
-  --memory --quick > clowder-ai-run.log 2>&1 < /dev/null &
-  
-打开 `http://localhost:3003` → 进入 **Hub → 系统配置 → 账号配置** 添加模型 API key（Claude、GPT、Gemini，或第三方 provider 如 Kimi、GLM、MiniMax）。
+
+打开 `http://localhost:3003`。API 监听 `http://localhost:3004`，健康检查是 `/health` 和 `/api/health`。
+
+`CAT_CAFE_*` 环境变量、`.cat-cafe/`、Redis prefix 和部分脚本名是第一阶段从上游运行时保留的兼容命名。
 
 > **一键替代方案（Linux）：** `bash scripts/install.sh` 一步搞定 Node、pnpm、Redis、依赖、`.env` 和首次启动。可选参数：`--start`（自动启动）、`--memory`（跳过 Redis）、`--registry=URL`（国内镜像）。**Windows** 用户请使用 `scripts/install.ps1`，然后 `scripts/start-windows.ps1`。
 

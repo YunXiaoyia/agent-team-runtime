@@ -27,14 +27,13 @@ For most non-developer users, start with the desktop installer when a release as
 
 After launching the desktop app, go to **Hub → System Settings → Account Configuration** to connect provider API keys and CLI accounts. The installer prepares the local runtime; it does not complete your third-party provider login for you.
 
-Use the source setup below if you want to develop Clowder, run from a specific branch, or no desktop installer is available for your platform.
+Use the source setup below for `agent-team-runtime`. Desktop packaging is inherited from upstream Clowder and is not the primary launch path for this repo.
 
 ### Source Setup
 
 ```bash
-# 1. Clone
-git clone https://github.com/zts212653/clowder-ai.git
-cd clowder-ai
+# 1. Enter this repo
+cd agent-team-runtime
 
 # 2. Install
 pnpm install
@@ -45,30 +44,30 @@ pnpm build
 # 4. Configure infrastructure (API keys are added via UI after launch)
 cp .env.example .env
 
-# 5. Run
-pnpm start
-# If this fails with "target path exists", use:
-#   pnpm start:direct
+# 5. Run directly from this checkout
+pnpm start:direct
+# No Redis? Use:
+#   pnpm start:direct -- --memory
 ```
 
 To enable local semantic rerank for the memory system, set `EMBED_MODE=on` (or `shadow`) in `.env`. `pnpm start` / `pnpm start:direct` will auto-launch the platform launcher (`scripts/embed-server.sh` on Unix, `scripts/embed-server.ps1` on Windows). Apple Silicon uses MLX by default; other platforms fall back to `sentence-transformers`.
 
-`pnpm start` uses the **runtime worktree** architecture: it creates an isolated `../cat-cafe-runtime` worktree (on first run), syncs it to `origin/main`, builds, starts Redis, and launches Frontend (port 3003) + API (port 3004). This keeps your development checkout clean.
+`pnpm start:direct` launches Frontend (port 3003) + API (port 3004) from the current checkout. `pnpm start` still uses the inherited runtime worktree architecture.
 
-> **Tip:** If `pnpm start` fails because `../cat-cafe-runtime` already exists, use `pnpm start:direct` instead — it runs directly in your current checkout without creating a worktree. You can also set a custom path: `CAT_CAFE_RUNTIME_DIR=../my-runtime pnpm start`.
+> **Compatibility note:** `CAT_CAFE_*` environment variables, `.cat-cafe/`, Redis prefixes, and some script names are retained from the upstream runtime for the first import phase.
 
-Open `http://localhost:3003` and start talking to your team.
+Open `http://localhost:3003` and start talking to your team. API health checks are available at `http://localhost:3004/health` and `http://localhost:3004/api/health`.
 
 > **Alternative — One-line installer (Linux):** `bash scripts/install.sh` handles Node, pnpm, Redis, dependencies, `.env`, and first launch in one step. On **Windows**, use `scripts/install.ps1` then `scripts/start-windows.ps1`.
 
 ## How `pnpm start` Works (Runtime Worktree)
 
-Clowder uses a **runtime worktree** to keep your dev checkout clean:
+The inherited Clowder startup can use a **runtime worktree** to keep your dev checkout clean:
 
 ```
 your-projects/
-├── clowder-ai/             # Your development checkout (feature branches, edits)
-└── cat-cafe-runtime/       # Auto-created runtime worktree (tracks origin/main)
+├── agent-team-runtime/          # Your development checkout
+└── agent-team-runtime-runtime/  # Optional runtime worktree
 ```
 
 | Command | What it does |
@@ -84,9 +83,9 @@ your-projects/
 | `pnpm runtime:sync` | Only sync worktree to origin/main (no start) |
 | `pnpm runtime:status` | Show worktree path, branch, HEAD, ahead/behind |
 
-First run creates `../cat-cafe-runtime` automatically. Subsequent runs do a fast-forward sync then start.
+Prefer `pnpm start:direct` for this repo. If you use `pnpm start`, set `CAT_CAFE_RUNTIME_DIR=../agent-team-runtime-runtime` to avoid the inherited default directory name.
 
-> **Custom runtime path:** Set `CAT_CAFE_RUNTIME_DIR` to use a different location: `CAT_CAFE_RUNTIME_DIR=../my-clowder-runtime pnpm start`
+> **Custom runtime path:** Set `CAT_CAFE_RUNTIME_DIR` to use a different location: `CAT_CAFE_RUNTIME_DIR=../agent-team-runtime-runtime pnpm start`
 
 ## Running a Specific Version (Without Auto-Update)
 
@@ -97,12 +96,11 @@ By default, `pnpm start` auto-syncs to the latest `origin/main`. If you want to 
 Clowder publishes [tagged releases](https://github.com/zts212653/clowder-ai/releases) (`v0.1.0`, `v0.2.0`, `v0.3.0`, `v0.4.0`, etc.). To run a specific version:
 
 ```bash
-# 1. Clone (or use your existing clone)
-git clone https://github.com/zts212653/clowder-ai.git
-cd clowder-ai
+# 1. Use this checkout
+cd agent-team-runtime
 
-# 2. Checkout the version you want
-git checkout v0.4.0          # or any tag from the Releases page
+# 2. Checkout the version you want, if this repo has release tags
+git checkout <tag>
 
 # 3. Install + build
 pnpm install
