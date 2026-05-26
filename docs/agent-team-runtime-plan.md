@@ -12,8 +12,8 @@
   - `packages/runtime`: AgentService、Provider、Router、A2A、四铁律 guards。
   - `packages/mcp-server`: 最小 MCP 回调桥。
 - 存储用 SQLite + Prisma，默认 `data/runtime.db`；不使用 Redis。
-- Codex 接入：spawn `codex exec --json ...`，注入 `developer_instructions`，解析 JSONL 为统一 `AgentMessage`。
-- Claude 接入：spawn `claude -p ... --output-format stream-json --verbose`，用 `--system-prompt-file` 注入 L0/铁律 prompt。
+- Codex 接入：spawn `codex exec --json ...`，按当前本机 CLI 能力在 prompt payload 中注入 `developer_instructions`，解析 JSONL 为统一 `AgentMessage`。
+- Claude 接入：spawn `claude -p ... --output-format stream-json --verbose`，按当前本机 CLI 能力用 `--system-prompt` 注入 L0/铁律 prompt。
 - 协同层支持 `@codex`、`@claude`、多 mention 串行/并行、A2A handoff，默认最大 depth 为 `2`。
 
 ## Git Management
