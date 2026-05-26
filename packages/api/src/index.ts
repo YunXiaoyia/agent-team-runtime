@@ -1292,7 +1292,8 @@ async function main(): Promise<void> {
 
   // F101: Game engine store (created early so messages route can intercept /game commands)
   const { RedisGameStore } = await import('./domains/cats/services/stores/redis/RedisGameStore.js');
-  const f101GameStore = redis ? new RedisGameStore(redis) : undefined;
+  const { InMemoryGameStore } = await import('./domains/cats/services/stores/memory/InMemoryGameStore.js');
+  const f101GameStore = redis ? new RedisGameStore(redis) : new InMemoryGameStore();
 
   // F101 Phase I: Shared ActionNotifier + game driver (narrator or legacy).
   // Created early so both messagesRoutes and gameRoutes use the same driver instance.

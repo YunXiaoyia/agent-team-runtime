@@ -15,11 +15,10 @@
  *   result/success → 跳过 (done 在循环后 yield)
  */
 
-import { existsSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { dirname, isAbsolute, join, resolve } from 'node:path';
 import { type CatId, createCatId } from '@agent-team-runtime/shared';
-import { getCatEffort } from '../../../../../config/cat-config-loader.js';
 import { getCatModel } from '../../../../../config/cat-models.js';
 import { createModuleLogger } from '../../../../../infrastructure/logger.js';
 import { formatCliExitError } from '../../../../../utils/cli-format.js';
@@ -262,7 +261,7 @@ export class ClaudeAgentService implements AgentService {
     return true;
   }
 
-  private async compileL0ToTempFile(): Promise<string> {
+  private async compileL0ToTempFile(): Promise<{ path: string; content: string }> {
     const l0Dir = mkdtempSync(join(tmpdir(), 'cat-cafe-l0-'));
     const l0Path = join(l0Dir, 'system-prompt-l0.md');
     try {
@@ -271,7 +270,7 @@ export class ClaudeAgentService implements AgentService {
       removeL0TempDir(l0Path);
       throw new Error(`L0 compile failed for ${this.catId as string}: ${(err as Error).message}`);
     }
-    return l0Path;
+    return { path: l0Path, content: readFileSync(l0Path, 'utf-8') };
   }
 
   async *invoke(prompt: string, options?: AgentServiceOptions): AsyncIterable<AgentMessage> {
@@ -292,16 +291,12 @@ export class ClaudeAgentService implements AgentService {
       'stream-json',
       '--include-partial-messages',
       '--verbose',
-      '--effort',
-      getCatEffort(this.catId as string, undefined, 'anthropic'),
       '--permission-mode',
       PERMISSION_MODE,
       // api_key mode: skip user-level ~/.claude/settings.json to prevent config pollution.
       // subscription mode: include user-level so CLI reads auth from ~/.claude/settings.json.
       '--setting-sources',
       isApiKeyMode ? 'project,local' : 'project,local,user',
-      // Enable Chrome MCP integration (built-in, requires Chrome + extension running)
-      '--chrome',
     ];
 
     // Only pass --model for known Anthropic models. For third-party models
@@ -360,8 +355,9 @@ export class ClaudeAgentService implements AgentService {
 
     let l0Path: string | undefined;
     try {
-      l0Path = await this.compileL0ToTempFile();
-      args.push('--system-prompt-file', l0Path);
+      const compiledL0 = await this.compileL0ToTempFile();
+      l0Path = compiledL0.path;
+      args.push('--system-prompt', compiledL0.content);
       // Route layer passes pack-only systemPrompt for native-L0 providers.
       // Keep it as an append layer, but never use it as the carrier's L0 source.
       if (options?.systemPrompt) args.push('--append-system-prompt', options.systemPrompt);

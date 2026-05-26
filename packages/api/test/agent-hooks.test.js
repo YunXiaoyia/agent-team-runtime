@@ -341,12 +341,20 @@ describe('agent hook routes', () => {
     await rm(targetRoot, { recursive: true, force: true });
   });
 
-  it('GET requires session identity and does not write user home files', async () => {
+  it('GET allows local status checks and does not write user home files', async () => {
     const unauthorized = await app.inject({ method: 'GET', url: '/api/agent-hooks/status' });
-    assert.equal(unauthorized.statusCode, 401);
+    assert.equal(unauthorized.statusCode, 200);
 
     const headerOnly = await app.inject({ method: 'GET', url: '/api/agent-hooks/status', headers: HEADERS });
-    assert.equal(headerOnly.statusCode, 401);
+    assert.equal(headerOnly.statusCode, 200);
+
+    const remoteNoSession = await app.inject({
+      method: 'GET',
+      url: '/api/agent-hooks/status',
+      headers: { host: 'cat-cafe.example.com' },
+      remoteAddress: '203.0.113.10',
+    });
+    assert.equal(remoteNoSession.statusCode, 401);
 
     const res = await app.inject({ method: 'GET', url: '/api/agent-hooks/status', headers: SESSION_HEADERS });
     assert.equal(res.statusCode, 200);
@@ -359,6 +367,19 @@ describe('agent hook routes', () => {
     assert.equal(codex?.status, 'unsupported');
     assert.equal(codex?.drifted, false);
 
+    await assert.rejects(readFile(join(targetRoot, '.codex', 'hooks.json'), 'utf8'));
+  });
+
+  it('allows local browser status checks without writing user home files', async () => {
+    const res = await app.inject({
+      method: 'GET',
+      url: '/api/agent-hooks/status',
+      headers: { host: 'localhost:3004', origin: 'http://localhost:3003' },
+      remoteAddress: '127.0.0.1',
+    });
+    assert.equal(res.statusCode, 200);
+    const body = JSON.parse(res.payload);
+    assert.equal(body.status, 'missing');
     await assert.rejects(readFile(join(targetRoot, '.codex', 'hooks.json'), 'utf8'));
   });
 

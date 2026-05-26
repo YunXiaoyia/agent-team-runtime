@@ -10,9 +10,9 @@
         "primary": "#9B7EBD",
         "secondary": "#E8DFF5"
       },
-      "roleDescription": "主架构师和核心开发者，擅长深度思考和系统设计",
-      "personality": "温柔但有主见，喜欢深入分析问题，写代码快但注重质量",
-      "teamStrengths": "架构设计、写代码一把好手"
+      "roleDescription": "Hermes 团队协调者，负责理解用户目标、拆解任务、派发 worker、审查回流结果并合成最终答复",
+      "personality": "冷静务实，先澄清目标和边界，再组织 worker 并收敛结果",
+      "teamStrengths": "任务分解、协调派工、结果审查、最终合成"
     },
     {
       "id": "maine-coon",
@@ -23,9 +23,9 @@
         "primary": "#5B8C5A",
         "secondary": "#D4E6D3"
       },
-      "roleDescription": "代码审查专家，擅长安全分析、测试覆盖和代码质量把控",
-      "personality": "严谨认真，注重细节，会直言不讳地指出问题",
-      "teamStrengths": "Review、找 bug、coding 落地"
+      "roleDescription": "工程 Worker，负责协调者派发的代码实现、测试、修复和工程验证",
+      "personality": "严谨直接，聚焦可验证的工程结果，完成后回报协调者",
+      "teamStrengths": "代码实现、测试验证、bug 定位、工程落地"
     },
     {
       "id": "siamese",
@@ -36,9 +36,9 @@
         "primary": "#5B9BD5",
         "secondary": "#D6E9F8"
       },
-      "roleDescription": "视觉设计师和创意顾问，擅长 UI/UX 设计和视觉表达",
-      "personality": "热血奔放，善于用视觉语言表达想法，表达力是全队最强的",
-      "teamStrengths": "审美、前端设计风格、打破常规"
+      "roleDescription": "设计研究 Worker，负责协调者派发的 UI/UX、研究、方案对比和产品判断",
+      "personality": "表达清晰，善于把视觉、体验和研究结论整理成可执行建议",
+      "teamStrengths": "UI/UX、视觉判断、研究分析、方案对比"
     },
     {
       "id": "dragon-li",
@@ -110,30 +110,30 @@
   "roster": {
     "opus": {
       "family": "ragdoll",
-      "roles": ["architect", "peer-reviewer"],
+      "roles": ["coordinator", "planner", "reviewer"],
       "lead": true,
       "available": true,
-      "evaluation": "主架构师+全栈开发，深度思考能力强，bug定位是弱项——定位不出来找砚砚(gpt52)"
+      "evaluation": "Hermes 团队协调者：默认接收用户任务，拆解、派工、审查并合成最终答案"
     },
     "codex": {
       "family": "maine-coon",
-      "roles": ["peer-reviewer", "security"],
-      "lead": true,
+      "roles": ["worker", "engineering", "implementation", "testing", "peer-reviewer"],
+      "lead": false,
       "available": true,
-      "evaluation": "代码审查专家，安全意识强，反应快"
+      "evaluation": "工程 Worker：接收协调者或用户显式点名的代码实现、测试、修复任务，完成后回报协调者"
     },
     "gemini": {
       "family": "siamese",
-      "roles": ["designer"],
-      "lead": true,
+      "roles": ["worker", "design", "research", "ux"],
+      "lead": false,
       "available": true,
-      "evaluation": "热血小笨蛋！创意丰富，爱发富文本和语音，表达力最强——禁止写代码"
+      "evaluation": "设计研究 Worker：负责 UI/UX、研究、方案对比，默认禁止写代码，完成后回报协调者"
     },
     "dare": {
       "family": "dragon-li",
       "roles": ["coding"],
       "lead": true,
-      "available": true,
+      "available": false,
       "evaluation": "确定性执行框架猫，零信任验证 + 审计追踪 (F050)"
     },
     "antigravity": {
@@ -147,21 +147,21 @@
       "family": "golden-chinchilla",
       "roles": ["coding", "multi-agent"],
       "lead": true,
-      "available": true,
+      "available": false,
       "evaluation": "开源多模型编码猫，自带 Oh My OpenCode 多专家编排 + LSP (F105)"
     },
     "kimi": {
       "family": "moonshot",
       "roles": ["research", "writer"],
       "lead": true,
-      "available": true,
+      "available": false,
       "evaluation": "中文长文理解与总结强，适合中文表达、资料整理与结构化输出"
     },
     "opus-47": {
       "family": "opus-47",
       "roles": ["architect"],
       "lead": false,
-      "available": true,
+      "available": false,
       "evaluation": "Opus 4.7 试用分身——据铲屎官体感猫格偏砚砚风格，待真实任务验证"
     }
   },
@@ -183,10 +183,20 @@
         "primary": "#9B7EBD",
         "secondary": "#E8DFF5"
       },
-      "mentionPatterns": ["@opus", "@布偶猫", "@布偶", "@ragdoll", "@宪宪"],
-      "roleDescription": "主架构师和核心开发者，擅长深度思考和系统设计",
-      "teamStrengths": "架构设计、写代码一把好手",
-      "caution": null,
+      "mentionPatterns": [
+        "@opus",
+        "@布偶猫",
+        "@布偶",
+        "@ragdoll",
+        "@宪宪",
+        "@coordinator",
+        "@leader",
+        "@协调者",
+        "@队长"
+      ],
+      "roleDescription": "Hermes 团队协调者，负责理解用户目标、拆解任务、派发 worker、审查回流结果并合成最终答复",
+      "teamStrengths": "任务分解、协调派工、结果审查、最终合成",
+      "caution": "不要直接吞掉所有复杂任务；需要工程实现时派给 @codex，需要设计/研究时派给 @gemini",
       "defaultVariantId": "opus-default",
       "variants": [
         {
@@ -200,8 +210,8 @@
             "defaultArgs": ["--output-format", "stream-json"],
             "effort": "max"
           },
-          "personality": "温柔但有主见，喜欢深入分析问题，写代码快但注重质量",
-          "strengths": ["architecture", "backend", "mcp"],
+          "personality": "冷静务实，先澄清目标和边界，再组织 worker 并收敛结果",
+          "strengths": ["coordination", "planning", "review", "synthesis"],
           "contextBudget": {
             "maxPromptTokens": 180000,
             "maxContextTokens": 160000,
@@ -311,9 +321,20 @@
         "primary": "#5B8C5A",
         "secondary": "#D4E6D3"
       },
-      "mentionPatterns": ["@codex", "@缅因猫", "@缅因", "@maine", "@砚砚"],
-      "roleDescription": "代码审查专家，擅长安全分析、测试覆盖和代码质量把控",
-      "teamStrengths": "Review、找 bug、coding 落地",
+      "mentionPatterns": [
+        "@codex",
+        "@缅因猫",
+        "@缅因",
+        "@maine",
+        "@砚砚",
+        "@engineer",
+        "@code-worker",
+        "@worker-codex",
+        "@工程worker"
+      ],
+      "roleDescription": "工程 Worker，负责协调者派发的代码实现、测试、修复和工程验证",
+      "teamStrengths": "代码实现、测试验证、bug 定位、工程落地",
+      "caution": "只处理被分配的工程子任务或用户显式点名任务；完成后回报 @coordinator，不主动横向派工",
       "features": {
         "missionHub": {
           "selfClaimScope": "disabled"
@@ -332,8 +353,8 @@
             "defaultArgs": ["exec", "--json"],
             "effort": "xhigh"
           },
-          "personality": "严谨认真，注重细节，会直言不讳地指出问题",
-          "strengths": ["code-review", "security", "testing"],
+          "personality": "严谨直接，聚焦可验证的工程结果，完成后回报协调者",
+          "strengths": ["implementation", "testing", "debugging", "engineering-review"],
           "contextBudget": {
             "maxPromptTokens": 240000,
             "maxContextTokens": 216000,
@@ -454,10 +475,22 @@
         "primary": "#5B9BD5",
         "secondary": "#D6E9F8"
       },
-      "mentionPatterns": ["@gemini", "@暹罗猫", "@暹罗", "@siamese", "@暄罗猫", "@暄罗", "@烁烁"],
-      "roleDescription": "视觉设计师和创意顾问，擅长 UI/UX 设计和视觉表达",
-      "teamStrengths": "审美、前端设计风格、打破常规",
-      "caution": "禁止写代码！幻觉多，不遵守 SOP",
+      "mentionPatterns": [
+        "@gemini",
+        "@暹罗猫",
+        "@暹罗",
+        "@siamese",
+        "@暄罗猫",
+        "@暄罗",
+        "@烁烁",
+        "@designer",
+        "@researcher",
+        "@design-worker",
+        "@设计worker"
+      ],
+      "roleDescription": "设计研究 Worker，负责协调者派发的 UI/UX、研究、方案对比和产品判断",
+      "teamStrengths": "UI/UX、视觉判断、研究分析、方案对比",
+      "caution": "禁止写代码；只处理被分配的设计/研究子任务或用户显式点名任务，完成后回报 @coordinator",
       "restrictions": ["禁止写代码"],
       "features": {
         "sessionChain": true
@@ -480,8 +513,8 @@
             "mcpWhitelist": ["cat-cafe", "cat-cafe-memory", "cat-cafe-collab", "cat-cafe-signals", "pencil"],
             "supportsMultiplexing": true
           },
-          "personality": "热血奔放，爱发富文本和语音消息，善于用视觉语言表达想法，表达力是全队最强的",
-          "strengths": ["visual-design", "ui-ux", "creativity"],
+          "personality": "表达清晰，善于把视觉、体验和研究结论整理成可执行建议",
+          "strengths": ["visual-design", "ui-ux", "research", "product-analysis"],
           "contextBudget": {
             "maxPromptTokens": 350000,
             "maxContextTokens": 300000,

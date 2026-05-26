@@ -177,3 +177,61 @@ describe('RedisGameStore', { skip: redisIsolationSkipReason(REDIS_URL) }, () => 
     assert.equal(active, null);
   });
 });
+
+describe('InMemoryGameStore', () => {
+  let InMemoryGameStore;
+  let store;
+
+  before(async () => {
+    const storeModule = await import('../dist/domains/cats/services/stores/memory/InMemoryGameStore.js');
+    InMemoryGameStore = storeModule.InMemoryGameStore;
+  });
+
+  beforeEach(() => {
+    store = new InMemoryGameStore();
+  });
+
+  it('getActiveGame returns null when no game is active', async () => {
+    assert.equal(await store.getActiveGame('thread-empty'), null);
+  });
+
+  it('createGame persists and lists active games', async () => {
+    const runtime = createTestRuntime();
+    const result = await store.createGame(runtime);
+
+    assert.equal(result.gameId, runtime.gameId);
+    assert.deepEqual(await store.getGame(runtime.gameId), runtime);
+    assert.deepEqual(await store.getActiveGame(runtime.threadId), runtime);
+
+    const active = await store.listActiveGames();
+    assert.equal(active.length, 1);
+    assert.equal(active[0].gameId, runtime.gameId);
+  });
+
+  it('createGame rejects if thread already has active game', async () => {
+    const runtime1 = createTestRuntime();
+    await store.createGame(runtime1);
+
+    const runtime2 = createTestRuntime({ gameId: 'game-duplicate', threadId: runtime1.threadId });
+    await assert.rejects(() => store.createGame(runtime2), /already has an active game/);
+  });
+
+  it('updateGame rejects stale version', async () => {
+    const runtime = createTestRuntime();
+    await store.createGame(runtime);
+
+    await assert.rejects(() => store.updateGame(runtime.gameId, runtime), /version conflict/i);
+  });
+
+  it('endGame marks finished and clears active mapping', async () => {
+    const runtime = createTestRuntime();
+    await store.createGame(runtime);
+
+    await store.endGame(runtime.gameId, 'villager');
+    const loaded = await store.getGame(runtime.gameId);
+    assert.equal(loaded.status, 'finished');
+    assert.equal(loaded.winner, 'villager');
+    assert.equal(await store.getActiveGame(runtime.threadId), null);
+    assert.deepEqual(await store.listActiveGames(), []);
+  });
+});

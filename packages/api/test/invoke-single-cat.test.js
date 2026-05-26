@@ -158,6 +158,91 @@ describe('invokeSingleCat audit events (P1 fix)', () => {
     };
   }
 
+  function withEnv(updates, fn) {
+    const saved = {};
+    for (const key of Object.keys(updates)) saved[key] = process.env[key];
+    for (const [key, value] of Object.entries(updates)) {
+      if (value === undefined) delete process.env[key];
+      else process.env[key] = value;
+    }
+    return Promise.resolve()
+      .then(fn)
+      .finally(() => {
+        for (const [key, value] of Object.entries(saved)) {
+          if (value === undefined) delete process.env[key];
+          else process.env[key] = value;
+        }
+      });
+  }
+
+  it('resolves Hermes coordinator .env account aliases', async () => {
+    const mod = await import('../dist/domains/cats/services/agents/invocation/invoke-single-cat.js');
+    await withEnv(
+      {
+        HERMES_COORDINATOR_API_KEY: 'sk-coordinator-local',
+        HERMES_COORDINATOR_API_BASE_URL: 'http://127.0.0.1:4010/v1',
+        HERMES_COORDINATOR_MODEL: 'claude-local-coordinator',
+      },
+      async () => {
+        const account = mod.resolveEnvRuntimeAccountForCat('opus');
+        assert.equal(account.id, 'env-opus');
+        assert.equal(account.authType, 'api_key');
+        assert.equal(account.apiKey, 'sk-coordinator-local');
+        assert.equal(account.baseUrl, 'http://127.0.0.1:4010/v1');
+        assert.deepEqual(account.models, ['claude-local-coordinator']);
+      },
+    );
+  });
+
+  it('injects per-cat .env API settings into Codex runtime env', async () => {
+    const root = await mkdtemp(join(tmpdir(), 'invoke-env-account-'));
+    const apiDir = join(root, 'packages', 'api');
+    await mkdir(apiDir, { recursive: true });
+    await writeFile(join(root, 'pnpm-workspace.yaml'), 'packages:\n  - "packages/*"\n', 'utf-8');
+
+    const optionsSeen = [];
+    const service = {
+      async *invoke(_prompt, options) {
+        optionsSeen.push(options ?? {});
+        yield { type: 'done', catId: 'codex', timestamp: Date.now() };
+      },
+    };
+
+    const previousCwd = process.cwd();
+    try {
+      await withEnv(
+        {
+          CAT_CODEX_API_KEY: 'sk-codex-local',
+          CAT_CODEX_API_BASE_URL: 'http://127.0.0.1:4020/v1',
+          CAT_CODEX_MODEL: 'gpt-local-codex',
+        },
+        async () => {
+          process.chdir(apiDir);
+          await collect(
+            invokeSingleCat(makeDeps(), {
+              catId: 'codex',
+              service,
+              prompt: 'test env account',
+              userId: 'user-env-account',
+              threadId: 'thread-env-account',
+              isLastCat: true,
+            }),
+          );
+        },
+      );
+    } finally {
+      process.chdir(previousCwd);
+      await rmWithRetry(root);
+    }
+
+    const callbackEnv = optionsSeen[0]?.callbackEnv ?? {};
+    assert.equal(callbackEnv.CODEX_AUTH_MODE, 'api_key');
+    assert.equal(callbackEnv.OPENAI_API_KEY, 'sk-codex-local');
+    assert.equal(callbackEnv.OPENAI_BASE_URL, 'http://127.0.0.1:4020/v1');
+    assert.equal(callbackEnv.OPENAI_API_BASE, 'http://127.0.0.1:4020/v1');
+    assert.equal(callbackEnv.CAT_CAFE_OPENAI_MODEL_OVERRIDE, 'gpt-local-codex');
+  });
+
   it('emits CAT_ERROR audit when service yields error before done', async () => {
     const errorService = {
       async *invoke() {

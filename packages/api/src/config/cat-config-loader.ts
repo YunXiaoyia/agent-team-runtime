@@ -5,7 +5,7 @@
  */
 
 import { readFileSync } from 'node:fs';
-import { dirname, resolve } from 'node:path';
+import { basename, dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import type {
   CatBreed,
@@ -298,6 +298,21 @@ function mergeById(base: HasId[], overlay: HasId[]): HasId[] {
   return result;
 }
 
+function normalizeCatalogOverlay(catalog: Record<string, unknown>): Record<string, unknown> {
+  const hasLegacyEditorShape = Array.isArray(catalog.roleTemplates) || isPlainObject(catalog.clientDefaults);
+  if (hasLegacyEditorShape && Array.isArray(catalog.breeds) && catalog.breeds.length === 0) {
+    const normalized = { ...catalog };
+    delete normalized.breeds;
+    delete normalized.roleTemplates;
+    delete normalized.clientDefaults;
+    delete normalized.roster;
+    delete normalized.reviewPolicy;
+    delete normalized.version;
+    return normalized;
+  }
+  return catalog;
+}
+
 /**
  * Load and validate the resolved cat config source.
  * Explicit filePath reads that file directly.
@@ -309,7 +324,12 @@ export function loadCatConfig(filePath?: string): CatCafeConfig {
   let resolvedPath = filePath;
   if (filePath) {
     try {
-      raw = readFileSync(filePath, 'utf-8');
+      const projectRoot = dirname(dirname(filePath));
+      const rawFromCatalogStore =
+        basename(filePath) === 'cat-catalog.json' && basename(dirname(filePath)) === '.cat-cafe'
+          ? readCatCatalogRaw(projectRoot)
+          : null;
+      raw = rawFromCatalogStore ?? readFileSync(filePath, 'utf-8');
     } catch (err) {
       const code = (err as NodeJS.ErrnoException).code;
       throw new Error(`Failed to read cat config at ${filePath}: ${code ?? 'unknown error'}`);
@@ -323,7 +343,7 @@ export function loadCatConfig(filePath?: string): CatCafeConfig {
       const baseRaw = readTemplate(templatePath);
       const baseJson = JSON.parse(baseRaw) as Record<string, unknown>;
       const catalogJson = JSON.parse(catalogRaw) as Record<string, unknown>;
-      raw = JSON.stringify(deepMergeConfig(baseJson, catalogJson));
+      raw = JSON.stringify(deepMergeConfig(baseJson, normalizeCatalogOverlay(catalogJson)));
       resolvedPath = resolveCatCatalogPath(projectRoot);
     } else {
       raw = readTemplate(templatePath);

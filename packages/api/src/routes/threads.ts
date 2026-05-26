@@ -266,7 +266,9 @@ export const threadsRoutes: FastifyPluginAsync<ThreadsRoutesOptions> = async (ap
       backlogItemId,
       bootcampState,
     } = parseResult.data;
-    const userId = resolveUserId(request, { fallbackUserId: legacyUserId });
+    const userId =
+      resolveUserId(request, { fallbackUserId: legacyUserId }) ??
+      (request.headers.origin ? resolveUserId(request, { defaultUserId: 'default-user' }) : null);
     if (!userId) {
       reply.status(401);
       return { error: 'Identity required (session cookie or X-Cat-Cafe-User header)' };

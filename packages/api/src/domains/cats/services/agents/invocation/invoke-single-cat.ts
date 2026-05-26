@@ -20,6 +20,7 @@ import {
   resolveForClient,
   validateRuntimeProviderBinding,
 } from '../../../../../config/account-resolver.js';
+import type { RuntimeProviderProfile } from '../../../../../config/account-resolver.js';
 import { resolveBoundAccountRefForCat } from '../../../../../config/cat-account-binding.js';
 import { isSessionChainEnabled } from '../../../../../config/cat-config-loader.js';
 import { getContextWindowFallback } from '../../../../../config/context-window-sizes.js';
@@ -165,6 +166,54 @@ function abortableNext<T>(iter: AsyncIterator<T>, signal: AbortSignal): Promise<
 
 const ANTHROPIC_PROFILE_MODE_KEY = 'CAT_CAFE_ANTHROPIC_PROFILE_MODE';
 const ANTHROPIC_PROFILE_MODE_API_KEY = 'api_key';
+
+const HERMES_ROLE_ENV_PREFIXES: Record<string, readonly string[]> = {
+  opus: ['HERMES_COORDINATOR'],
+  codex: ['HERMES_ENGINEER', 'HERMES_ENGINEERING_WORKER', 'HERMES_CODE_WORKER'],
+  gemini: ['HERMES_DESIGNER', 'HERMES_RESEARCHER', 'HERMES_DESIGN_WORKER', 'HERMES_RESEARCH_WORKER'],
+};
+
+function catEnvPrefix(catId: string): string {
+  return `CAT_${catId.toUpperCase().replace(/[^A-Z0-9]/g, '_')}`;
+}
+
+function roleEnvPrefixes(catId: string): string[] {
+  return [catEnvPrefix(catId), ...(HERMES_ROLE_ENV_PREFIXES[catId] ?? [])];
+}
+
+function readFirstEnvValue(keys: readonly string[]): string | undefined {
+  for (const key of keys) {
+    const value = process.env[key]?.trim();
+    if (value) return value;
+  }
+  return undefined;
+}
+
+/**
+ * Runtime-only role account override from .env.
+ *
+ * This lets Hermes deployments pin each active role to a local/API-gateway
+ * endpoint without writing account files through the UI. The account is derived
+ * from the role/cat being invoked, so it is already provider-compatible.
+ */
+export function resolveEnvRuntimeAccountForCat(catId: string): RuntimeProviderProfile | null {
+  const prefixes = roleEnvPrefixes(catId);
+  const apiKey = readFirstEnvValue(prefixes.map((prefix) => `${prefix}_API_KEY`));
+  const baseUrl = readFirstEnvValue(
+    prefixes.flatMap((prefix) => [`${prefix}_API_BASE_URL`, `${prefix}_BASE_URL`]),
+  );
+  const model = readFirstEnvValue(prefixes.map((prefix) => `${prefix}_MODEL`));
+  if (!apiKey && !baseUrl) return null;
+
+  return {
+    id: `env-${catId}`,
+    authType: 'api_key',
+    kind: 'api_key',
+    apiKey: apiKey ?? 'local',
+    ...(baseUrl ? { baseUrl } : {}),
+    ...(model ? { models: [model] } : {}),
+  };
+}
 
 /** Derive a URL-safe slug from profile ID for proxy routing. */
 function deriveProxySlug(profileId: string): string {
@@ -799,6 +848,8 @@ export async function* invokeSingleCat(deps: InvocationDeps, params: InvocationP
       if (!builtinClient) return null;
       // Yield to event loop so preflight warnings are delivered before account resolution.
       await Promise.resolve();
+      const envRuntime = resolveEnvRuntimeAccountForCat(catId as string);
+      if (envRuntime) return envRuntime;
       const runtime = resolveForClient(projectRoot, builtinClient, effectiveAccountRef);
       if (effectiveAccountRef && !runtime) {
         throw new Error(`bound account "${effectiveAccountRef}" not found`);
@@ -913,6 +964,9 @@ export async function* invokeSingleCat(deps: InvocationDeps, params: InvocationP
     } else if (effectiveProtocol === 'openai' || effectiveProtocol === 'openai-responses') {
       if (resolvedAccount?.authType === 'api_key') {
         callbackEnv.CODEX_AUTH_MODE = 'api_key';
+        if (resolvedAccount.models?.length) {
+          callbackEnv.CAT_CAFE_OPENAI_MODEL_OVERRIDE = resolvedAccount.models[0];
+        }
         if (resolvedAccount.apiKey) {
           callbackEnv.OPENAI_API_KEY = resolvedAccount.apiKey;
           // OpenCode selects provider by model prefix; `openrouter/...` models require this key name.
@@ -927,6 +981,9 @@ export async function* invokeSingleCat(deps: InvocationDeps, params: InvocationP
       }
     } else if (effectiveProtocol === 'google') {
       if (resolvedAccount?.authType === 'api_key' && resolvedAccount.apiKey) {
+        if (resolvedAccount.models?.length) {
+          callbackEnv.CAT_CAFE_GEMINI_MODEL_OVERRIDE = resolvedAccount.models[0];
+        }
         // Gemini CLI: native Google SDK, uses GEMINI_API_KEY
         callbackEnv.GEMINI_API_KEY = resolvedAccount.apiKey;
         callbackEnv.GOOGLE_API_KEY = resolvedAccount.apiKey;

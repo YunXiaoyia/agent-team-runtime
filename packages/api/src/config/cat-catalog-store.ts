@@ -192,6 +192,25 @@ function createEmptyRuntimeCatalog(template: CatCafeConfig): CatCafeConfig {
   };
 }
 
+function isLegacyEditorEmptyCatalog(catalog: unknown): catalog is Record<string, unknown> & { breeds: [] } {
+  if (catalog === null || typeof catalog !== 'object' || Array.isArray(catalog)) return false;
+  const record = catalog as Record<string, unknown>;
+  return (
+    Array.isArray(record.breeds) &&
+    record.breeds.length === 0 &&
+    (Array.isArray(record.roleTemplates) ||
+      (record.clientDefaults !== null && typeof record.clientDefaults === 'object' && !Array.isArray(record.clientDefaults)))
+  );
+}
+
+function readTemplateCatalog(projectRoot: string): CatCafeConfig | null {
+  try {
+    return JSON.parse(readFileSync(safePath(projectRoot, 'cat-template.json'), 'utf-8')) as CatCafeConfig;
+  } catch {
+    return null;
+  }
+}
+
 /** Ensure the owner entry exists in an existing catalog. Returns true if backfilled. */
 function ensureOwnerInRoster(catalogPath: string): boolean {
   let raw: string;
@@ -243,6 +262,10 @@ export function readCatCatalogRaw(projectRoot: string): string | null {
   const raw = readFileSync(catalogPath, 'utf-8');
   try {
     const parsed = JSON.parse(raw) as CatCafeConfig;
+    if (isLegacyEditorEmptyCatalog(parsed)) {
+      const template = readTemplateCatalog(projectRoot);
+      if (template) return `${JSON.stringify(template, null, 2)}\n`;
+    }
     // Hand the migration template breed.ids so it can detect legacy variants
     // that were promoted to standalone breeds in template but not yet here.
     const templateBreedIds = readTemplateBreedIds(projectRoot);

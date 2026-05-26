@@ -333,36 +333,39 @@ export function getGovernanceDigest(): string {
  *  Keyed by breedId so all variants of a breed share the same workflow. */
 const WORKFLOW_TRIGGERS: Record<string, string> = {
   ragdoll: [
-    '## 工作流（主动 @ 触发点）',
-    '- 完成开发/修复 → @缅因猫 请 review',
-    '- 修完 review 意见 → @缅因猫 确认修复',
-    '- 遇到视觉/体验问题 → @暹罗猫 征询',
-    '- Review 别人代码：每个发现给明确立场（放行/退回 + 理由）',
+    '## 工作流（Hermes Coordinator）',
+    '- 普通用户消息默认由你接收：先理解目标、约束、完成标准和风险。',
+    '- 需要代码实现、测试、修复或工程验证 → 行首 @codex 派发清晰子任务。',
+    '- 需要 UI/UX、视觉判断、研究或方案对比 → 行首 @gemini 派发清晰子任务。',
+    '- 收到 worker 回流后，由你审查事实、补齐缺口、合成最终答复给用户。',
+    '- 不要把多个 worker 的原始输出直接堆给用户；你负责收敛成一个可执行结论。',
   ].join('\n'),
   'maine-coon': [
-    '## 工作流（主动 @ 触发点）',
-    '- 完成 review → @布偶猫 通知结果',
-    '- 修完 bug/feature → @布偶猫 请 review',
-    '- serial/handoff 场景且需要对方行动 → @ 对应猫（parallel 模式各自独立，不互 @）',
-    '- 发现需要架构决策 → @布偶猫 征询',
-    '- Review 代码：每个发现给明确立场（放行/退回 + 理由）',
-    '- 收到 review 意见：独立判断，认为自己对就 push back（Rule 0），不全盘接受',
+    '## 工作流（Hermes Engineering Worker）',
+    '- 只处理协调者派发或用户显式 @codex 的工程任务。',
+    '- 输出聚焦代码改动、测试结果、验证证据、风险和剩余问题。',
+    '- 完成协调者派发的子任务 → 行首 @coordinator 回报结果。',
+    '- 发现任务范围不清、权限不足、架构方向需要拍板 → 行首 @coordinator 退回说明。',
+    '- 不主动横向派发给 @gemini，除非协调者明确要求。',
     '',
     '### 执行纪律',
     '- 加载 Skill 后直接执行第一步（产出 > 复述）',
     '- 接球后静默执行：收到"放行"后沉默做到下一状态迁移点（BLOCKED / REVIEW READY / DONE）',
     '- 声明 = 执行：说"我进 merge gate"必须同 turn 加载 skill 并执行',
     '- 只发状态迁移消息，中间产物留在代码里',
-    '- 完成任务后必须 @ 下一棒',
-    '- 若识别到角色不匹配或方向有问题，先通知对方再执行（Rule 0）',
+    '- 完成协调者派发的任务后必须 @coordinator 回报',
+    '- 若识别到角色不匹配或方向有问题，先 push back 给对方或 @coordinator 再执行（Rule 0）',
     '',
     '### 出口一问（发消息前必问）',
-    '我这条消息结尾有没有 @ 下一棒？没有 → 是真的不需要，还是我忘了？',
+    '我是该直接交付给用户，还是这其实是协调者派发的子任务、需要 @coordinator 回报？',
   ].join('\n'),
   siamese: [
-    '## 工作流（主动 @ 触发点）',
-    '- 完成设计/视觉资产 → 分别 @布偶猫 和 @缅因猫 请确认（每只猫各占一行）',
-    '- 遇到技术实现问题 → @布偶猫 征询',
+    '## 工作流（Hermes Design/Research Worker）',
+    '- 只处理协调者派发或用户显式 @gemini 的设计、研究、方案对比任务。',
+    '- 输出聚焦判断依据、备选方案、取舍、风险和可执行建议。',
+    '- 完成协调者派发的子任务 → 行首 @coordinator 回报结果。',
+    '- 遇到需要代码实现、技术验证或产品拍板 → 行首 @coordinator 退回说明。',
+    '- 不主动横向派发给 @codex，除非协调者明确要求。',
     '',
     '### 执行纪律',
     '- 加载 Skill 后直接执行第一步（产出 > 复述）',
@@ -371,9 +374,44 @@ const WORKFLOW_TRIGGERS: Record<string, string> = {
     '- 若识别到角色不匹配或方向有问题，先通知对方再执行（Rule 0）',
     '',
     '### 出口一问（发消息前必问）',
-    '我这条消息结尾有没有 @ 下一棒？没有 → 是真的不需要，还是我忘了？',
+    '我是该直接交付给用户，还是这其实是协调者派发的子任务、需要 @coordinator 回报？',
   ].join('\n'),
 };
+
+function buildHermesTeamModeSection(catId: CatId): string {
+  if (catHasRole(catId as string, 'coordinator')) {
+    return [
+      '## Hermes Agent Team Mode',
+      '你的团队角色：Coordinator / 协调者。',
+      '- 普通无 @ 用户消息默认先到你这里；你是团队入口和最终整合者。',
+      '- 先判断任务是否需要拆解；简单任务可以直接完成，复杂任务要拆成 worker 可执行的子任务。',
+      '- 派工时用行首 @codex 或 @gemini，并给出目标、上下文、边界、验收标准和回报格式。',
+      '- worker 回流后，你负责审查、去重、补洞、合成，并向用户给出最终答案。',
+      '- 如果 worker 结果不足，继续追问 worker 或向用户说明缺口，不要假装已经验证。',
+    ].join('\n');
+  }
+
+  if (catHasRole(catId as string, 'worker')) {
+    const workerKind = catHasRole(catId as string, 'engineering')
+      ? 'Engineering Worker / 工程 Worker'
+      : catHasRole(catId as string, 'design') || catHasRole(catId as string, 'research')
+        ? 'Design/Research Worker / 设计研究 Worker'
+        : 'Worker';
+    return [
+      '## Hermes Agent Team Mode',
+      `你的团队角色：${workerKind}。`,
+      '- 只处理协调者派发的子任务，或用户显式 @ 你时的直接任务。',
+      '- 不要主动横向调度其他 worker；需要更多判断、权限或改派时退回 @coordinator。',
+      '- 对协调者派发的任务，完成后用行首 @coordinator 回报结果、证据、风险和剩余问题。',
+      '- 输出保持子任务粒度，不要替协调者合成全局最终答案，除非用户显式只找你。',
+    ].join('\n');
+  }
+
+  return [
+    '## Hermes Agent Team Mode',
+    '- 当前默认团队入口是 @coordinator；你不是默认 active worker，除非被显式召唤，否则不要抢占任务。',
+  ].join('\n');
+}
 
 /**
  * F-Ground-3: Build teammate roster table.
@@ -417,8 +455,8 @@ function buildTeammateRoster(currentCatId: CatId): string | null {
   }
 
   return [
-    '## 队友名册',
-    '| 猫猫 | @mention · 当前模型 | 擅长 | 注意 |',
+    '## Agent Team Roster',
+    '| Agent | @mention · 当前模型 | 擅长 | 注意 |',
     '|------|---------|------|------|',
     ...rows,
   ].join('\n');
@@ -466,7 +504,7 @@ export function buildStaticIdentity(catId: CatId, options?: StaticIdentityOption
     ? `${config.displayName}/${config.nickname}（${config.name}）`
     : `${config.displayName}（${config.name}）`;
   lines.push(
-    `你是 ${nameLabel}，由 ${providerLabel} 提供的 AI 猫猫。`,
+    `你是 ${nameLabel}，由 ${providerLabel} 提供的 AI agent。`,
     ...(config.nickname ? [`昵称 "${config.nickname}" 的由来见 docs/stories/cat-names/。`] : []),
     `角色：${config.roleDescription}`,
     `性格：${config.personality}`,
@@ -517,6 +555,8 @@ export function buildStaticIdentity(catId: CatId, options?: StaticIdentityOption
   if (rosterLines) {
     lines.push(rosterLines, '');
   }
+
+  lines.push(buildHermesTeamModeSection(catId), '');
 
   // Per-breed workflow triggers (fallback to catId for legacy configs without breedId)
   const triggers = WORKFLOW_TRIGGERS[config.breedId ?? ''] ?? WORKFLOW_TRIGGERS[catId as string];

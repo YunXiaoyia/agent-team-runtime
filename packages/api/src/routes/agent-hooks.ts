@@ -19,6 +19,10 @@ function resolveStrictAgentHookUserId(request: FastifyRequest): string | null {
   return fromSession;
 }
 
+function resolveAgentHookStatusUserId(request: FastifyRequest): string | null {
+  return resolveStrictAgentHookUserId(request) ?? (isTrustedLocalApiRequest(request) ? 'default-user' : null);
+}
+
 function isLoopbackRequest(request: FastifyRequest): boolean {
   return request.ip === '127.0.0.1' || request.ip === '::1' || request.ip === '::ffff:127.0.0.1';
 }
@@ -82,7 +86,7 @@ function resolveOptions(options: AgentHooksRouteOptions, request: FastifyRequest
 
 export const agentHooksRoutes: FastifyPluginAsync<AgentHooksRouteOptions> = async (app, options) => {
   app.get('/api/agent-hooks/status', async (request, reply) => {
-    const userId = resolveStrictAgentHookUserId(request);
+    const userId = resolveAgentHookStatusUserId(request);
     if (!userId) {
       reply.status(401);
       return { error: 'Session identity required for browser requests' };

@@ -196,7 +196,7 @@ sudo journalctl -u clowder-ai -f
 
 ### 基础设施（`.env`）
 
-`.env` 文件只配置**基础设施** — 端口、Redis 和可选的服务 URL。模型 API key 通过 Web UI 管理（见下方）。
+`.env` 文件配置端口、Redis、可选服务 URL。Hermes Agent Team 模式也支持把每个角色的 API endpoint/key/model 固定写在 `.env`，这样不用每次进 UI 配置。
 
 **Redis** — 线程、消息、任务和记忆的持久化存储：
 
@@ -240,7 +240,46 @@ NEXT_PUBLIC_API_URL=http://localhost:3004
 
 ![百炼 Provider 账号配置](docs/setup/setup-provider-bailian.png)
 
-> **兼容模式：** 系统仍会从 `.env` 读取 `ANTHROPIC_API_KEY`、`OPENAI_API_KEY`、`GOOGLE_API_KEY` 作为兜底，但这条路径已不推荐。新安装请统一用 UI 配置。
+### Hermes 角色 API（`.env`）
+
+Hermes Agent Team 模式下，`.env` 的角色配置优先级高于 UI account。只要配置了某个角色的 `API_KEY` 或 `API_BASE_URL`，运行时会自动为该角色创建临时 account。
+
+```bash
+# 协调者 / opus / Anthropic-compatible
+CAT_OPUS_API_KEY=local
+CAT_OPUS_API_BASE_URL=http://127.0.0.1:4001/v1
+CAT_OPUS_MODEL=claude-local-coordinator
+
+# 工程 worker / codex / OpenAI-compatible
+CAT_CODEX_API_KEY=local
+CAT_CODEX_API_BASE_URL=http://127.0.0.1:4002/v1
+CAT_CODEX_MODEL=gpt-local-codex
+
+# 设计研究 worker / gemini / gateway-compatible
+CAT_GEMINI_API_KEY=local
+CAT_GEMINI_API_BASE_URL=http://127.0.0.1:4003/v1
+CAT_GEMINI_MODEL=gemini-local-worker
+```
+
+也可以用 Hermes 角色别名：
+
+```bash
+HERMES_COORDINATOR_API_KEY=local
+HERMES_COORDINATOR_API_BASE_URL=http://127.0.0.1:4001/v1
+HERMES_COORDINATOR_MODEL=claude-local-coordinator
+
+HERMES_ENGINEER_API_KEY=local
+HERMES_ENGINEER_API_BASE_URL=http://127.0.0.1:4002/v1
+HERMES_ENGINEER_MODEL=gpt-local-codex
+
+HERMES_DESIGNER_API_KEY=local
+HERMES_DESIGNER_API_BASE_URL=http://127.0.0.1:4003/v1
+HERMES_DESIGNER_MODEL=gemini-local-worker
+```
+
+如果本地 API 不校验 key，`API_KEY` 填 `local` 即可。改完 `.env` 后重启后端。
+
+> **兼容模式：** 系统仍会从 `.env` 读取 `ANTHROPIC_API_KEY`、`OPENAI_API_KEY`、`GOOGLE_API_KEY` 作为兜底。Hermes 模式建议优先使用上面的角色配置。
 
 ### 成员配置
 

@@ -442,7 +442,7 @@ describe('AgentRouter', () => {
 
     const { targetCats } = await router.resolveTargetsAndIntent('这个架构 tradeoff 怎么选', 'thread-arch');
     assert.equal(targetCats[0], 'opus', 'Should prefer opus first for architecture scope');
-    assert.ok(targetCats.includes('codex'), 'Should keep existing participant after preferred cat');
+    assert.deepEqual(targetCats, ['opus'], 'Hermes coordinator-first should not append existing worker participant');
   });
 
   test('routingPolicy does not override explicit @mention', async () => {
@@ -1147,7 +1147,7 @@ describe('AgentRouter', () => {
     assert.deepEqual(threadStore._participants.thread_1, ['opus', 'codex']);
   });
 
-  test('no @ mention routes to last replier only (F078)', async () => {
+  test('no @ mention routes to coordinator even when a worker was most recent', async () => {
     const { AgentRouter } = await import('../dist/domains/cats/services/agents/routing/AgentRouter.js');
 
     const mockClaudeService = createMockAgentService('opus');
@@ -1171,17 +1171,17 @@ describe('AgentRouter', () => {
     );
 
     const messages = [];
-    // No @ mention — F078: routes to last replier only (codex)
+    // Hermes team mode: no @ user messages return to the coordinator (opus).
     for await (const msg of router.route('user-1', 'what do you think?', 'thread_1')) {
       messages.push(msg);
     }
 
-    assert.equal(mockClaudeService.invoke.mock.callCount(), 0, 'opus not called — not last replier');
-    assert.equal(mockCodexService.invoke.mock.callCount(), 1, 'codex called — last replier');
+    assert.equal(mockClaudeService.invoke.mock.callCount(), 1, 'opus coordinator called');
+    assert.equal(mockCodexService.invoke.mock.callCount(), 0, 'codex worker not called without explicit @');
     assert.equal(mockGeminiService.invoke.mock.callCount(), 0);
   });
 
-  test('F078: no @ mention returns only last replier (most recent by activity)', async () => {
+  test('Hermes coordinator-first: no @ mention ignores most recent activity', async () => {
     const { AgentRouter } = await import('../dist/domains/cats/services/agents/routing/AgentRouter.js');
 
     const mockClaudeService = createMockAgentService('opus');
@@ -1207,11 +1207,10 @@ describe('AgentRouter', () => {
       }),
     );
 
-    // F078: returns only the most recent replier, not all participants
+    // Hermes team mode: returns only the coordinator, not the most recent worker.
     const result = await router.resolveTargetsAndIntent('what do you think?', 'thread_activity');
 
-    assert.equal(result.targetCats[0], 'codex', 'Most recently active cat (codex) should be the target');
-    assert.equal(result.targetCats.length, 1, 'F078: only last replier, not all participants');
+    assert.deepEqual(result.targetCats, ['opus'], 'Coordinator should be the target');
   });
 
   test('#267: never-responded cat excluded from healthy replier fallback', async () => {
@@ -1242,7 +1241,7 @@ describe('AgentRouter', () => {
     assert.equal(result.targetCats.length, 1);
   });
 
-  test('#267: unhealthy last replier skipped, falls back to next healthy', async () => {
+  test('#267: unhealthy worker activity does not override coordinator default', async () => {
     const { AgentRouter } = await import('../dist/domains/cats/services/agents/routing/AgentRouter.js');
 
     const mockClaudeService = createMockAgentService('opus');
@@ -1299,7 +1298,7 @@ describe('AgentRouter', () => {
     assert.equal(mockGeminiService.invoke.mock.callCount(), 0);
   });
 
-  test('@three cats then no-@ routes to one cat from last user-message mentions (F078 superseded by F194 Z6 AC-Z16)', async () => {
+  test('@three cats then no-@ returns to coordinator', async () => {
     const { AgentRouter } = await import('../dist/domains/cats/services/agents/routing/AgentRouter.js');
 
     const mockClaudeService = createMockAgentService('opus');
@@ -1327,15 +1326,10 @@ describe('AgentRouter', () => {
     assert.equal(mockCodexService.invoke.mock.callCount(), 1);
     assert.equal(mockGeminiService.invoke.mock.callCount(), 1);
 
-    // Second: no @
-    // F078 (旧语义): 路由到 last replier 的单只猫
-    // F194 Phase Z6 AC-Z16 (修正语义): 候选集来自上一条 user message 的 mentions，
-    // 但 no-@ fallback 只召唤一只确定的猫（first routable mention），不会把上一轮
-    // parallel ideate 的全量 targetCats 自动延续成新一轮并发。
+    // Second: no @. Hermes team mode routes back to the coordinator.
     for await (const _ of router.route('user-1', 'what about this?', 'thread_x')) {
     }
 
-    // After Z6: only the first routable previous mention is called again.
     assert.equal(mockClaudeService.invoke.mock.callCount(), 2);
     assert.equal(mockCodexService.invoke.mock.callCount(), 1);
     assert.equal(mockGeminiService.invoke.mock.callCount(), 1);
@@ -1399,7 +1393,7 @@ describe('AgentRouter', () => {
     assert.equal(mockCodexService.invoke.mock.callCount(), 0);
   });
 
-  test('new @ mention adds to participants; no-@ routes to last replier (F078)', async () => {
+  test('new @ mention adds to participants; no-@ returns to coordinator', async () => {
     const { AgentRouter } = await import('../dist/domains/cats/services/agents/routing/AgentRouter.js');
 
     const mockClaudeService = createMockAgentService('opus');
@@ -1425,11 +1419,11 @@ describe('AgentRouter', () => {
     assert.equal(mockGeminiService.invoke.mock.callCount(), 1);
     assert.equal(mockClaudeService.invoke.mock.callCount(), 0); // not called — only @gemini
 
-    // Now no @ — F078: routes to last replier only (gemini, most recent participant)
+    // Now no @ — Hermes team mode returns to coordinator.
     for await (const _ of router.route('user-1', 'looks good?', 'thread_y')) {
     }
-    assert.equal(mockClaudeService.invoke.mock.callCount(), 0, 'opus not called — not last replier');
-    assert.equal(mockGeminiService.invoke.mock.callCount(), 2, 'gemini called again — last replier');
+    assert.equal(mockClaudeService.invoke.mock.callCount(), 1, 'opus coordinator called');
+    assert.equal(mockGeminiService.invoke.mock.callCount(), 1, 'gemini worker not called again without explicit @');
     assert.deepEqual(threadStore._participants.thread_y, ['opus', 'gemini']);
   });
 
@@ -2161,10 +2155,10 @@ describe('AgentRouter', () => {
   });
 });
 
-// ── F078: Smart Routing & Group Mentions ─────────────────────────────
+// ── Hermes coordinator-first routing & group mentions ─────────────────
 
-describe('F078: Default to last replier', () => {
-  test('no @mention routes to most recent replier only (not all participants)', async () => {
+describe('Hermes coordinator-first default routing', () => {
+  test('no @mention routes to coordinator only (not recent participants)', async () => {
     const { AgentRouter } = await import('../dist/domains/cats/services/agents/routing/AgentRouter.js');
 
     const threadStore = createMockThreadStore({ t1: ['opus', 'codex', 'gemini'] });
@@ -2185,7 +2179,7 @@ describe('F078: Default to last replier', () => {
     );
 
     const { targetCats } = await router.resolveTargetsAndIntent('hello', 't1');
-    assert.deepStrictEqual(targetCats, ['opus'], 'should route to last replier only');
+    assert.deepStrictEqual(targetCats, ['opus'], 'should route to coordinator only');
   });
 
   test('no participants defaults to opus', async () => {
@@ -2207,7 +2201,7 @@ describe('F078: Default to last replier', () => {
     assert.deepStrictEqual(targetCats, ['opus']);
   });
 
-  test('no @mention skips unavailable last replier and preferred cats', async () => {
+  test('no @mention ignores worker activity and preferred cats when coordinator is available', async () => {
     await withAvailabilityConfig({ codex: false }, async () => {
       const { AgentRouter } = await import('../dist/domains/cats/services/agents/routing/AgentRouter.js');
 
@@ -2227,7 +2221,7 @@ describe('F078: Default to last replier', () => {
       );
 
       const { targetCats } = await router.resolveTargetsAndIntent('hello', 't1');
-      assert.deepStrictEqual(targetCats, ['gemini'], 'should skip unavailable last replier/preferred cats');
+      assert.deepStrictEqual(targetCats, ['opus'], 'available coordinator should win over worker activity');
     });
   });
 
@@ -2256,7 +2250,7 @@ describe('F078: Default to last replier', () => {
     });
   });
 
-  test('explicit @mention still overrides last-replier default', async () => {
+  test('explicit @mention still overrides coordinator default', async () => {
     const { AgentRouter } = await import('../dist/domains/cats/services/agents/routing/AgentRouter.js');
 
     const threadStore = createMockThreadStore({ t1: ['opus', 'codex'] });
@@ -2598,11 +2592,11 @@ describe('F078: Group mentions', () => {
 });
 
 // ────────────────────────────────────────────────────────────────
-// #58: preferredCats should act as candidate scope, not dispatch list
+// #58: preferredCats no longer drive default dispatch in Hermes mode
 // ────────────────────────────────────────────────────────────────
 
-describe('#58: preferredCats candidate scope (not dispatch list)', () => {
-  test('multi preferredCats + last replier in preferred set → routes to last replier only', async () => {
+describe('#58: preferredCats no longer drive default dispatch in Hermes mode', () => {
+  test('multi preferredCats + worker activity → routes to coordinator only', async () => {
     const { AgentRouter } = await import('../dist/domains/cats/services/agents/routing/AgentRouter.js');
 
     const threadStore = createMockThreadStore(
@@ -2627,10 +2621,10 @@ describe('#58: preferredCats candidate scope (not dispatch list)', () => {
     );
 
     const { targetCats } = await router.resolveTargetsAndIntent('hello', 't1');
-    assert.deepStrictEqual(targetCats, ['codex'], 'should route to last replier, not all preferred cats');
+    assert.deepStrictEqual(targetCats, ['opus'], 'should route to coordinator, not all preferred cats');
   });
 
-  test('last replier NOT in preferred set → still routes to last replier (user mental model)', async () => {
+  test('last replier outside preferred set still loses to coordinator', async () => {
     const { AgentRouter } = await import('../dist/domains/cats/services/agents/routing/AgentRouter.js');
 
     const threadStore = createMockThreadStore(
@@ -2656,8 +2650,8 @@ describe('#58: preferredCats candidate scope (not dispatch list)', () => {
     const { targetCats } = await router.resolveTargetsAndIntent('hello', 't1');
     assert.deepStrictEqual(
       targetCats,
-      ['codex'],
-      'should route to last replier even when outside preferred set — user expects continuity',
+      ['opus'],
+      'should route to coordinator even when worker was most recent',
     );
   });
 
@@ -2687,7 +2681,7 @@ describe('#58: preferredCats candidate scope (not dispatch list)', () => {
     assert.deepStrictEqual(targetCats, ['codex'], '@mention should override preferredCats');
   });
 
-  test('no preferredCats preserves existing last-replier behavior', async () => {
+  test('no preferredCats still routes no-@ traffic to coordinator', async () => {
     const { AgentRouter } = await import('../dist/domains/cats/services/agents/routing/AgentRouter.js');
 
     const threadStore = createMockThreadStore({ t1: ['opus', 'codex', 'gemini'] });
@@ -2707,7 +2701,7 @@ describe('#58: preferredCats candidate scope (not dispatch list)', () => {
     );
 
     const { targetCats } = await router.resolveTargetsAndIntent('hello', 't1');
-    assert.deepStrictEqual(targetCats, ['gemini'], 'without preferredCats, last replier should still work');
+    assert.deepStrictEqual(targetCats, ['opus'], 'without preferredCats, coordinator should still win');
   });
 
   test('@全体布偶猫 still triggers parallel dispatch even with preferredCats', async () => {
@@ -2760,7 +2754,7 @@ describe('#58: preferredCats candidate scope (not dispatch list)', () => {
     assert.ok(targetCats.includes('opus'), 'should include opus');
   });
 
-  test('explicit #ideate with multi preferredCats dispatches all preferred cats', async () => {
+  test('explicit #ideate with multi preferredCats still enters coordinator', async () => {
     const { AgentRouter } = await import('../dist/domains/cats/services/agents/routing/AgentRouter.js');
 
     const threadStore = createMockThreadStore({ t1: ['opus', 'codex'] }, {}, {}, { t1: ['opus', 'codex'] });
@@ -2779,7 +2773,7 @@ describe('#58: preferredCats candidate scope (not dispatch list)', () => {
     );
 
     const { targetCats, intent } = await router.resolveTargetsAndIntent('#ideate discuss this together', 't1');
-    assert.deepStrictEqual(targetCats.sort(), ['codex', 'opus'], '#ideate should dispatch all preferred cats');
+    assert.deepStrictEqual(targetCats, ['opus'], '#ideate should not bypass coordinator without explicit @');
     assert.equal(intent.intent, 'ideate', 'intent should be ideate');
     assert.equal(intent.explicit, true, 'ideate should be explicit');
   });
@@ -2836,11 +2830,7 @@ describe('#58: preferredCats candidate scope (not dispatch list)', () => {
     assert.deepEqual(after.targetCats, ['codex'], 'codex should be routable after refresh');
   });
 
-  // F194 Phase Z5 AC-Z16: 无 @ fallback 优先用上一条 user message 的 mentions，
-  // 不让 thread 里其他猫的发言（如 vision guard）抢路由 fallback。
-  // 铲屎官 alpha catch 2026-05-10 04:51："明明 at 的最后一只猫是 47 or 55 但是召唤出来的却是 46"
-  // user message 严格定义：userId !== null && catId === null（cat-to-cat handoff/vision guard 不计）
-  test('AC-Z16: no-mention msg falls back to PREVIOUS user message mentions, not thread activity', async () => {
+  test('Hermes mode: no-mention msg returns to coordinator, not previous user mentions or thread activity', async () => {
     const { AgentRouter } = await import('../dist/domains/cats/services/agents/routing/AgentRouter.js');
 
     const messageStore = createMockMessageStore();
@@ -2882,19 +2872,15 @@ describe('#58: preferredCats candidate scope (not dispatch list)', () => {
       }),
     );
 
-    // user msg2 (current message under resolution) has no @
     const result = await router.resolveTargetsAndIntent('继续刚才的讨论', 't_z16');
-    // GREEN after Z6: fallback picks one deterministic cat from prev user mentions [codex, opus].
-    // RED before Z5: gemini wins via lastMessageAt → wrong cat.
-    // RED in Z5: both codex+opus are invoked → over-broad parallel fallback.
-    assert.deepEqual(result.targetCats, ['codex']);
+    assert.deepEqual(result.targetCats, ['opus']);
     assert.ok(
       !result.targetCats.includes('gemini'),
       `gemini was vision guard cat, NOT user-mentioned — must not win fallback. got ${JSON.stringify(result.targetCats)}`,
     );
   });
 
-  test('AC-Z16: cat-to-cat handoff messages (catId-bearing) are NOT counted as user messages', async () => {
+  test('Hermes mode: cat-to-cat handoff mentions do not affect no-@ coordinator routing', async () => {
     const { AgentRouter } = await import('../dist/domains/cats/services/agents/routing/AgentRouter.js');
 
     const messageStore = createMockMessageStore();
@@ -2933,13 +2919,8 @@ describe('#58: preferredCats candidate scope (not dispatch list)', () => {
       }),
     );
 
-    // user msg2 no @ — fallback should use prev USER msg's mentions [opus], NOT cat-to-cat A2A's mentions [codex]
     const result = await router.resolveTargetsAndIntent('谢谢', 't_z16b');
-    assert.deepEqual(
-      result.targetCats,
-      ['opus'],
-      'fallback uses last user msg mentions [opus], ignores cat A2A mentions',
-    );
+    assert.deepEqual(result.targetCats, ['opus'], 'coordinator remains default for no-@ user messages');
   });
 
   test('AC-Z16 R2: async messageStore (Redis-style) — getByThread returns Promise, must be awaited (砚砚 R1 P1#1)', async () => {
@@ -2984,14 +2965,7 @@ describe('#58: preferredCats candidate scope (not dispatch list)', () => {
     );
 
     const result = await router.resolveTargetsAndIntent('继续讨论', 't_async_z16');
-    // GREEN after R2 fix: await Promise → fallback returns [codex] (last user msg mentions)
-    // RED before R2 fix: Array.isArray(Promise) === false → fallback returns null → legacy
-    //   participantsWithActivity wins → gemini selected (wrong)
-    assert.deepEqual(
-      result.targetCats,
-      ['codex'],
-      'async messageStore.getByThread must be awaited; codex (last user mention) wins, not gemini (last activity)',
-    );
+    assert.deepEqual(result.targetCats, ['opus'], 'no-@ user message should enter coordinator');
   });
 
   test('AC-Z16 R3: user @ + 6 cat/vision-guard messages between + no-@ → still finds user mention (砚砚 R2 P1)', async () => {
@@ -3040,15 +3014,7 @@ describe('#58: preferredCats candidate scope (not dispatch list)', () => {
     );
 
     const result = await router.resolveTargetsAndIntent('继续刚才的', 't_z16_window');
-    // GREEN after R3 fix: window fetches 50 thread messages, counts up to 5 user messages,
-    //   finds first user msg with mentions → codex
-    // RED before R3 fix: window=5 thread messages = 6 cat messages full, no user msg seen →
-    //   fallback null → legacy participantsWithActivity → gemini selected (wrong)
-    assert.deepEqual(
-      result.targetCats,
-      ['codex'],
-      'window should count user messages not thread messages; cat dispatches between user @ and current msg should not push out user mention',
-    );
+    assert.deepEqual(result.targetCats, ['opus'], 'no-@ user message should enter coordinator');
   });
 
   test('AC-Z16 R3: time window 1h cutoff — old user mention not used as fallback', async () => {
@@ -3082,8 +3048,7 @@ describe('#58: preferredCats candidate scope (not dispatch list)', () => {
     );
 
     const result = await router.resolveTargetsAndIntent('hi', 't_z16_old');
-    // 远古 mention (>1h ago) 不再用 → fallback to legacy participantsWithActivity → opus
-    assert.deepEqual(result.targetCats, ['opus'], 'old user mention beyond 1h window should not win fallback');
+    assert.deepEqual(result.targetCats, ['opus'], 'old user mention beyond 1h window should not bypass coordinator');
   });
 
   test('AC-Z16 R4: 51+ non-user messages between user @ and current → pagination still finds user mention (砚砚 R3 P1)', async () => {
@@ -3133,15 +3098,7 @@ describe('#58: preferredCats candidate scope (not dispatch list)', () => {
     );
 
     const result = await router.resolveTargetsAndIntent('继续刚才的', 't_z16_pagination');
-    // GREEN after R4: pagination loops with getByThreadBefore beyond first 50,
-    //   finds user @ codex on later page → returns ['codex']
-    // RED before R4: 50-message single-page lookback never reaches the user msg →
-    //   fallback null → legacy participantsWithActivity → gemini selected (wrong)
-    assert.deepEqual(
-      result.targetCats,
-      ['codex'],
-      'pagination should keep walking past one page of cat messages until user mention or 5 user msgs / 1h cutoff',
-    );
+    assert.deepEqual(result.targetCats, ['opus'], 'no-@ user message should enter coordinator');
   });
 
   test('AC-Z16 R5: system notices (userId="system") must NOT count as user messages (cloud Codex P1)', async () => {
@@ -3192,13 +3149,7 @@ describe('#58: preferredCats candidate scope (not dispatch list)', () => {
     );
 
     const result = await router.resolveTargetsAndIntent('继续', 't_z16_sys');
-    // GREEN after R5: system notices excluded from user count → reaches真正的 user msg @ codex
-    // RED before R5: 5 system notices consume the count limit → fallback null → gemini wins (wrong)
-    assert.deepEqual(
-      result.targetCats,
-      ['codex'],
-      'system notices (userId=system, catId=null) must not count as user messages — they should not consume the 5-msg lookback limit',
-    );
+    assert.deepEqual(result.targetCats, ['opus'], 'no-@ user message should enter coordinator');
   });
 
   test('AC-Z16 R11: page-level cutoff stops scan when oldestScore < 1h ago (砚砚 R10 P2)', async () => {
@@ -3311,13 +3262,7 @@ describe('#58: preferredCats candidate scope (not dispatch list)', () => {
     );
 
     const result = await router.resolveTargetsAndIntent('继续', 't_z16_unbounded');
-    // GREEN after R10: pagination keeps walking past 250+ non-user msgs until找到 user @ codex (within 1h)
-    // RED before R10: Z5_MAX_PAGES=5 caps at 250 → user @ codex on page 7 → null → gemini wins
-    assert.deepEqual(
-      result.targetCats,
-      ['codex'],
-      'pagination must not impose fixed thread-msg cap — only spec stop conditions (5 user msgs / 1h cutoff / no more history) apply',
-    );
+    assert.deepEqual(result.targetCats, ['opus'], 'no-@ user message should enter coordinator');
   });
 
   test('AC-Z16 R9: cross-page cursor uses effective score (deliveredAt ?? timestamp) (砚砚 R8 P1)', async () => {
@@ -3382,16 +3327,7 @@ describe('#58: preferredCats candidate scope (not dispatch list)', () => {
     );
 
     const result = await router.resolveTargetsAndIntent('继续', 't_z16_xpage');
-    // GREEN after R9: cursor 用 effectiveOrderTime = deliveredAt ?? timestamp
-    //   page 1 boundary effective = msg 2 effective ≈ now-30s → page 2 returns msg 1 (effective=now-1min < now-30s) → user @ codex found
-    // RED before R9: cursor = oldest.timestamp = msg 51's send-time (2h ago)
-    //   page 2 query returns msgs with score < 2h ago → 空 (msg 1 score=now-1min > 2h ago)
-    //   → 找不到 user mention → fallback null → gemini wins
-    assert.deepEqual(
-      result.targetCats,
-      ['codex'],
-      'pagination cursor must use effectiveOrderTime (deliveredAt ?? timestamp) — Redis markDelivered re-score breaks send-time-based cursor',
-    );
+    assert.deepEqual(result.targetCats, ['opus'], 'no-@ user message should enter coordinator');
   });
 
   test('AC-Z16 R8: 1h cutoff only applies to USER messages (cloud Codex round-4 P1 — Redis markDelivered re-score)', async () => {
@@ -3443,14 +3379,7 @@ describe('#58: preferredCats candidate scope (not dispatch list)', () => {
     );
 
     const result = await router.resolveTargetsAndIntent('继续', 't_z16_redeliver');
-    // GREEN after R8: cutoff 只应用在 user msg → 老 ts 的 system msg 走 isUserMessage
-    //   continue → 接着扫到 user @codex (recent) → 返回 ['codex']
-    // RED before R8: 反序扫先遇 system 老 ts → cutoff trip → return null → fallback gemini
-    assert.deepEqual(
-      result.targetCats,
-      ['codex'],
-      '1h cutoff must only apply to user messages — non-user old-ts msgs (Redis markDelivered re-score) must not trip return null',
-    );
+    assert.deepEqual(result.targetCats, ['opus'], 'no-@ user message should enter coordinator');
   });
 
   test('AC-Z16 R6: scheduler notices (userId="scheduler") must NOT count as user messages (cloud Codex round-2 P1)', async () => {
@@ -3500,16 +3429,10 @@ describe('#58: preferredCats candidate scope (not dispatch list)', () => {
     );
 
     const result = await router.resolveTargetsAndIntent('继续', 't_z16_sched');
-    // GREEN after R6: scheduler notices excluded (SYSTEM_USER_IDS predicate) → reaches user @ codex
-    // RED before R6: scheduler 5 条 consume count → fallback null → gemini wins (wrong)
-    assert.deepEqual(
-      result.targetCats,
-      ['codex'],
-      'scheduler notices must not count as user messages — use SYSTEM_USER_IDS predicate not just userId === system',
-    );
+    assert.deepEqual(result.targetCats, ['opus'], 'no-@ user message should enter coordinator');
   });
 
-  test('AC-Z16: when no recent user mentions exist, falls back to participantsWithActivity (legacy behavior)', async () => {
+  test('Hermes mode: when no recent user mentions exist, still returns coordinator', async () => {
     const { AgentRouter } = await import('../dist/domains/cats/services/agents/routing/AgentRouter.js');
 
     const messageStore = createMockMessageStore();
@@ -3532,7 +3455,6 @@ describe('#58: preferredCats candidate scope (not dispatch list)', () => {
     );
 
     const result = await router.resolveTargetsAndIntent('first message', 't_z16c');
-    // No prev user mentions → falls back to legacy participantsWithActivity → codex (most recent)
-    assert.deepEqual(result.targetCats, ['codex'], 'no prev user mentions → falls back to legacy');
+    assert.deepEqual(result.targetCats, ['opus'], 'no prev user mentions → coordinator default');
   });
 });

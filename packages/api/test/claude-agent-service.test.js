@@ -106,7 +106,7 @@ function createClaudeAgentService(options = {}) {
 
 // --- Test cases ---
 
-test('F203 AC-C5: -p carrier passes --system-prompt-file with compiled L0 path', async () => {
+test('F203 AC-C5: -p carrier passes compiled L0 via --system-prompt', async () => {
   const proc = createMockProcess();
   const spawnFn = createMockSpawnFn(proc);
   const l0CompilerFn = buildFakeL0Compiler('L0 for opus-47');
@@ -128,9 +128,10 @@ test('F203 AC-C5: -p carrier passes --system-prompt-file with compiled L0 path',
 
   const args = spawnFn.mock.calls[0].arguments[1];
   assert.ok(args.includes('-p'), 'still uses print carrier');
-  const flagIdx = args.indexOf('--system-prompt-file');
-  assert.ok(flagIdx >= 0, `--system-prompt-file present in argv: ${args.join(' ')}`);
-  assert.equal(args[flagIdx + 1], l0Path);
+  const flagIdx = args.indexOf('--system-prompt');
+  assert.ok(flagIdx >= 0, `--system-prompt present in argv: ${args.join(' ')}`);
+  assert.equal(args[flagIdx + 1], 'L0 for opus-47');
+  assert.ok(!args.includes('--system-prompt-file'), 'Claude 2.0.55 does not support --system-prompt-file');
   assert.ok(!args.includes('--append-system-prompt'), 'native L0 must not ride append-system-prompt');
 });
 
@@ -237,9 +238,9 @@ test('F203 AC-C5: cliConfigArgs cannot override reserved Claude system prompt fl
   await promise;
 
   const args = spawnFn.mock.calls[0].arguments[1];
-  const l0Path = l0CompilerFn.calls[0].outPath;
-  assert.equal(args.filter((arg) => arg === '--system-prompt-file').length, 1);
-  assert.equal(args[args.indexOf('--system-prompt-file') + 1], l0Path);
+  assert.equal(args.filter((arg) => arg === '--system-prompt').length, 1);
+  assert.equal(args[args.indexOf('--system-prompt') + 1], 'L0 for opus-47');
+  assert.ok(!args.includes('--system-prompt-file'));
   assert.ok(!args.includes('/tmp/attacker.md'));
   assert.ok(!args.includes('--append-system-prompt'));
   assert.ok(!args.includes('ATTACKER_APPEND'));
@@ -751,6 +752,32 @@ test('passes --include-partial-messages flag for incremental stream-json output'
 
   const args = spawnFn.mock.calls[0].arguments[1];
   assert.ok(args.includes('--include-partial-messages'));
+});
+
+test('does not pass unsupported --effort flag to Claude CLI', async () => {
+  const proc = createMockProcess();
+  const spawnFn = createMockSpawnFn(proc);
+  const service = createClaudeAgentService({ spawnFn });
+
+  const promise = collect(service.invoke('hello'));
+  emitClaudeEvents(proc, [{ type: 'result', subtype: 'success' }]);
+  await promise;
+
+  const args = spawnFn.mock.calls[0].arguments[1];
+  assert.ok(!args.includes('--effort'), `Claude CLI argv must not include --effort: ${args.join(' ')}`);
+});
+
+test('does not pass unsupported --chrome flag to Claude CLI', async () => {
+  const proc = createMockProcess();
+  const spawnFn = createMockSpawnFn(proc);
+  const service = createClaudeAgentService({ spawnFn });
+
+  const promise = collect(service.invoke('hello'));
+  emitClaudeEvents(proc, [{ type: 'result', subtype: 'success' }]);
+  await promise;
+
+  const args = spawnFn.mock.calls[0].arguments[1];
+  assert.ok(!args.includes('--chrome'), `Claude CLI argv must not include --chrome: ${args.join(' ')}`);
 });
 
 test('streams text deltas from stream_event without duplicating final assistant payload', async () => {

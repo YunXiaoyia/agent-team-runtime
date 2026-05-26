@@ -80,6 +80,7 @@ describe('SystemPromptBuilder', () => {
     // Dynamic teammate listing absent, but static collaboration guide still present
     assert.ok(!prompt.includes('你的队友'));
     assert.ok(prompt.includes('@队友'));
+    assert.ok(prompt.includes('Hermes Agent Team Mode'));
     // Still mentions 铲屎官
     assert.ok(prompt.includes('铲屎官'));
   });
@@ -335,11 +336,14 @@ describe('SystemPromptBuilder', () => {
     const { buildStaticIdentity } = await import('../dist/domains/cats/services/context/SystemPromptBuilder.js');
     const opusId = buildStaticIdentity('opus');
     assert.ok(opusId.includes('工作流'), 'Opus should have workflow triggers');
-    assert.ok(opusId.includes('@缅因猫'), 'Opus workflow should mention review with 缅因猫');
+    assert.ok(opusId.includes('@codex'), 'Opus workflow should dispatch engineering work to codex');
+    assert.ok(opusId.includes('@gemini'), 'Opus workflow should dispatch design/research work to gemini');
+    assert.ok(opusId.includes('Coordinator'), 'Opus workflow should identify coordinator role');
 
     const codexId = buildStaticIdentity('codex');
     assert.ok(codexId.includes('工作流'), 'Codex should have workflow triggers');
-    assert.ok(codexId.includes('@布偶猫'), 'Codex workflow should mention notifying 布偶猫');
+    assert.ok(codexId.includes('@coordinator'), 'Codex workflow should report back to coordinator');
+    assert.ok(codexId.includes('Engineering Worker'), 'Codex workflow should identify engineering worker role');
     assert.ok(codexId.includes('出口一问'), 'Codex workflow should include exit check (出口一问)');
   });
 
@@ -495,7 +499,7 @@ describe('SystemPromptBuilder', () => {
   test('buildStaticIdentity includes teammate roster with strengths', async () => {
     const { buildStaticIdentity } = await import('../dist/domains/cats/services/context/SystemPromptBuilder.js');
     const identity = buildStaticIdentity('opus');
-    assert.ok(identity.includes('## 队友名册'), 'Should have roster section');
+    assert.ok(identity.includes('## Agent Team Roster'), 'Should have roster section');
     assert.ok(identity.includes('擅长'), 'Should have strengths column header');
     assert.ok(identity.includes('@缅因猫') || identity.includes('@codex'), 'Should list codex mention');
     assert.ok(identity.includes('@暹罗猫') || identity.includes('@gemini'), 'Should list gemini mention');
@@ -516,7 +520,7 @@ describe('SystemPromptBuilder', () => {
       });
 
       const identity = buildStaticIdentity('opus');
-      assert.match(identity, /## 队友名册/, 'new session identity must include roster');
+      assert.match(identity, /## Agent Team Roster/, 'new session identity must include roster');
       assert.match(identity, /火花猫\/小火花/, 'runtime-created cat must be listed');
       assert.match(identity, /@runtime-spark · gpt-5\.4-mini/, 'runtime-created model alias must be visible');
     } finally {
@@ -532,7 +536,7 @@ describe('SystemPromptBuilder', () => {
     const opusRoster = buildStaticIdentity('opus');
     // Self (opus) should not appear in the roster table rows
     // The roster rows start after the header, each begins with "|"
-    const rosterSection = opusRoster.split('## 队友名册')[1];
+    const rosterSection = opusRoster.split('## Agent Team Roster')[1];
     assert.ok(rosterSection, 'Roster section should exist');
     assert.ok(!rosterSection.includes('| 布偶猫/宪宪'), 'Opus default should not list itself');
   });
@@ -550,8 +554,7 @@ describe('SystemPromptBuilder', () => {
       }
 
       const identity = buildStaticIdentity('opus');
-      // gpt52 keeps teamStrengths and has no explicit caution override in current config.
-      assert.ok(identity.includes('架构思考'), 'Should include gpt52 teamStrengths');
+      assert.ok(identity.includes('代码实现'), 'Should include codex worker teamStrengths');
       assert.ok(identity.includes('| 缅因猫/砚砚（GPT-5.4） |') || identity.includes('| 缅因猫/砚砚 |'));
       // gemini has caution about no coding
       assert.ok(identity.includes('禁止写代码'), 'Should include gemini caution');
@@ -576,7 +579,7 @@ describe('SystemPromptBuilder', () => {
       }
 
       const identity = buildStaticIdentity('codex');
-      const rosterSection = identity.split('## 队友名册')[1];
+      const rosterSection = identity.split('## Agent Team Roster')[1];
       assert.ok(rosterSection, 'Roster section should exist');
       // Find the Sonnet row
       const sonnetRow = rosterSection.split('\n').find((line) => line.includes('Sonnet'));
@@ -741,7 +744,7 @@ describe('SystemPromptBuilder', () => {
         catRegistry.register(id, config);
       }
       const prompt = buildStaticIdentity('opus');
-      assert.match(prompt, /队友名册/, 'must include 队友名册 section');
+      assert.match(prompt, /Agent Team Roster/, 'must include Agent Team Roster section');
       assert.match(prompt, /禁止写代码/, 'teammate roster must surface gemini restrictions');
       assert.match(prompt, /硬限制/, 'restrictions must carry a visible marker distinct from narrative caution');
     } finally {

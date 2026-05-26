@@ -151,6 +151,47 @@ describe('cat-config-loader', () => {
       }
     });
 
+    it('ignores legacy editor catalog shape with empty breeds so template cats remain available', () => {
+      const projectDir = mkdtempSync(join(tmpdir(), 'cat-legacy-empty-breeds-'));
+      const templatePath = join(projectDir, 'cat-template.json');
+      writeFileSync(templatePath, JSON.stringify(validConfig()));
+
+      const runtimeDir = join(projectDir, '.cat-cafe');
+      mkdirSync(runtimeDir, { recursive: true });
+      writeFileSync(
+        join(runtimeDir, 'cat-catalog.json'),
+        JSON.stringify({
+          version: 2,
+          roleTemplates: [{ id: 'ragdoll', name: '布偶猫' }],
+          clientDefaults: { claude: { defaultModel: 'claude-sonnet-4-6' } },
+          roster: {
+            owner: {
+              family: 'owner',
+              roles: ['owner'],
+              lead: false,
+              available: true,
+              evaluation: 'legacy editor entry',
+            },
+          },
+          breeds: [],
+        }),
+      );
+
+      const saved = process.env.CAT_TEMPLATE_PATH;
+      process.env.CAT_TEMPLATE_PATH = templatePath;
+      try {
+        const config = loadCatConfig();
+        assert.equal(config.breeds.length, 1);
+        assert.equal(config.breeds[0].id, 'ragdoll');
+      } finally {
+        if (saved === undefined) {
+          delete process.env.CAT_TEMPLATE_PATH;
+        } else {
+          process.env.CAT_TEMPLATE_PATH = saved;
+        }
+      }
+    });
+
     it('replaces cli object when catalog switches provider so stale effort/defaultArgs do not leak from base', () => {
       const projectDir = mkdtempSync(join(tmpdir(), 'cat-cli-merge-project-'));
       const templatePath = join(projectDir, 'cat-template.json');
@@ -963,6 +1004,39 @@ describe('F32-b P4c: Sonnet variant in project config', () => {
     assert.ok(all.antigravity); // F061: Bengal cat (Antigravity CDP bridge)
     assert.ok(all['antig-opus']); // F061: Bengal cat Claude variant
     assert.ok(all.opencode); // F105: OpenCode external agent
+  });
+
+  it('Hermes default roster exposes only coordinator and two active workers', () => {
+    const templatePath =
+      process.env.CAT_TEMPLATE_PATH ??
+      resolve(dirname(fileURLToPath(import.meta.url)), '../../..', 'cat-template.json');
+    const config = loadCatConfig(templatePath);
+    const active = Object.entries(config.roster)
+      .filter(([, entry]) => entry.available !== false)
+      .map(([id]) => id)
+      .sort();
+    assert.deepEqual(active, ['codex', 'gemini', 'opus']);
+    assert.deepEqual(config.roster.opus.roles, ['coordinator', 'planner', 'reviewer']);
+    assert.ok(config.roster.codex.roles.includes('worker'));
+    assert.ok(config.roster.codex.roles.includes('engineering'));
+    assert.ok(config.roster.gemini.roles.includes('worker'));
+    assert.ok(config.roster.gemini.roles.includes('research'));
+  });
+
+  it('Hermes default mentions resolve coordinator and worker aliases', () => {
+    const templatePath =
+      process.env.CAT_TEMPLATE_PATH ??
+      resolve(dirname(fileURLToPath(import.meta.url)), '../../..', 'cat-template.json');
+    const all = toAllCatConfigs(loadCatConfig(templatePath));
+    for (const alias of ['@coordinator', '@leader', '@协调者', '@队长']) {
+      assert.ok(all.opus.mentionPatterns.includes(alias), `${alias} should target opus coordinator`);
+    }
+    for (const alias of ['@engineer', '@code-worker', '@worker-codex', '@工程worker']) {
+      assert.ok(all.codex.mentionPatterns.includes(alias), `${alias} should target codex worker`);
+    }
+    for (const alias of ['@designer', '@researcher', '@design-worker', '@设计worker']) {
+      assert.ok(all.gemini.mentionPatterns.includes(alias), `${alias} should target gemini worker`);
+    }
   });
 
   it('antigravity variants have no cli config (F061 Bridge replaces CDP)', () => {

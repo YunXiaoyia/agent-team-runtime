@@ -687,8 +687,9 @@ export class AgentRouter {
   }
 
   /**
-   * Read-only target resolution: mentions → last-replier (scoped to preferredCats) → default cat.
-   * F32-b Phase 2 + #58: preferredCats is a candidate scope, not a dispatch list.
+   * Read-only target resolution: explicit mentions/group mentions → coordinator.
+   * Hermes Agent Team mode: ordinary no-@ user messages always enter the
+   * coordinator instead of continuing with the most recent worker.
    * Does NOT mutate thread participants.
    */
   private async peekTargets(message: string, threadId: string): Promise<CatId[]> {
@@ -697,53 +698,6 @@ export class AgentRouter {
 
     if (this.threadStore) {
       const thread = await this.threadStore.get(threadId);
-
-      // F32-b Phase 2 + #58: preferredCats = candidate scope, not dispatch list
-      // R5: Object.hasOwn + dedupe; Cloud P1: Array.isArray guard for corrupted data
-      const rawPref = Array.isArray(thread?.preferredCats) ? thread.preferredCats : [];
-      const validPreferred = this.filterRoutableCats(rawPref);
-      const preferredSet = new Set(validPreferred.map(String));
-
-      // #58: explicit #ideate with multiple preferred cats → dispatch all (user requested parallel)
-      const hasExplicitIdeate = /#ideate\b/i.test(message);
-      if (hasExplicitIdeate && validPreferred.length > 1) {
-        return this.applyThreadRoutingPolicy(thread, message, validPreferred);
-      }
-
-      // F194 Phase Z5 AC-Z16: 优先用上一条 user message 的 mentions 作 fallback 候选集，
-      // 不让 thread 里其他猫的发言（vision guard / cross-post）抢路由。
-      // 铲屎官原话："明明 at 的最后一只猫是 47 or 55 但是召唤出来的却是 46"
-      const userMentionFallback = await this.findRecentUserMentionFallback(threadId);
-      if (userMentionFallback && userMentionFallback.length > 0) {
-        return this.applyThreadRoutingPolicy(thread, message, userMentionFallback);
-      }
-
-      // F078: last-replier takes absolute priority over preferredCats.
-      // User mental model: "no @ = continue with whoever I was talking to".
-      // preferredCats only kicks in when there's no conversation history at all.
-      // #267: three-tier fallback — (1) any healthy replier (unscoped),
-      //   (2) preferred non-errored participant, (3) any non-errored participant.
-      const participantsWithActivity = await this.threadStore.getParticipantsWithActivity(threadId);
-      const isRoutable = (p: { catId: CatId }) => this.isRoutableCat(p.catId);
-      const isHealthy = (p: { lastResponseHealthy?: boolean }) => p.lastResponseHealthy !== false;
-      const healthyReplier = participantsWithActivity.find((p) => p.messageCount > 0 && isHealthy(p) && isRoutable(p));
-      if (healthyReplier) {
-        return this.applyThreadRoutingPolicy(thread, message, [healthyReplier.catId]);
-      }
-      const preferredFallback = participantsWithActivity.find(
-        (p) => isHealthy(p) && isRoutable(p) && preferredSet.has(p.catId as string),
-      );
-      const anyFallback = participantsWithActivity.find((p) => isHealthy(p) && isRoutable(p));
-      const fallbackParticipant = preferredFallback ?? anyFallback;
-      if (fallbackParticipant) {
-        return this.applyThreadRoutingPolicy(thread, message, [fallbackParticipant.catId]);
-      }
-
-      // No healthy participant at all: use first preferred cat
-      if (validPreferred.length > 0) {
-        return this.applyThreadRoutingPolicy(thread, message, [validPreferred[0]]);
-      }
-
       return this.applyThreadRoutingPolicy(thread, message, [getDefaultCatId()]);
     }
 
@@ -763,50 +717,6 @@ export class AgentRouter {
 
     if (this.threadStore) {
       const thread = await this.threadStore.get(threadId);
-
-      // F32-b Phase 2 + #58: preferredCats = candidate scope, not dispatch list
-      // R5: Object.hasOwn + dedupe; Cloud P1: Array.isArray guard for corrupted data
-      const rawPref = Array.isArray(thread?.preferredCats) ? thread.preferredCats : [];
-      const validPreferred = this.filterRoutableCats(rawPref);
-      const preferredSet = new Set(validPreferred.map(String));
-
-      // #58: explicit #ideate with multiple preferred cats → dispatch all (user requested parallel)
-      const hasExplicitIdeate = /#ideate\b/i.test(message);
-      if (hasExplicitIdeate && validPreferred.length > 1) {
-        return this.applyThreadRoutingPolicy(thread, message, validPreferred);
-      }
-
-      // F194 Phase Z5 AC-Z16: 优先用上一条 user message 的 mentions 作 fallback 候选集，
-      // 不让 thread 里其他猫的发言（vision guard / cross-post）抢路由。
-      // 铲屎官原话："明明 at 的最后一只猫是 47 or 55 但是召唤出来的却是 46"
-      const userMentionFallback = await this.findRecentUserMentionFallback(threadId);
-      if (userMentionFallback && userMentionFallback.length > 0) {
-        return this.applyThreadRoutingPolicy(thread, message, userMentionFallback);
-      }
-
-      // F078 + #58: last-replier takes priority over preferred cats (user mental model)
-      // #267: three-tier fallback (same as peekTargets)
-      const participantsWithActivity = await this.threadStore.getParticipantsWithActivity(threadId);
-      const isRoutable = (p: { catId: CatId }) => this.isRoutableCat(p.catId);
-      const isHealthy = (p: { lastResponseHealthy?: boolean }) => p.lastResponseHealthy !== false;
-      const healthyReplier = participantsWithActivity.find((p) => p.messageCount > 0 && isHealthy(p) && isRoutable(p));
-      if (healthyReplier) {
-        return this.applyThreadRoutingPolicy(thread, message, [healthyReplier.catId]);
-      }
-      const preferredFallback = participantsWithActivity.find(
-        (p) => isHealthy(p) && isRoutable(p) && preferredSet.has(p.catId as string),
-      );
-      const anyFallback = participantsWithActivity.find((p) => isHealthy(p) && isRoutable(p));
-      const fallbackParticipant = preferredFallback ?? anyFallback;
-      if (fallbackParticipant) {
-        return this.applyThreadRoutingPolicy(thread, message, [fallbackParticipant.catId]);
-      }
-
-      // No healthy participant at all: use first preferred cat
-      if (validPreferred.length > 0) {
-        return this.applyThreadRoutingPolicy(thread, message, [validPreferred[0]]);
-      }
-
       return this.applyThreadRoutingPolicy(thread, message, [getDefaultCatId()]);
     }
 
