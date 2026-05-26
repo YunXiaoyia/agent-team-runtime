@@ -6,10 +6,12 @@
 pnpm install
 cp .env.example .env
 pnpm prisma:generate
+pnpm prisma:push
 pnpm dev
 ```
 
 The API listens on port `3104` by default.
+The default `DATABASE_URL` in `.env.example` resolves to `data/runtime.db`.
 
 ## Test
 
