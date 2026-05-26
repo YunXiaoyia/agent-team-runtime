@@ -2,7 +2,7 @@
 
 ## Summary
 
-将 `/home/yunyi/Desktop/Bytedance_cmp/agent-team-runtime` 从当前轻量 Fastify/Prisma 后端，改造成以 `/home/yunyi/Desktop/Bytedance_cmp/clowder-ai` 为主体的独立运行时项目。
+将 `agent-team-runtime` 从当前轻量 Fastify/Prisma 后端，改造成以同级 `clowder-ai` 源仓库为主体的独立运行时项目。
 
 本次方向不再是“选择性移植少量 Provider/Router/MCP 思路”，而是复制 Clowder 的大部分运行时代码，并把新项目保留为 `agent-team-runtime`。运行模型跟随 Clowder：Redis + API 3004 + Web 3003 + MCP server。
 
@@ -80,7 +80,7 @@
   - 验证 Socket.IO/API 不因包名重命名失败。
 
 - 代码一致性验证：
-  - 全仓搜索确保没有路径指向旧的本地绝对路径 `/home/yunyi/Desktop/Bytedance_cmp/clowder-ai`。
+  - 全仓搜索确保没有路径指向旧的本地绝对路径。
   - 搜索 `@agent-team-runtime/`，除兼容文档或刻意保留说明外，代码 import 应改为 `@agent-team-runtime/`。
   - 搜索私有状态文件，确认 `.env`、`.cat-cafe/credentials.json`、runtime DB、日志、`node_modules/` 没有进入 git。
 
