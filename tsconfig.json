@@ -13,6 +13,12 @@
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "baseUrl": ".",
+    "paths": {
+      "@agent-team-runtime/shared": ["packages/shared/src/index.ts"],
+      "@agent-team-runtime/runtime": ["packages/runtime/src/index.ts"],
+      "@agent-team-runtime/mcp-server": ["packages/mcp-server/src/index.ts"]
+    }
   }
 }

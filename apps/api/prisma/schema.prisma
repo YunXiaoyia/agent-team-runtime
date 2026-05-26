@@ -8,12 +8,16 @@ datasource db {
 }
 
 model Agent {
-  id           String   @id
-  name         String
-  provider     String
-  capabilities String
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  id               String   @id
+  name             String
+  provider         String
+  mention          String   @unique
+  capabilities     String
+  model            String?
+  workingDirectory String?
+  systemPrompt     String?
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
 }
 
 model Thread {
@@ -25,14 +29,15 @@ model Thread {
 }
 
 model Message {
-  id        String   @id
-  threadId  String
-  sender    String
-  role      String
-  content   String
-  metadata  String?
-  createdAt DateTime @default(now())
-  thread    Thread   @relation(fields: [threadId], references: [id], onDelete: Cascade)
+  id           String   @id
+  threadId     String
+  invocationId String?
+  sender       String
+  role         String
+  content      String
+  metadata     String?
+  createdAt    DateTime @default(now())
+  thread       Thread   @relation(fields: [threadId], references: [id], onDelete: Cascade)
 }
 
 model Invocation {
