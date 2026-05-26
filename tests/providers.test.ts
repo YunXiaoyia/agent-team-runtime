@@ -27,7 +27,7 @@ describe("provider transforms", () => {
 });
 
 describe("provider CLI adapters", () => {
-  it("spawns codex exec with json output and developer instructions", async () => {
+  it("spawns codex exec with json output and injected developer instructions", async () => {
     const calls: Array<{ command: string; args: string[] }> = [];
     const spawnFn: SpawnFn = async (command, args) => {
       calls.push({ command, args });
@@ -47,12 +47,12 @@ describe("provider CLI adapters", () => {
     expect(calls[0].command).toBe("codex");
     expect(calls[0].args).toContain("exec");
     expect(calls[0].args).toContain("--json");
-    expect(calls[0].args).toContain("--developer-instructions");
-    expect(calls[0].args.at(-1)).toBe("do work");
+    expect(calls[0].args.at(-1)).toContain("<developer_instructions>");
+    expect(calls[0].args.at(-1)).toContain("do work");
     expect(result.messages[0].content).toBe("ok");
   });
 
-  it("spawns claude with stream-json verbose and system prompt file", async () => {
+  it("spawns claude with stream-json verbose and injected system prompt", async () => {
     const calls: Array<{ command: string; args: string[] }> = [];
     const spawnFn: SpawnFn = async (command, args) => {
       calls.push({ command, args });
@@ -70,7 +70,7 @@ describe("provider CLI adapters", () => {
     });
 
     expect(calls[0].command).toBe("claude");
-    expect(calls[0].args).toEqual(expect.arrayContaining(["-p", "do work", "--output-format", "stream-json", "--verbose", "--system-prompt-file"]));
+    expect(calls[0].args).toEqual(expect.arrayContaining(["-p", "--output-format", "stream-json", "--verbose", "--system-prompt", "do work"]));
     expect(result.messages[0].content).toBe("ok");
   });
 });

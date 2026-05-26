@@ -16,12 +16,17 @@ export class CodexProvider implements AgentProvider {
 
   async run(input: ProviderRunInput): Promise<ProviderRunResult> {
     const developerInstructions = input.agent.systemPrompt ?? DEFAULT_DEVELOPER_INSTRUCTIONS;
+    const prompt = [
+      "<developer_instructions>",
+      developerInstructions,
+      "</developer_instructions>",
+      "",
+      input.prompt
+    ].join("\n");
     const args = [
       "exec",
       "--json",
-      "--developer-instructions",
-      developerInstructions,
-      input.prompt
+      prompt
     ];
 
     const result = await this.spawnFn("codex", args, {

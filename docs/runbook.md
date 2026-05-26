@@ -43,6 +43,7 @@ Callback endpoints require the `x-callback-token` header when `CALLBACK_TOKEN` i
 ## Manual Smoke
 
 Real provider smoke tests require `codex` and/or `claude` installed in `PATH`.
+The provider adapters target the current local CLI help: Codex receives developer instructions inside the prompt payload, and Claude receives the runtime prompt through `--system-prompt`.
 
 1. Register a Codex agent with provider `codex`.
 2. Register a Claude agent with provider `claude`.

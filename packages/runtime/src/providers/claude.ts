@@ -1,6 +1,3 @@
-import { mkdtemp, writeFile, rm } from "node:fs/promises";
-import { join } from "node:path";
-import { tmpdir } from "node:os";
 import type { ProviderRunInput, ProviderRunResult } from "@agent-team-runtime/shared";
 import { transformClaudeStreamJson } from "./transforms.js";
 import type { AgentProvider, SpawnFn } from "./types.js";
@@ -18,39 +15,32 @@ export class ClaudeProvider implements AgentProvider {
   constructor(private readonly spawnFn: SpawnFn = nodeSpawnFn) {}
 
   async run(input: ProviderRunInput): Promise<ProviderRunResult> {
-    const dir = await mkdtemp(join(tmpdir(), "agent-team-runtime-claude-"));
-    const promptFile = join(dir, "system-prompt.md");
+    const systemPrompt = input.agent.systemPrompt ?? DEFAULT_SYSTEM_PROMPT;
+    const args = [
+      "-p",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--system-prompt",
+      systemPrompt,
+      input.prompt
+    ];
 
-    try {
-      await writeFile(promptFile, input.agent.systemPrompt ?? DEFAULT_SYSTEM_PROMPT, "utf8");
-      const args = [
-        "-p",
-        input.prompt,
-        "--output-format",
-        "stream-json",
-        "--verbose",
-        "--system-prompt-file",
-        promptFile
-      ];
+    const result = await this.spawnFn("claude", args, {
+      cwd: input.agent.workingDirectory
+    });
 
-      const result = await this.spawnFn("claude", args, {
-        cwd: input.agent.workingDirectory
-      });
-
-      if (result.exitCode !== 0) {
-        throw new Error(`claude exited with ${result.exitCode}: ${result.stderr}`);
-      }
-
-      return {
-        raw: result.stdout,
-        messages: transformClaudeStreamJson(result.stdout, {
-          threadId: input.threadId,
-          invocationId: input.invocationId,
-          agentId: input.agent.id
-        })
-      };
-    } finally {
-      await rm(dir, { recursive: true, force: true });
+    if (result.exitCode !== 0) {
+      throw new Error(`claude exited with ${result.exitCode}: ${result.stderr}`);
     }
+
+    return {
+      raw: result.stdout,
+      messages: transformClaudeStreamJson(result.stdout, {
+        threadId: input.threadId,
+        invocationId: input.invocationId,
+        agentId: input.agent.id
+      })
+    };
   }
 }
