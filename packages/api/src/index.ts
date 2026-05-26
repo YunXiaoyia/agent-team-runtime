@@ -4,9 +4,9 @@
  */
 
 import { join } from 'node:path';
-import { type CatConfig, type CatId, CORE_COMMANDS, catRegistry } from '@cat-cafe/shared';
-import type { RedisClient } from '@cat-cafe/shared/utils';
-import { createRedisClient, SessionStore } from '@cat-cafe/shared/utils';
+import { type CatConfig, type CatId, CORE_COMMANDS, catRegistry } from '@agent-team-runtime/shared';
+import type { RedisClient } from '@agent-team-runtime/shared/utils';
+import { createRedisClient, SessionStore } from '@agent-team-runtime/shared/utils';
 import fastifyCookie from '@fastify/cookie';
 import cors from '@fastify/cors';
 import fastifyWebsocket from '@fastify/websocket';

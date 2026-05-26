@@ -13,7 +13,7 @@ import { execFileSync } from 'node:child_process';
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { rm } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
-import { type CatId, type ContextHealth, catRegistry, type MessageContent } from '@cat-cafe/shared';
+import { type CatId, type ContextHealth, catRegistry, type MessageContent } from '@agent-team-runtime/shared';
 import { context, SpanStatusCode, trace } from '@opentelemetry/api';
 import {
   resolveBuiltinClientForProvider,
@@ -758,7 +758,7 @@ export async function* invokeSingleCat(deps: InvocationDeps, params: InvocationP
 
     // F070 Phase 2: Inject dispatch mission context for external projects
     let missionPrefix = '';
-    let capturedMissionPack: import('@cat-cafe/shared').DispatchMissionPack | undefined;
+    let capturedMissionPack: import('@agent-team-runtime/shared').DispatchMissionPack | undefined;
     if (workingDirectory && !isSameProject(workingDirectory, hostProjectRoot) && threadStore) {
       try {
         const thread = await preflightRace(

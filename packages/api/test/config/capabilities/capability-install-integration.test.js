@@ -18,7 +18,7 @@ describe('F146 validation scenario: browser 3-backend integration', () => {
   beforeEach(async () => {
     projectRoot = await mkdtemp(join(tmpdir(), 'f146-int-'));
     await mkdir(join(projectRoot, '.cat-cafe'), { recursive: true });
-    /** @type {import('@cat-cafe/shared').CapabilitiesConfig} */
+    /** @type {import('@agent-team-runtime/shared').CapabilitiesConfig} */
     const seed = { version: 1, capabilities: [] };
     await writeCapabilitiesConfig(projectRoot, seed);
   });

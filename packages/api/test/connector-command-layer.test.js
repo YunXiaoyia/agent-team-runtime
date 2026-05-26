@@ -1280,7 +1280,7 @@ describe('ConnectorCommandLayer + CommandRegistry (F142-B)', () => {
 
   it('/thread CORE_COMMANDS usage matches handler error hint (P2 regression)', async () => {
     // Lock: CORE_COMMANDS says "/thread <thread_id> <message>" — handler must agree
-    const { CORE_COMMANDS } = await import('@cat-cafe/shared');
+    const { CORE_COMMANDS } = await import('@agent-team-runtime/shared');
     const threadDef = CORE_COMMANDS.find((c) => c.name === '/thread');
     assert.ok(threadDef, '/thread must exist in CORE_COMMANDS');
     assert.equal(threadDef.usage, '/thread <thread_id> <message>');
@@ -1311,7 +1311,7 @@ describe('F154: /focus command (AC-A1, AC-A3, AC-A6, AC-A7)', () => {
 
   before(async () => {
     // Set up catRegistry with test cats
-    const { catRegistry, createCatId } = await import('@cat-cafe/shared');
+    const { catRegistry, createCatId } = await import('@agent-team-runtime/shared');
     const { loadCatConfig, toAllCatConfigs } = await import('../dist/config/cat-config-loader.js');
     const allConfigs = toAllCatConfigs(loadCatConfig());
     catRegistry.reset();
@@ -1428,7 +1428,7 @@ describe('F154: /ask command (AC-A2, AC-A5, AC-A6)', () => {
   const binding = { connectorId: CID, externalChatId: EXT, threadId: THREAD_ID, userId: UID, createdAt: Date.now() };
 
   before(async () => {
-    const { catRegistry } = await import('@cat-cafe/shared');
+    const { catRegistry } = await import('@agent-team-runtime/shared');
     const { loadCatConfig, toAllCatConfigs } = await import('../dist/config/cat-config-loader.js');
     const allConfigs = toAllCatConfigs(loadCatConfig());
     catRegistry.reset();
@@ -1522,7 +1522,7 @@ describe('F154: /focus + /ask with commandRegistry (P1/P2 regression)', () => {
   const binding = { connectorId: CID, externalChatId: EXT, threadId: THREAD_ID, userId: UID, createdAt: Date.now() };
 
   before(async () => {
-    const shared = await import('@cat-cafe/shared');
+    const shared = await import('@agent-team-runtime/shared');
     const { loadCatConfig, toAllCatConfigs } = await import('../dist/config/cat-config-loader.js');
     const allConfigs = toAllCatConfigs(loadCatConfig());
     shared.catRegistry.reset();

@@ -26,7 +26,7 @@ describe('RedisSummaryStore', { skip: redisIsolationSkipReason(REDIS_URL) }, () 
 
     const storeModule = await import('../dist/domains/cats/services/stores/redis/RedisSummaryStore.js');
     RedisSummaryStore = storeModule.RedisSummaryStore;
-    const redisModule = await import('@cat-cafe/shared/utils');
+    const redisModule = await import('@agent-team-runtime/shared/utils');
     createRedisClient = redisModule.createRedisClient;
 
     redis = createRedisClient({ url: REDIS_URL });

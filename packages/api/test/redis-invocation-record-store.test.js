@@ -25,7 +25,7 @@ describe('RedisInvocationRecordStore', { skip: redisIsolationSkipReason(REDIS_UR
 
     const storeModule = await import('../dist/domains/cats/services/stores/redis/RedisInvocationRecordStore.js');
     RedisInvocationRecordStore = storeModule.RedisInvocationRecordStore;
-    const redisModule = await import('@cat-cafe/shared/utils');
+    const redisModule = await import('@agent-team-runtime/shared/utils');
     createRedisClient = redisModule.createRedisClient;
 
     redis = createRedisClient({ url: REDIS_URL });

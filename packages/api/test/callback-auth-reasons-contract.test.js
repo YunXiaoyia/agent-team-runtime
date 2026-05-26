@@ -2,7 +2,7 @@
  * F174 Phase A — Contract test: shared reason taxonomy stays in lockstep
  * with the API's MESSAGE_BY_REASON map and the MCP client's KNOWN_REASONS.
  *
- * If a new reason is added to @cat-cafe/shared without updating both ends,
+ * If a new reason is added to @agent-team-runtime/shared without updating both ends,
  * this test fails — preventing the enum drift 砚砚 flagged in his Phase A
  * review (reminder #2).
  */

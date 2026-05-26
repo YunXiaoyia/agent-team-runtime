@@ -5,8 +5,8 @@
  * 纯函数，无副作用。读取 catRegistry 生成身份上下文。
  */
 
-import type { CatConfig, CatId, CompiledPackBlocks, WorldContextEnvelope } from '@cat-cafe/shared';
-import { catRegistry } from '@cat-cafe/shared';
+import type { CatConfig, CatId, CompiledPackBlocks, WorldContextEnvelope } from '@agent-team-runtime/shared';
+import { catRegistry } from '@agent-team-runtime/shared';
 import {
   catHasRole,
   getCoCreatorConfig,

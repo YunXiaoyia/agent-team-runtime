@@ -1,4 +1,4 @@
-import type { MarketplaceArtifactKind, MarketplaceEcosystem, TrustLevel } from '@cat-cafe/shared';
+import type { MarketplaceArtifactKind, MarketplaceEcosystem, TrustLevel } from '@agent-team-runtime/shared';
 import type { FastifyPluginAsync } from 'fastify';
 import type { AdapterRegistry } from '../marketplace/adapter-registry.js';
 import { validateInstallPlan } from '../marketplace/install-plan-bridge.js';

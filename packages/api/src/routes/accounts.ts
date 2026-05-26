@@ -7,7 +7,7 @@ import { existsSync } from 'node:fs';
 import { realpath, stat } from 'node:fs/promises';
 import { homedir } from 'node:os';
 import { relative, resolve, win32 } from 'node:path';
-import type { AccountConfig } from '@cat-cafe/shared';
+import type { AccountConfig } from '@agent-team-runtime/shared';
 import type { FastifyPluginAsync } from 'fastify';
 import { z } from 'zod';
 import { resolveCatCatalogPath } from '../config/cat-catalog-store.js';

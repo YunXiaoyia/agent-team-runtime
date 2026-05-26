@@ -9,7 +9,7 @@
  *   inputTokens = raw + cache_read + cache_creation (total input).
  */
 
-import type { CatId } from '@cat-cafe/shared';
+import type { CatId } from '@agent-team-runtime/shared';
 import type { AgentMessage, TokenUsage } from '../../../types.js';
 
 // ── Anthropic API shapes (inline, no SDK dependency) ──

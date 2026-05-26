@@ -9,7 +9,7 @@ import { readFile } from 'node:fs/promises';
 import { homedir } from 'node:os';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import type { CatCafeConfig } from '@cat-cafe/shared';
+import type { CatCafeConfig } from '@agent-team-runtime/shared';
 import type { FastifyPluginAsync } from 'fastify';
 import { getRoster, loadCatConfig, toAllCatConfigs } from '../config/cat-config-loader.js';
 import { compileL0ViaSubprocess } from '../domains/cats/services/agents/providers/l0-compiler.js';

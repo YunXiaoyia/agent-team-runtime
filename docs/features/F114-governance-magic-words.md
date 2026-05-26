@@ -82,7 +82,7 @@ created: 2026-03-13
 - [x] AC-2: team lead发送「星星罐子」时，猫停止新增副作用并等待指示
 - [x] AC-3: `feat-lifecycle` 愿景守护步骤包含 BLOCKED 条件（缺对照表 = 不放行）
 - [x] AC-4: 愿景守护输出包含"team experience vs 实际状态"对照表格式
-- [x] AC-5: SystemPromptBuilder 测试通过（`pnpm --filter @cat-cafe/api test`）
+- [x] AC-5: SystemPromptBuilder 测试通过（`pnpm --filter @agent-team-runtime/api test`）
 
 ## Dependencies
 

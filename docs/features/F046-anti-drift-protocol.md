@@ -272,7 +272,7 @@ Phase A 为流程/文档变更，无代码测试。
 Phase B（B4/B6）代码证据（2026-03-02）：
 - `node --test scripts/check-skills-manifest.test.mjs` → 4/4 pass
 - `pnpm check:skills` → 15 skills 挂载/注册/manifest 全绿
-- `pnpm --filter @cat-cafe/api run build` → success
+- `pnpm --filter @agent-team-runtime/api run build` → success
 - `node --test packages/api/test/review-identity-gate.test.js packages/api/test/system-prompt-builder.test.js` → 60/60 pass
 - `node --test packages/api/test/agent-router.test.js`（在 `packages/api/` 目录）→ 50/50 pass
 
@@ -283,7 +283,7 @@ Phase B（B1/B3）文档证据（2026-03-02）：
 - `cat-cafe-skills/feat-lifecycle/SKILL.md` kickoff 已要求嵌入 B3 checklist
 
 Phase B（B5 扩展）运行时回归证据（2026-03-03）：
-- `pnpm --filter @cat-cafe/api run build` → success
+- `pnpm --filter @agent-team-runtime/api run build` → success
 - `node --test packages/api/test/f046-b5-runtime-regression-seed.test.js` → 10/10 pass
 - 说明：B5 已从 seed 3 条扩展到 10 条（覆盖 D2 去惯性 + debug/play 核心路径；D1/D3 keyword gate 测试随 PR #206 简化后合并）
 

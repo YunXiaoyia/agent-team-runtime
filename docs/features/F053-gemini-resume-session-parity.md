@@ -86,12 +86,12 @@ updated: 2026-03-03
 
 ## Test Evidence（Phase A）
 
-- `pnpm --filter @cat-cafe/api run build`
+- `pnpm --filter @agent-team-runtime/api run build`
 - `node --test packages/api/test/gemini-agent-service.test.js`
 - 结果：24 passed, 0 failed（含新增 `passes --resume when sessionId is provided`）
 
 ## Test Evidence（Phase B）
 
-- `pnpm --filter @cat-cafe/api run build`
+- `pnpm --filter @agent-team-runtime/api run build`
 - `node --test packages/api/test/invoke-single-cat.test.js --test-name-pattern "resume failure"`
 - 结果：43 passed, 0 failed（含分类与 `resume_failure_stats` 新增用例）

@@ -5,7 +5,7 @@
 
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
-import type { UserPreferences } from '@cat-cafe/shared';
+import type { UserPreferences } from '@agent-team-runtime/shared';
 
 function preferencesPath(projectRoot: string): string {
   return resolve(projectRoot, '.cat-cafe', 'user-preferences.json');

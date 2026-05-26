@@ -3,7 +3,7 @@
  * F211 Phase A1: Redis available -> RedisRuntimeSessionStore, otherwise in-memory.
  */
 
-import type { RedisClient } from '@cat-cafe/shared/utils';
+import type { RedisClient } from '@agent-team-runtime/shared/utils';
 import { RedisRuntimeSessionStore } from './RedisRuntimeSessionStore.js';
 import { RuntimeSessionStore } from './RuntimeSessionStore.js';
 

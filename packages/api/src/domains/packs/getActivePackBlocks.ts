@@ -5,7 +5,7 @@
  * Phase A: single-pack (first installed wins). Multi-pack merge is Phase B.
  */
 
-import type { CompiledPackBlocks } from '@cat-cafe/shared';
+import type { CompiledPackBlocks } from '@agent-team-runtime/shared';
 import { PackCompiler } from './PackCompiler.js';
 import type { PackStore } from './PackStore.js';
 

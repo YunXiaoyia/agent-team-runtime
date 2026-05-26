@@ -5,14 +5,14 @@
 
 import { randomUUID } from 'node:crypto';
 import { readFileSync } from 'node:fs';
-import type { CallbackAuthFailureReason } from '@cat-cafe/shared';
+import type { CallbackAuthFailureReason } from '@agent-team-runtime/shared';
 import {
   CALLBACK_AUTH_FAILURE_REASONS,
   DEVELOPMENT_SOP_STAGE_IDS,
   isCallbackAuthFailureReason,
   normalizeRichBlock,
   SOP_DEFINITION_IDS,
-} from '@cat-cafe/shared';
+} from '@agent-team-runtime/shared';
 import { z } from 'zod';
 import { sendCallbackRequest } from './callback-outbox.js';
 import { extractReasonTag } from './callback-retry.js';
@@ -21,7 +21,7 @@ import type { ToolResult } from './file-tools.js';
 import { errorResult, successResult } from './file-tools.js';
 
 /**
- * F174 Phase A — reason taxonomy lives in @cat-cafe/shared (single source of
+ * F174 Phase A — reason taxonomy lives in @agent-team-runtime/shared (single source of
  * truth shared with the API). Aliased here for local readability.
  */
 type AuthFailureReason = CallbackAuthFailureReason;

@@ -323,7 +323,7 @@ test('ensure_api_native_addons rebuilds better-sqlite3 after Node ABI drift', ()
   try {
     mkdirSync(binDir, { recursive: true });
     mkdirSync(apiDir, { recursive: true });
-    writeFileSync(join(apiDir, 'package.json'), '{"name":"@cat-cafe/api"}\n');
+    writeFileSync(join(apiDir, 'package.json'), '{"name":"@agent-team-runtime/api"}\n');
     writeFileSync(
       join(binDir, 'node'),
       `#!/bin/bash

@@ -1,4 +1,4 @@
-import type { CapabilityEntry } from '@cat-cafe/shared';
+import type { CapabilityEntry } from '@agent-team-runtime/shared';
 
 interface RevokeResult {
   entry: CapabilityEntry;

@@ -7,7 +7,7 @@
  *
  * Follows F139 TaskSpec_P1 consumer pattern (CiCdCheckTaskSpec etc).
  */
-import type { CatId, ConnectorSource } from '@cat-cafe/shared';
+import type { CatId, ConnectorSource } from '@agent-team-runtime/shared';
 import type {
   ConnectorDeliveryDeps,
   ConnectorDeliveryInput,

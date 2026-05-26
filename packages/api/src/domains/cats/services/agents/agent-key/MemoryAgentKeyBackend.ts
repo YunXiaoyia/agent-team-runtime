@@ -1,5 +1,5 @@
 import { createHash } from 'node:crypto';
-import type { AgentKeyRecord, AgentKeyVerifyResult } from '@cat-cafe/shared';
+import type { AgentKeyRecord, AgentKeyVerifyResult } from '@agent-team-runtime/shared';
 import type { AgentKeyInput, IAgentKeyBackend } from './IAgentKeyBackend.js';
 
 export class MemoryAgentKeyBackend implements IAgentKeyBackend {

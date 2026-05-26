@@ -1,4 +1,4 @@
-import type { StudyMeta } from '@cat-cafe/shared';
+import type { StudyMeta } from '@agent-team-runtime/shared';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { getThreadHref } from '@/components/ThreadSidebar/thread-navigation';
 import { useIMEGuard } from '@/hooks/useIMEGuard';

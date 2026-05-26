@@ -5,7 +5,7 @@
 import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 
-import { type ManifestSlashCommand, ManifestSlashCommandSchema } from '@cat-cafe/shared';
+import { type ManifestSlashCommand, ManifestSlashCommandSchema } from '@agent-team-runtime/shared';
 import { parse as parseYaml } from 'yaml';
 
 interface ManifestSkillEntry {

@@ -5,12 +5,12 @@
  * EXPIRED_CREDENTIALS_ERROR with a discriminated body { error, reason, message, hint }
  * so MCP clients can branch on `reason` instead of regex-matching error text.
  *
- * The reason taxonomy lives in @cat-cafe/shared so the MCP client and the
+ * The reason taxonomy lives in @agent-team-runtime/shared so the MCP client and the
  * API server share a single source of truth (砚砚 review reminder #2 —
  * prevent enum drift between client/server).
  */
 
-import type { CallbackAuthFailureReason } from '@cat-cafe/shared';
+import type { CallbackAuthFailureReason } from '@agent-team-runtime/shared';
 
 /** Re-exported for backwards-compatible imports within this package. */
 export type CallbackAuthErrorReason = CallbackAuthFailureReason;

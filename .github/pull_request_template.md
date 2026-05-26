@@ -35,7 +35,7 @@ Closes #
 ```
 pnpm check                                    # result
 pnpm lint                                     # result
-pnpm --filter @cat-cafe/api run test:public   # result
+pnpm --filter @agent-team-runtime/api run test:public   # result
 ```
 
 ## AC Checklist (Feature PRs only)

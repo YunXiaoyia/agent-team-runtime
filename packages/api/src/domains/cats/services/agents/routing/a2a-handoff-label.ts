@@ -1,4 +1,4 @@
-import type { CatConfig, CatId } from '@cat-cafe/shared';
+import type { CatConfig, CatId } from '@agent-team-runtime/shared';
 
 type HandoffCatConfig = Pick<CatConfig, 'displayName' | 'variantLabel'>;
 

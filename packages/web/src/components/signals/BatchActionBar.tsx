@@ -1,4 +1,4 @@
-import type { SignalArticleStatus } from '@cat-cafe/shared';
+import type { SignalArticleStatus } from '@agent-team-runtime/shared';
 import { useCallback, useState } from 'react';
 import { batchSignalArticles } from '@/utils/signals-api';
 

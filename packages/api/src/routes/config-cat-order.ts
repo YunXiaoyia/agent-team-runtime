@@ -3,7 +3,7 @@
  * Owner-gated writes, file-backed persistence via cat-order-store.
  */
 
-import { catRegistry } from '@cat-cafe/shared';
+import { catRegistry } from '@agent-team-runtime/shared';
 import type { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify';
 import { z } from 'zod';
 import { getOwnerUserId } from '../config/cat-config-loader.js';

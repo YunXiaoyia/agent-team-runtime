@@ -3,8 +3,8 @@
  *
  * #320: Reads from unified TaskStore instead of PrTrackingStore.
  */
-import type { ConnectorSource } from '@cat-cafe/shared';
-import { parsePrSubjectKey, prSubjectKey } from '@cat-cafe/shared';
+import type { ConnectorSource } from '@agent-team-runtime/shared';
+import { parsePrSubjectKey, prSubjectKey } from '@agent-team-runtime/shared';
 import type { FastifyBaseLogger } from 'fastify';
 import type { ITaskStore } from '../../domains/cats/services/stores/ports/TaskStore.js';
 import type { ConnectorDeliveryDeps } from './deliver-connector-message.js';

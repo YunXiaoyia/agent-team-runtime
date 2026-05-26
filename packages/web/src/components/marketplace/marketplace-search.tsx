@@ -1,7 +1,7 @@
 'use client';
 
-import type { MarketplaceEcosystem, TrustLevel } from '@cat-cafe/shared';
-import { MARKETPLACE_ECOSYSTEMS, TRUST_LEVELS } from '@cat-cafe/shared';
+import type { MarketplaceEcosystem, TrustLevel } from '@agent-team-runtime/shared';
+import { MARKETPLACE_ECOSYSTEMS, TRUST_LEVELS } from '@agent-team-runtime/shared';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useMarketplaceStore } from '@/stores/marketplaceStore';
 import { HubIcon } from '../hub-icons';

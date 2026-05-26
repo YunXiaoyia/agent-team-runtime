@@ -1,10 +1,10 @@
 /**
- * @cat-cafe/shared
+ * @agent-team-runtime/shared
  * 共享类型和 schemas
  *
  * Note: Redis utils are NOT exported from root to avoid pulling
  * Node-only dependencies into frontend bundles.
- * Import from '@cat-cafe/shared/utils' instead.
+ * Import from '@agent-team-runtime/shared/utils' instead.
  */
 
 // Export avatar size limits (shared between API route bodyLimit and frontend size gate)

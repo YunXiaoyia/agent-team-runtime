@@ -13,7 +13,7 @@ import type {
   PermissionRequest,
   PermissionResponse,
   RespondScope,
-} from '@cat-cafe/shared';
+} from '@agent-team-runtime/shared';
 import type { Server as SocketIOServer } from 'socket.io';
 import { getPushNotificationService } from '../push/PushNotificationService.js';
 import type { IAuthorizationAuditStore } from '../stores/ports/AuthorizationAuditStore.js';

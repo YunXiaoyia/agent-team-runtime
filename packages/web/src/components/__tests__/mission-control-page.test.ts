@@ -1,4 +1,4 @@
-import type { CatId } from '@cat-cafe/shared';
+import type { CatId } from '@agent-team-runtime/shared';
 import React, { act } from 'react';
 import { createRoot, type Root } from 'react-dom/client';
 import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';

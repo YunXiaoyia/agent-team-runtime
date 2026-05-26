@@ -17,7 +17,7 @@ async function getSchemas() {
     PackMaskSchema,
     PackWorkflowSchema,
     PackWorldDriverSchema,
-  } = await import('@cat-cafe/shared');
+  } = await import('@agent-team-runtime/shared');
   return {
     PackManifestSchema,
     PackGuardrailsSchema,

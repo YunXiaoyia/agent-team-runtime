@@ -4,7 +4,7 @@ import type {
   SceneRecord,
   WorldEventEntry,
   WorldRecord,
-} from '@cat-cafe/shared';
+} from '@agent-team-runtime/shared';
 
 export const IWorldStoreSymbol = Symbol.for('IWorldStore');
 

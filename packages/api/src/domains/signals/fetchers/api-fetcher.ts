@@ -1,4 +1,4 @@
-import type { SignalSource } from '@cat-cafe/shared';
+import type { SignalSource } from '@agent-team-runtime/shared';
 import type { FetchError, Fetcher, FetchResult, RawArticle } from './types.js';
 
 interface JsonResponseLike {

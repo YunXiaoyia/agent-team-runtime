@@ -1,4 +1,4 @@
-import type { ProbeState } from '@cat-cafe/shared';
+import type { ProbeState } from '@agent-team-runtime/shared';
 
 interface ProbeResult {
   connectionStatus: 'connected' | 'disconnected' | 'unknown';

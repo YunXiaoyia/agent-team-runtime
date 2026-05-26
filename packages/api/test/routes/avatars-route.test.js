@@ -4,7 +4,7 @@ import { mkdtemp, rm, stat } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { after, before, describe, it } from 'node:test';
-import { AVATAR_RAW_FILE_LIMIT_BYTES } from '@cat-cafe/shared';
+import { AVATAR_RAW_FILE_LIMIT_BYTES } from '@agent-team-runtime/shared';
 import Fastify from 'fastify';
 import { avatarsRoutes } from '../../dist/routes/avatars.js';
 

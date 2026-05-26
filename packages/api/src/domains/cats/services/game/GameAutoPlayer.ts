@@ -6,7 +6,7 @@
  * Phase H4: AI speech with messageStore context.
  */
 
-import type { GameAction, GameRuntime, GameView, Seat, SeatId } from '@cat-cafe/shared';
+import type { GameAction, GameRuntime, GameView, Seat, SeatId } from '@agent-team-runtime/shared';
 import { createModuleLogger } from '../../../../infrastructure/logger.js';
 import type { IGameStore } from '../stores/ports/GameStore.js';
 import type { IMessageStore } from '../stores/ports/MessageStore.js';
@@ -337,7 +337,7 @@ export class GameAutoPlayer {
             round: _runtime.round,
             phase: 'day_discuss',
             type: m.catId ? 'speech' : 'announce',
-            scope: 'public' as import('@cat-cafe/shared').EventScope,
+            scope: 'public' as import('@agent-team-runtime/shared').EventScope,
             payload: { seatId: speakerSeat, text: m.content },
             timestamp: m.timestamp,
           });

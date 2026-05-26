@@ -8,8 +8,8 @@
  * Do NOT manually prepend the prefix — pass bare keys and let ioredis handle it.
  */
 
-import type { CatId } from '@cat-cafe/shared';
-import type { RedisClient } from '@cat-cafe/shared/utils';
+import type { CatId } from '@agent-team-runtime/shared';
+import type { RedisClient } from '@agent-team-runtime/shared/utils';
 import type { TokenUsage } from '../../types.js';
 import type {
   CreateInvocationInput,

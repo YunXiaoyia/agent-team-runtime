@@ -1,4 +1,4 @@
-import type { CatId, TaskItem } from '@cat-cafe/shared';
+import type { CatId, TaskItem } from '@agent-team-runtime/shared';
 import React from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { describe, expect, it, vi } from 'vitest';

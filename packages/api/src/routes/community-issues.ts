@@ -13,7 +13,7 @@
  */
 
 import { createHash, randomUUID } from 'node:crypto';
-import { type CatId, createCatId, DEFAULT_INTAKE_CHECKLIST, validateIntakeChecklist } from '@cat-cafe/shared';
+import { type CatId, createCatId, DEFAULT_INTAKE_CHECKLIST, validateIntakeChecklist } from '@agent-team-runtime/shared';
 import type { FastifyPluginAsync } from 'fastify';
 import { z } from 'zod';
 import { getRoster } from '../config/cat-config-loader.js';
@@ -323,7 +323,7 @@ export const communityIssueRoutes: FastifyPluginAsync<CommunityIssuesRoutesOptio
       return { error: 'Issue not in triageable state', currentState: issue.state };
     }
 
-    const entry = { ...result.data, timestamp: Date.now() } as import('@cat-cafe/shared').TriageEntry;
+    const entry = { ...result.data, timestamp: Date.now() } as import('@agent-team-runtime/shared').TriageEntry;
     const orchestrator = new TriageOrchestrator({ communityIssueStore, threadStore: opts.threadStore });
     return orchestrator.recordTriageEntry(id, entry);
   });

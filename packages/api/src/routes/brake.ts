@@ -6,7 +6,7 @@
  * PUT  /api/brake/settings   — update user brake settings
  */
 
-import type { BrakeCheckinRequest, BrakeSettings } from '@cat-cafe/shared';
+import type { BrakeCheckinRequest, BrakeSettings } from '@agent-team-runtime/shared';
 import type { FastifyPluginAsync } from 'fastify';
 import type { ActivityTracker } from '../domains/health/ActivityTracker.js';
 import { resolveUserId } from '../utils/request-identity.js';

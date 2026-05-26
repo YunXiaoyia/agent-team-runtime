@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { beforeEach, describe, it } from 'node:test';
-import { catRegistry } from '@cat-cafe/shared';
+import { catRegistry } from '@agent-team-runtime/shared';
 import { ConnectorRouter } from '../dist/infrastructure/connectors/ConnectorRouter.js';
 import { MemoryConnectorThreadBindingStore } from '../dist/infrastructure/connectors/ConnectorThreadBindingStore.js';
 import { InboundMessageDedup } from '../dist/infrastructure/connectors/InboundMessageDedup.js';

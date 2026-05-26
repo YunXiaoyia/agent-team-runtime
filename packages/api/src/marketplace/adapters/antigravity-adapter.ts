@@ -3,7 +3,7 @@ import type {
   MarketplaceAdapter,
   MarketplaceSearchQuery,
   MarketplaceSearchResult,
-} from '@cat-cafe/shared';
+} from '@agent-team-runtime/shared';
 
 export interface AntigravityCatalogEntry {
   id: string;

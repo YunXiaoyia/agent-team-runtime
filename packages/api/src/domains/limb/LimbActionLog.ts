@@ -6,7 +6,7 @@
  */
 
 import { randomUUID } from 'node:crypto';
-import type { LimbActionLogEntry } from '@cat-cafe/shared';
+import type { LimbActionLogEntry } from '@agent-team-runtime/shared';
 
 export class LimbActionLog {
   private readonly entries = new Map<string, LimbActionLogEntry>();

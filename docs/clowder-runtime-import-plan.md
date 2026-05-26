@@ -20,7 +20,7 @@
 
 - 命名和启动调整：
   - 根包名改为 `agent-team-runtime`。
-  - workspace 包名从 `@cat-cafe/*` 改为 `@agent-team-runtime/*`，并同步内部 import。
+  - workspace 包名从 `@agent-team-runtime/*` 改为 `@agent-team-runtime/*`，并同步内部 import。
   - 环境变量先保留 `CAT_CAFE_*` 兼容名，新增文档说明这是从 Clowder 迁入的兼容命名；第一阶段不强行重命名所有 env，避免破坏大量脚本。
   - 默认启动方式改为 Clowder 模型：`pnpm start:direct` 或 `pnpm dev:direct`。
   - 访问入口改为 Web `http://localhost:3003`，API `http://localhost:3004`；不再承诺 `GET /` 是 API 首页。
@@ -52,7 +52,7 @@
 
 4. 项目标识迁移：
    - 根 `package.json` 的 `name` 改为 `agent-team-runtime`。
-   - `@cat-cafe/api`、`@cat-cafe/shared`、`@cat-cafe/mcp-server`、`@cat-cafe/web` 改为 `@agent-team-runtime/api`、`@agent-team-runtime/shared`、`@agent-team-runtime/mcp-server`、`@agent-team-runtime/web`。
+   - `@agent-team-runtime/api`、`@agent-team-runtime/shared`、`@agent-team-runtime/mcp-server`、`@agent-team-runtime/web` 改为 `@agent-team-runtime/api`、`@agent-team-runtime/shared`、`@agent-team-runtime/mcp-server`、`@agent-team-runtime/web`。
    - 同步 TypeScript imports、package scripts 中的 workspace filter。
    - 暂时保留 `CAT_CAFE_*` env、`.cat-cafe` 状态目录名、Redis key prefix 和脚本内部历史命名，作为第一阶段兼容层。
 
@@ -81,7 +81,7 @@
 
 - 代码一致性验证：
   - 全仓搜索确保没有路径指向旧的本地绝对路径 `/home/yunyi/Desktop/Bytedance_cmp/clowder-ai`。
-  - 搜索 `@cat-cafe/`，除兼容文档或刻意保留说明外，代码 import 应改为 `@agent-team-runtime/`。
+  - 搜索 `@agent-team-runtime/`，除兼容文档或刻意保留说明外，代码 import 应改为 `@agent-team-runtime/`。
   - 搜索私有状态文件，确认 `.env`、`.cat-cafe/credentials.json`、runtime DB、日志、`node_modules/` 没有进入 git。
 
 ## Assumptions

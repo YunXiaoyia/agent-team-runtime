@@ -13,8 +13,8 @@
  * F088 Multi-Platform Chat Gateway
  */
 
-import type { ConnectorThreadBinding } from '@cat-cafe/shared';
-import type { RedisClient } from '@cat-cafe/shared/utils';
+import type { ConnectorThreadBinding } from '@agent-team-runtime/shared';
+import type { RedisClient } from '@agent-team-runtime/shared/utils';
 import type { IConnectorThreadBindingStore } from './ConnectorThreadBindingStore.js';
 import { ConnectorBindingKeys } from './connector-binding-keys.js';
 

@@ -1,6 +1,6 @@
 'use client';
 
-import type { SignalArticle, SignalArticleStatus, SignalTier } from '@cat-cafe/shared';
+import type { SignalArticle, SignalArticleStatus, SignalTier } from '@agent-team-runtime/shared';
 import { useSearchParams } from 'next/navigation';
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useIMEGuard } from '@/hooks/useIMEGuard';

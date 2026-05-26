@@ -3,7 +3,7 @@
  * Scaffolds standard docs/ directory structure for a new project,
  * enabling IndexBuilder to index documents immediately.
  *
- * Usage: pnpm --filter @cat-cafe/api project:init [target-dir]
+ * Usage: pnpm --filter @agent-team-runtime/api project:init [target-dir]
  */
 
 import { existsSync, mkdirSync, writeFileSync } from 'node:fs';

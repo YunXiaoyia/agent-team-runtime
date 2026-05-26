@@ -15,8 +15,8 @@ import type {
   SuggestBacklogClaimInput,
   ThreadPhase,
   UpdateBacklogDispatchProgressInput,
-} from '@cat-cafe/shared';
-import type { RedisClient } from '@cat-cafe/shared/utils';
+} from '@agent-team-runtime/shared';
+import type { RedisClient } from '@agent-team-runtime/shared/utils';
 import type { IBacklogStore } from '../ports/BacklogStore.js';
 import { BacklogTransitionError } from '../ports/BacklogStore.js';
 import { generateSortableId } from '../ports/MessageStore.js';

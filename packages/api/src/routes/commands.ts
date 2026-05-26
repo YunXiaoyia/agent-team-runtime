@@ -3,7 +3,7 @@
  * POST /api/commands/extract-tasks - Extract tasks from conversation
  */
 
-import { type CommandSurface, catRegistry } from '@cat-cafe/shared';
+import { type CommandSurface, catRegistry } from '@agent-team-runtime/shared';
 import type { FastifyPluginAsync } from 'fastify';
 import { z } from 'zod';
 import { extractTasks, toCreateTaskInputs } from '../domains/cats/services/orchestration/TaskExtractor.js';

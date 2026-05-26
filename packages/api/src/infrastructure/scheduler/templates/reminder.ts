@@ -1,4 +1,4 @@
-import { SCHEDULER_TRIGGER_PREFIX } from '@cat-cafe/shared';
+import { SCHEDULER_TRIGGER_PREFIX } from '@agent-team-runtime/shared';
 import type { TaskSpec_P1 } from '../types.js';
 import type { DynamicTaskParams, TaskTemplate } from './types.js';
 

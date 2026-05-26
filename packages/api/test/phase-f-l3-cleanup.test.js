@@ -6,7 +6,7 @@
  *
  * AC-F2 lives in mcp-server/test/phase-f-headers-only-auth.test.js — cloud
  * Codex P2 (PR #1388): API tests must not depend on mcp-server/dist
- * (clean-workspace `pnpm --filter @cat-cafe/api test` would module-not-found).
+ * (clean-workspace `pnpm --filter @agent-team-runtime/api test` would module-not-found).
  */
 
 import assert from 'node:assert/strict';

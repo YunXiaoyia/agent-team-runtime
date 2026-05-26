@@ -1,4 +1,4 @@
-import { DEVELOPMENT_SOP_STAGE_IDS, SOP_DEFINITION_IDS } from '@cat-cafe/shared';
+import { DEVELOPMENT_SOP_STAGE_IDS, SOP_DEFINITION_IDS } from '@agent-team-runtime/shared';
 import type { FastifyPluginAsync } from 'fastify';
 import { z } from 'zod';
 import type { IBacklogStore } from '../domains/cats/services/stores/ports/BacklogStore.js';
@@ -92,7 +92,7 @@ export const workflowSopRoutes: FastifyPluginAsync<WorkflowSopRoutesOptions> = a
         ...(rest.resumeCapsule !== undefined ? { resumeCapsule: rest.resumeCapsule } : {}),
         ...(rest.checks !== undefined ? { checks: rest.checks } : {}),
         ...(rest.expectedVersion !== undefined ? { expectedVersion: rest.expectedVersion } : {}),
-      } as import('@cat-cafe/shared').UpdateWorkflowSopInput;
+      } as import('@agent-team-runtime/shared').UpdateWorkflowSopInput;
       const sop = await workflowSopStore.upsert(request.params.itemId, featureId, input, userId);
       return sop;
     } catch (err) {

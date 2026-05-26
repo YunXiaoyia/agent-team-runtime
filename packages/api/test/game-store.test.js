@@ -2,7 +2,7 @@
  * GameStore Tests (F101 Task A4)
  * Tests RedisGameStore with optimistic concurrency + single-game-per-thread (KD-15).
  *
- * Run: pnpm --filter @cat-cafe/api test:redis
+ * Run: pnpm --filter @agent-team-runtime/api test:redis
  */
 
 import assert from 'node:assert/strict';
@@ -59,7 +59,7 @@ describe('RedisGameStore', { skip: redisIsolationSkipReason(REDIS_URL) }, () => 
 
     const storeModule = await import('../dist/domains/cats/services/stores/redis/RedisGameStore.js');
     RedisGameStore = storeModule.RedisGameStore;
-    const redisModule = await import('@cat-cafe/shared/utils');
+    const redisModule = await import('@agent-team-runtime/shared/utils');
     createRedisClient = redisModule.createRedisClient;
 
     redis = createRedisClient({ url: REDIS_URL });

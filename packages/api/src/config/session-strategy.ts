@@ -13,8 +13,8 @@
  * Phase 3: Runtime override via Redis + settings UI.
  */
 
-import type { ContextHealthConfig, SessionStrategyConfig, StrategyAction } from '@cat-cafe/shared';
-import { catRegistry } from '@cat-cafe/shared';
+import type { ContextHealthConfig, SessionStrategyConfig, StrategyAction } from '@agent-team-runtime/shared';
+import { catRegistry } from '@agent-team-runtime/shared';
 import { createModuleLogger } from '../infrastructure/logger.js';
 import { resolveBreedId } from './breed-resolver.js';
 import { getConfigSessionStrategy } from './cat-config-loader.js';

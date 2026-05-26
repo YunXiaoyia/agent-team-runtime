@@ -1,4 +1,4 @@
-import { generateId } from '@cat-cafe/shared';
+import { generateId } from '@agent-team-runtime/shared';
 import type {
   CommunityPrItem,
   CreateCommunityPrInput,

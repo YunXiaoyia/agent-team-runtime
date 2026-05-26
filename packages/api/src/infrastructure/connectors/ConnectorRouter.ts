@@ -15,8 +15,8 @@
  * F088 Multi-Platform Chat Gateway
  */
 
-import type { CatId, ConnectorSource, MessageContent } from '@cat-cafe/shared';
-import { catRegistry, getConnectorDefinition } from '@cat-cafe/shared';
+import type { CatId, ConnectorSource, MessageContent } from '@agent-team-runtime/shared';
+import { catRegistry, getConnectorDefinition } from '@agent-team-runtime/shared';
 import type { FastifyBaseLogger } from 'fastify';
 import { findMonorepoRoot } from '../../utils/monorepo-root.js';
 import type { ConnectorCommandLayer } from './ConnectorCommandLayer.js';

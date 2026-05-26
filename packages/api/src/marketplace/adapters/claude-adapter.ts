@@ -4,7 +4,7 @@ import type {
   MarketplaceSearchQuery,
   MarketplaceSearchResult,
   McpTransport,
-} from '@cat-cafe/shared';
+} from '@agent-team-runtime/shared';
 
 export interface ClaudeCatalogEntry {
   id: string;

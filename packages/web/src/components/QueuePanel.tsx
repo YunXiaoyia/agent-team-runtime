@@ -1,6 +1,6 @@
 'use client';
 
-import { SCHEDULER_TRIGGER_PREFIX } from '@cat-cafe/shared';
+import { SCHEDULER_TRIGGER_PREFIX } from '@agent-team-runtime/shared';
 import { closestCenter, DndContext, type DragEndEvent, PointerSensor, useSensor, useSensors } from '@dnd-kit/core';
 import { arrayMove, SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import { useCallback, useMemo, useState } from 'react';

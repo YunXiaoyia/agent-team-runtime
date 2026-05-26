@@ -2,8 +2,8 @@
  * Callback task routes — MCP post_message 回传的任务更新端点
  */
 
-import type { CatId } from '@cat-cafe/shared';
-import { catRegistry, createCatId } from '@cat-cafe/shared';
+import type { CatId } from '@agent-team-runtime/shared';
+import { catRegistry, createCatId } from '@agent-team-runtime/shared';
 import type { FastifyInstance } from 'fastify';
 import { z } from 'zod';
 import { resolveCatTarget } from '../domains/cats/services/agents/routing/cat-target-resolver.js';

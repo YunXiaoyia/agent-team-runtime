@@ -8,8 +8,8 @@
 
 import { cp, mkdir, readdir, readFile, rm, stat } from 'node:fs/promises';
 import { join } from 'node:path';
-import type { PackManifest, PackOnDisk } from '@cat-cafe/shared';
-import { PackManifestSchema } from '@cat-cafe/shared';
+import type { PackManifest, PackOnDisk } from '@agent-team-runtime/shared';
+import { PackManifestSchema } from '@agent-team-runtime/shared';
 import { parse } from 'yaml';
 
 export class PackStore {

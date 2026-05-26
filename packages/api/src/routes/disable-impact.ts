@@ -4,7 +4,7 @@
  * (OQ-2: server-side endpoint, no index, thin scan)
  */
 
-import { catRegistry } from '@cat-cafe/shared';
+import { catRegistry } from '@agent-team-runtime/shared';
 import type { FastifyInstance } from 'fastify';
 import type { ITaskStore } from '../domains/cats/services/stores/ports/TaskStore.js';
 import { resolveHeaderUserId } from '../utils/request-identity.js';

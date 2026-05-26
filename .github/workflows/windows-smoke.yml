@@ -32,8 +32,8 @@ jobs:
           node-version: 20
           cache: pnpm
       - run: pnpm install --frozen-lockfile
-      - run: pnpm --filter @cat-cafe/shared build
-      - run: pnpm --filter @cat-cafe/api build
+      - run: pnpm --filter @agent-team-runtime/shared build
+      - run: pnpm --filter @agent-team-runtime/api build
       - name: Windows-relevant tests
         run: |
           node --test packages/api/test/cli-spawn-win.test.js

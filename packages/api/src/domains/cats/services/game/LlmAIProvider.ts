@@ -11,7 +11,7 @@
  * - 10s timeout per call; fallback to null on failure (caller handles fallback).
  */
 
-import { catRegistry } from '@cat-cafe/shared';
+import { catRegistry } from '@agent-team-runtime/shared';
 import {
   type BuiltinAccountClient,
   builtinAccountIdForClient,

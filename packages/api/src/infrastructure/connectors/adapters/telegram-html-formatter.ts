@@ -1,4 +1,4 @@
-import type { RichBlock } from '@cat-cafe/shared';
+import type { RichBlock } from '@agent-team-runtime/shared';
 
 function esc(s: string): string {
   return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');

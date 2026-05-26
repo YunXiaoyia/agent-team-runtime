@@ -18,9 +18,9 @@
  * 虽然参数可选（兼容测试），但生产代码必须显式传入。
  */
 
-import type { CatId, CatRoutingError, MessageContent } from '@cat-cafe/shared';
-import { catRegistry, escapeRegExp } from '@cat-cafe/shared';
-import type { SessionStore } from '@cat-cafe/shared/utils';
+import type { CatId, CatRoutingError, MessageContent } from '@agent-team-runtime/shared';
+import { catRegistry, escapeRegExp } from '@agent-team-runtime/shared';
+import type { SessionStore } from '@agent-team-runtime/shared/utils';
 import { context as ctxApi, SpanStatusCode, trace } from '@opentelemetry/api';
 import { getDefaultCatId, isCatAvailable } from '../../../../../config/cat-config-loader.js';
 import { createModuleLogger } from '../../../../../infrastructure/logger.js';
@@ -90,7 +90,7 @@ interface ParsedMention {
  * Build mention aliases and speech regex from the current cat configs.
  * Must be called after catRegistry is populated (not at module load time).
  */
-function buildMentionData(configs: Record<string, import('@cat-cafe/shared').CatConfig>) {
+function buildMentionData(configs: Record<string, import('@agent-team-runtime/shared').CatConfig>) {
   const mentionAliases = Array.from(
     new Set(
       Object.values(configs).flatMap((config) => config.mentionPatterns.map((pattern) => pattern.replace(/^@/, ''))),

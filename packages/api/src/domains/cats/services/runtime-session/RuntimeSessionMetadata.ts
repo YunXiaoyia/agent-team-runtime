@@ -1,4 +1,4 @@
-import type { CatId } from '@cat-cafe/shared';
+import type { CatId } from '@agent-team-runtime/shared';
 
 export const RUNTIME_SESSION_RUNTIMES = ['antigravity-desktop'] as const;
 export type RuntimeSessionRuntime = (typeof RUNTIME_SESSION_RUNTIMES)[number];

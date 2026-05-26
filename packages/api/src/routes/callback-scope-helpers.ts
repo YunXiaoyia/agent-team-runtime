@@ -1,4 +1,4 @@
-import { type AgentKeyRecord, type CallbackPrincipal, type CatId, createCatId } from '@cat-cafe/shared';
+import { type AgentKeyRecord, type CallbackPrincipal, type CatId, createCatId } from '@agent-team-runtime/shared';
 import type { InvocationRecord } from '../domains/cats/services/agents/invocation/InvocationRegistry.js';
 import type { IThreadStore } from '../domains/cats/services/stores/ports/ThreadStore.js';
 

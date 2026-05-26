@@ -7,7 +7,7 @@ import {
   resolveWorkflowSopSkill,
   type SopStage,
   type WorkflowSop,
-} from '@cat-cafe/shared';
+} from '@agent-team-runtime/shared';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { apiFetch } from '@/utils/api-client';
 

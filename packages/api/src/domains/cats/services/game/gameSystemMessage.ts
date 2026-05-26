@@ -1,4 +1,4 @@
-import type { CatId } from '@cat-cafe/shared';
+import type { CatId } from '@agent-team-runtime/shared';
 import type { IMessageStore, StoredMessage } from '../stores/ports/MessageStore.js';
 
 interface NarrativeSocketLike {

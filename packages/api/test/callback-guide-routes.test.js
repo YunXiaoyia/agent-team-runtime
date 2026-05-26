@@ -8,7 +8,7 @@ import { mkdtempSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { beforeEach, describe, test } from 'node:test';
-import { catRegistry } from '@cat-cafe/shared';
+import { catRegistry } from '@agent-team-runtime/shared';
 import Fastify from 'fastify';
 import './helpers/setup-cat-registry.js';
 

@@ -1,5 +1,5 @@
-import type { CapabilityEntry, McpInstallPreview, McpInstallRequest } from '@cat-cafe/shared';
-import { MARKETPLACE_ECOSYSTEMS } from '@cat-cafe/shared';
+import type { CapabilityEntry, McpInstallPreview, McpInstallRequest } from '@agent-team-runtime/shared';
+import { MARKETPLACE_ECOSYSTEMS } from '@agent-team-runtime/shared';
 
 const CLI_CONFIGS = ['.mcp.json', '.codex/config.toml', '.gemini/settings.json', '.kimi/mcp.json'];
 

@@ -1,4 +1,4 @@
-import type { GameView, SeatId } from '@cat-cafe/shared';
+import type { GameView, SeatId } from '@agent-team-runtime/shared';
 import { API_URL } from '@/utils/api-client';
 import { getUserId } from '@/utils/userId';
 

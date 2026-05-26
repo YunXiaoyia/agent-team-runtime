@@ -17,7 +17,7 @@
  * - 6/08: 100% if no regression (Phase D AC-D3)
  * - 6/15: subscription policy cutover (R1 hard deadline)
  */
-import type { CatId } from '@cat-cafe/shared';
+import type { CatId } from '@agent-team-runtime/shared';
 import type { AgentService } from '../../types.js';
 import { ClaudeAgentService } from './ClaudeAgentService.js';
 import { ClaudeBgCarrierService } from './ClaudeBgCarrierService.js';

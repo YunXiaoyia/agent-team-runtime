@@ -11,7 +11,7 @@
 import { copyFileSync, existsSync, mkdirSync, readFileSync, renameSync, unlinkSync, writeFileSync } from 'node:fs';
 import { homedir } from 'node:os';
 import { resolve } from 'node:path';
-import type { AccountConfig } from '@cat-cafe/shared';
+import type { AccountConfig } from '@agent-team-runtime/shared';
 import { assertSafeTestConfigRoot } from './test-config-write-guard.js';
 
 const CONFIG_SUBDIR = '.cat-cafe';

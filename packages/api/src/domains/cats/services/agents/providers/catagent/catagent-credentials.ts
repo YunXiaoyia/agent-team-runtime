@@ -8,7 +8,7 @@
  * No env override, no fallback scan — fail closed if binding is missing.
  */
 
-import type { CatConfig } from '@cat-cafe/shared';
+import type { CatConfig } from '@agent-team-runtime/shared';
 import { resolveForClient } from '../../../../../../config/account-resolver.js';
 import { resolveBoundAccountRefForCat } from '../../../../../../config/cat-account-binding.js';
 import { createModuleLogger } from '../../../../../../infrastructure/logger.js';

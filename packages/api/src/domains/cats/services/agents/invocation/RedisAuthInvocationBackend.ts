@@ -19,8 +19,8 @@
  * Reference impl: RedisInvocationRecordStore.ts (Hash + Lua atomic pattern)
  */
 
-import type { CatId } from '@cat-cafe/shared';
-import type { RedisClient } from '@cat-cafe/shared/utils';
+import type { CatId } from '@agent-team-runtime/shared';
+import type { RedisClient } from '@agent-team-runtime/shared/utils';
 import type { CallerTraceContext } from '../../../../../infrastructure/telemetry/genai-semconv.js';
 import type { AuthInvocationInput, IAuthInvocationBackend } from './IAuthInvocationBackend.js';
 import type { InvocationRecord, VerifyResult } from './InvocationRegistry.js';

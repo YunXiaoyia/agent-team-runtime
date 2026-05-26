@@ -37,7 +37,7 @@ describe('RedisThreadReadStateStore', { skip: redisIsolationSkipReason(REDIS_URL
     RedisThreadReadStateStore = storeModule.RedisThreadReadStateStore;
     const msgModule = await import('../dist/domains/cats/services/stores/redis/RedisMessageStore.js');
     RedisMessageStore = msgModule.RedisMessageStore;
-    const redisModule = await import('@cat-cafe/shared/utils');
+    const redisModule = await import('@agent-team-runtime/shared/utils');
     createRedisClient = redisModule.createRedisClient;
 
     redis = createRedisClient({ url: REDIS_URL });

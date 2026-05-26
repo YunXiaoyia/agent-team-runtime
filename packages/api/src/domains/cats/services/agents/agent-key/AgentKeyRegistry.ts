@@ -1,5 +1,5 @@
 import { createHash, randomBytes, randomUUID } from 'node:crypto';
-import type { AgentKeyRecord, AgentKeyVerifyResult, CatId } from '@cat-cafe/shared';
+import type { AgentKeyRecord, AgentKeyVerifyResult, CatId } from '@agent-team-runtime/shared';
 import type { IAgentKeyBackend } from './IAgentKeyBackend.js';
 import { MemoryAgentKeyBackend } from './MemoryAgentKeyBackend.js';
 

@@ -2,7 +2,7 @@ import { strict as assert } from 'node:assert';
 import { describe, it } from 'node:test';
 
 // These imports will fail until we implement the shared module
-import { ManifestSlashCommandSchema, ManifestSlashCommandsSchema, parseCommand } from '@cat-cafe/shared';
+import { ManifestSlashCommandSchema, ManifestSlashCommandsSchema, parseCommand } from '@agent-team-runtime/shared';
 
 // --- Parser Tests ---
 

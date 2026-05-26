@@ -2,7 +2,7 @@ import { createHash } from 'node:crypto';
 import { constants as fsConstants } from 'node:fs';
 import { access, copyFile, mkdir, stat, writeFile } from 'node:fs/promises';
 import { basename, join, resolve } from 'node:path';
-import type { ImageContent } from '@cat-cafe/shared';
+import type { ImageContent } from '@agent-team-runtime/shared';
 
 export const ALLOWED_IMAGE_MIME_LIST = ['image/png', 'image/jpeg', 'image/gif', 'image/webp'] as const;
 export type SupportedImageMime = (typeof ALLOWED_IMAGE_MIME_LIST)[number];

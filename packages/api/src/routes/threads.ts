@@ -7,8 +7,8 @@
  * DELETE /api/threads/:id  - 删除对话
  */
 
-import type { CatId } from '@cat-cafe/shared';
-import { catIdSchema } from '@cat-cafe/shared';
+import type { CatId } from '@agent-team-runtime/shared';
+import { catIdSchema } from '@agent-team-runtime/shared';
 import type { FastifyPluginAsync } from 'fastify';
 import { z } from 'zod';
 import type { InvocationTracker } from '../domains/cats/services/agents/invocation/InvocationTracker.js';

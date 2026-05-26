@@ -8,7 +8,7 @@
 
 import { exec } from 'node:child_process';
 import { promisify } from 'node:util';
-import { builtinAccountIdForClient, type ClientId, protocolForClient } from '@cat-cafe/shared';
+import { builtinAccountIdForClient, type ClientId, protocolForClient } from '@agent-team-runtime/shared';
 import type { FastifyPluginAsync } from 'fastify';
 import { z } from 'zod';
 import { resolveByAccountRef } from '../config/account-resolver.js';

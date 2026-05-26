@@ -1,4 +1,4 @@
-import type { InstallPlan, McpInstallRequest } from '@cat-cafe/shared';
+import type { InstallPlan, McpInstallRequest } from '@agent-team-runtime/shared';
 
 export function toMcpInstallRequest(plan: InstallPlan): McpInstallRequest {
   if (plan.mode !== 'direct_mcp') {

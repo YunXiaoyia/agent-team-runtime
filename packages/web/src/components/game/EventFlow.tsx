@@ -1,6 +1,6 @@
 'use client';
 
-import type { GameEvent } from '@cat-cafe/shared';
+import type { GameEvent } from '@agent-team-runtime/shared';
 import { useEffect, useRef } from 'react';
 
 interface EventFlowProps {

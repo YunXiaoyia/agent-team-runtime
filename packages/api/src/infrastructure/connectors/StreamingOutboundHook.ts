@@ -1,4 +1,4 @@
-import { type CatId, catRegistry } from '@cat-cafe/shared';
+import { type CatId, catRegistry } from '@agent-team-runtime/shared';
 import type { FastifyBaseLogger } from 'fastify';
 import type { IConnectorThreadBindingStore } from './ConnectorThreadBindingStore.js';
 import { pickReceiptLine } from './feishu-receipt-lines.js';

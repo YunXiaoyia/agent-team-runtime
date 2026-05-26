@@ -28,7 +28,7 @@ import { spawn } from 'node:child_process';
 import { existsSync, mkdtempSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { isAbsolute, join, resolve } from 'node:path';
-import { type CatId, createCatId } from '@cat-cafe/shared';
+import { type CatId, createCatId } from '@agent-team-runtime/shared';
 import { getCatModel } from '../../../../../config/cat-models.js';
 import { resolveCliCommandOrBare } from '../../../../../utils/cli-resolve.js';
 import { buildChildEnv } from '../../../../../utils/cli-spawn.js';

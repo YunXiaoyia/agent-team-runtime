@@ -1,4 +1,4 @@
-import type { BubbleEventType, BubbleKind, BubbleOriginPhase, BubbleSourcePath } from '@cat-cafe/shared';
+import type { BubbleEventType, BubbleKind, BubbleOriginPhase, BubbleSourcePath } from '@agent-team-runtime/shared';
 import type { BubbleEvent } from '@/stores/bubble-reducer';
 import type { BackgroundAgentMessage } from './useAgentMessages';
 

@@ -1,4 +1,4 @@
-import type { CanonPromotionRecord, WorldRecallResult } from '@cat-cafe/shared';
+import type { CanonPromotionRecord, WorldRecallResult } from '@agent-team-runtime/shared';
 import type { IEvidenceStore } from '../memory/interfaces.js';
 
 export class WorldKnowledgeAdapter {

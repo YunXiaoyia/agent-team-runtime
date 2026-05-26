@@ -3,7 +3,7 @@
  * Aggregates core + skill commands at startup. In-memory cache (AC-B5).
  * Core commands always take priority over skill commands (AC-B2).
  */
-import type { CommandSurface, SlashCommandDefinition } from '@cat-cafe/shared';
+import type { CommandSurface, SlashCommandDefinition } from '@agent-team-runtime/shared';
 
 export class CommandRegistry {
   private readonly commands = new Map<string, SlashCommandDefinition>();

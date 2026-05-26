@@ -5,7 +5,7 @@
  * KD-8: PrFeedbackComment richer model (author, filePath, line, commentType).
  * KD-10: cursor commit after delivery success, trigger is best-effort.
  */
-import type { ConnectorSource } from '@cat-cafe/shared';
+import type { ConnectorSource } from '@agent-team-runtime/shared';
 import type { FastifyBaseLogger } from 'fastify';
 import type { ConnectorDeliveryDeps } from './deliver-connector-message.js';
 import { deliverConnectorMessage } from './deliver-connector-message.js';

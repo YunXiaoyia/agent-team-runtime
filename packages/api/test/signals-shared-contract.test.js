@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
 
-const shared = await import('@cat-cafe/shared');
+const shared = await import('@agent-team-runtime/shared');
 
 describe('shared signals contract', () => {
   it('exports signal schemas and parses valid source/article payloads', () => {

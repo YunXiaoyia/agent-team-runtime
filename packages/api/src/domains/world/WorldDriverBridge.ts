@@ -1,4 +1,4 @@
-import type { PackWorldDriver, WorldActionEnvelope, WorldContextEnvelope } from '@cat-cafe/shared';
+import type { PackWorldDriver, WorldActionEnvelope, WorldContextEnvelope } from '@agent-team-runtime/shared';
 import type { WorldContextProvider } from './WorldContextProvider.js';
 import type { ExecuteResult, WorldRuntimeCoordinator } from './WorldRuntimeCoordinator.js';
 

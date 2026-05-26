@@ -9,7 +9,7 @@ import type {
   RefluxPattern,
   ResolutionItem,
   Slice,
-} from '@cat-cafe/shared';
+} from '@agent-team-runtime/shared';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useExternalProjectStore } from '@/stores/externalProjectStore';
 import { apiFetch } from '@/utils/api-client';

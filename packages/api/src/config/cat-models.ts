@@ -6,7 +6,7 @@
  * 环境变量 CAT_{CATID}_MODEL 可 override，用于调试。
  */
 
-import { catRegistry } from '@cat-cafe/shared';
+import { catRegistry } from '@agent-team-runtime/shared';
 
 /**
  * F32-b: Generate dynamic env key from catId.

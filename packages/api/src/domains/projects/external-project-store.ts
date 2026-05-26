@@ -4,8 +4,8 @@
  */
 
 import { resolve } from 'node:path';
-import type { CreateExternalProjectInput, ExternalProject } from '@cat-cafe/shared';
-import type { RedisClient } from '@cat-cafe/shared/utils';
+import type { CreateExternalProjectInput, ExternalProject } from '@agent-team-runtime/shared';
+import type { RedisClient } from '@agent-team-runtime/shared/utils';
 import { generateSortableId } from '../cats/services/stores/ports/MessageStore.js';
 import { ExternalProjectKeys } from '../cats/services/stores/redis-keys/external-project-keys.js';
 

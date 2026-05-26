@@ -10,8 +10,8 @@ import type {
   CoCreatorConfig,
   ContextBudget,
   VoiceConfig,
-} from '@cat-cafe/shared';
-import { createCatId } from '@cat-cafe/shared';
+} from '@agent-team-runtime/shared';
+import { createCatId } from '@agent-team-runtime/shared';
 import { clearBudgetCache } from './cat-budgets.js';
 import { bootstrapCatCatalog, readCatCatalog, resolveCatCatalogPath } from './cat-catalog-store.js';
 import { _resetCachedConfig, loadCatConfig, toAllCatConfigs } from './cat-config-loader.js';

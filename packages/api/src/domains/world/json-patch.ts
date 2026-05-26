@@ -1,4 +1,4 @@
-import type { JsonPatchOperation } from '@cat-cafe/shared';
+import type { JsonPatchOperation } from '@agent-team-runtime/shared';
 
 export function applyPatch<T>(target: T, operations: JsonPatchOperation[]): T {
   const result = structuredClone(target) as Record<string, unknown>;

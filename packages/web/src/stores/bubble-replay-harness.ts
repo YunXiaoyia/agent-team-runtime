@@ -4,7 +4,7 @@ import type {
   BubbleKind,
   BubbleOriginPhase,
   BubbleSourcePath,
-} from '@cat-cafe/shared';
+} from '@agent-team-runtime/shared';
 import { findBubbleStoreInvariantViolations, validateIncomingBubbleEvent } from './bubble-invariants';
 import type { ChatMessage } from './chat-types';
 

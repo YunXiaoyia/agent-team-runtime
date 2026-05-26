@@ -1,4 +1,4 @@
-import type { SignalArticle } from '@cat-cafe/shared';
+import type { SignalArticle } from '@agent-team-runtime/shared';
 
 export interface SignalArticleStats {
   readonly todayCount: number;

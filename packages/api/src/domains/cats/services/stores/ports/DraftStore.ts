@@ -10,7 +10,7 @@
  * - TTL-based auto-cleanup (300s) with explicit delete on completion
  */
 
-import type { CatId } from '@cat-cafe/shared';
+import type { CatId } from '@agent-team-runtime/shared';
 
 export interface DraftRecord {
   userId: string;

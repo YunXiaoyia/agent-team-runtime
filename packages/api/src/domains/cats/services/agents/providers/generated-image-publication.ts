@@ -1,7 +1,7 @@
 import { createHash } from 'node:crypto';
 import { access } from 'node:fs/promises';
 import { join } from 'node:path';
-import type { RichMediaGalleryBlock } from '@cat-cafe/shared';
+import type { RichMediaGalleryBlock } from '@agent-team-runtime/shared';
 import {
   copyImageFileToUploadDir,
   mimeToImageExt,

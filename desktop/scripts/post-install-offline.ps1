@@ -314,7 +314,7 @@ Write-Step "Step 4/4 - Verify"
 $artifacts = @(
     "packages/api/dist/index.js",
     "packages/api/node_modules/zod",
-    "packages/api/node_modules/@cat-cafe/shared/dist/index.js",
+    "packages/api/node_modules/@agent-team-runtime/shared/dist/index.js",
     "packages/web/.next",
     "packages/web/node_modules/next/dist/bin/next"
 )

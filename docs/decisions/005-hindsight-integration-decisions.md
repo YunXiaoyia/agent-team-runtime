@@ -438,7 +438,7 @@ Ragdoll推荐 B（卡片）。
 ### 已完成（P0）
 
 1. 导入契约 + 导入器 + CLI 落地
-   - 入口：`pnpm --filter @cat-cafe/api hindsight:import:p0 -- --all`
+   - 入口：`pnpm --filter @agent-team-runtime/api hindsight:import:p0 -- --all`
 2. 默认 evidence 检索收紧
    - 默认 tags：`project:cat-cafe` + `origin:git`
    - 默认 tagsMatch：`all_strict`（由 runtime config 管理）
@@ -448,7 +448,7 @@ Ragdoll推荐 B（卡片）。
 
 ### 2026-02-13 验收快照
 
-- `pnpm --filter @cat-cafe/api test`：`984 pass / 0 fail / 1 skip`
+- `pnpm --filter @agent-team-runtime/api test`：`984 pass / 0 fail / 1 skip`
 - `bash scripts/hindsight/p0-health-check.sh`：PASS
   - `stats.total_nodes=66`
   - `tags.total=23`
@@ -520,7 +520,7 @@ done
 > 触发条件：本次合入包含可导入源变更（ADR / `CLAUDE.md` / `AGENTS.md` / `docs/public-lessons.md`）。
 
 ```bash
-pnpm --filter @cat-cafe/api hindsight:import:p0 -- --all
+pnpm --filter @agent-team-runtime/api hindsight:import:p0 -- --all
 bash scripts/hindsight/p0-health-check.sh
 ```
 
@@ -529,7 +529,7 @@ bash scripts/hindsight/p0-health-check.sh
 
 ### 2026-02-14 收口执行结果（main）
 
-- 导入：`pnpm --filter @cat-cafe/api hindsight:import:p0 -- --all`
+- 导入：`pnpm --filter @agent-team-runtime/api hindsight:import:p0 -- --all`
   - 结果：`sources=10 chunks=111 dryRun=false`
 - 健康检查：`bash scripts/hindsight/p0-health-check.sh`
   - 结果：`PASS stats.total_nodes=112 total_documents=30`

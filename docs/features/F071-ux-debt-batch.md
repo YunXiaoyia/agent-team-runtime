@@ -114,7 +114,7 @@ completed: 2026-03-11
 
 | ID | 需求点（team experience/转述） | AC 编号 | 验证方式 | 状态 |
 |----|---------------------------|---------|----------|------|
-| R1 | 上传后的消息图片支持点击预览（含回显） | AC-A1 | `pnpm --filter @cat-cafe/web test` + PR #268 | [x] |
+| R1 | 上传后的消息图片支持点击预览（含回显） | AC-A1 | `pnpm --filter @agent-team-runtime/web test` + PR #268 | [x] |
 | R2 | 发送前的待上传图片也支持点击预览 | AC-A2 | code review + `a26ca1b7` | [x] |
 | R3 | 无活跃任务时不要再显示“有猫猫在工作” | AC-A3 | `right-status-panel.test.ts` + PR #268 | [x] |
 | R4 | @ 列表成员太多时能过滤和滚动 | AC-A4 | `chat-input-mention-filter.test.ts` + PR #268 | [x] |

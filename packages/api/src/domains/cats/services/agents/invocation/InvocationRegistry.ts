@@ -12,7 +12,7 @@
  */
 
 import { randomUUID } from 'node:crypto';
-import type { CatId } from '@cat-cafe/shared';
+import type { CatId } from '@agent-team-runtime/shared';
 import type { CallerTraceContext } from '../../../../../infrastructure/telemetry/genai-semconv.js';
 import type { IAuthInvocationBackend } from './IAuthInvocationBackend.js';
 import { MemoryAuthInvocationBackend } from './MemoryAuthInvocationBackend.js';

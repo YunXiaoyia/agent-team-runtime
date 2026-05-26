@@ -4,7 +4,7 @@
  * 无 → AuthorizationAuditStore (内存)
  */
 
-import type { RedisClient } from '@cat-cafe/shared/utils';
+import type { RedisClient } from '@agent-team-runtime/shared/utils';
 import type { IAuthorizationAuditStore } from '../ports/AuthorizationAuditStore.js';
 import { AuthorizationAuditStore } from '../ports/AuthorizationAuditStore.js';
 import { RedisAuthorizationAuditStore } from '../redis/RedisAuthorizationAuditStore.js';

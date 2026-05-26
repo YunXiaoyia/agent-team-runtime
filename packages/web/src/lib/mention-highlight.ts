@@ -5,7 +5,7 @@
  * to populate regex with all cats from the runtime catalog.
  */
 
-import { escapeRegExp } from '@cat-cafe/shared';
+import { escapeRegExp } from '@agent-team-runtime/shared';
 import type { CatData } from '@/hooks/useCatData';
 
 // ── Internal builders ───────────────────────────────────

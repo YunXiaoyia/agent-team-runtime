@@ -8,8 +8,8 @@
  */
 
 import { randomUUID } from 'node:crypto';
-import type { A2AAgentConfig, A2AJsonRpcResponse, CatId } from '@cat-cafe/shared';
-import { createCatId } from '@cat-cafe/shared';
+import type { A2AAgentConfig, A2AJsonRpcResponse, CatId } from '@agent-team-runtime/shared';
+import { createCatId } from '@agent-team-runtime/shared';
 import type { AgentMessage, AgentService, AgentServiceOptions } from '../../types.js';
 import { transformA2ATaskToMessages } from './a2a-event-transform.js';
 

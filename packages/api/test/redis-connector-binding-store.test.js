@@ -21,7 +21,7 @@ describe('RedisConnectorThreadBindingStore', { skip: redisIsolationSkipReason(RE
 
     const storeModule = await import('../dist/infrastructure/connectors/RedisConnectorThreadBindingStore.js');
     RedisConnectorThreadBindingStore = storeModule.RedisConnectorThreadBindingStore;
-    const redisModule = await import('@cat-cafe/shared/utils');
+    const redisModule = await import('@agent-team-runtime/shared/utils');
     createRedisClient = redisModule.createRedisClient;
 
     redis = createRedisClient({ url: REDIS_URL });

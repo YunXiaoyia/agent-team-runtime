@@ -29,7 +29,7 @@ importers:
 
   packages/api:
     dependencies:
-      '@cat-cafe/shared':
+      '@agent-team-runtime/shared':
         specifier: workspace:*
         version: link:../shared
       '@fastify/cookie':
@@ -216,7 +216,7 @@ importers:
 
   packages/mcp-server:
     dependencies:
-      '@cat-cafe/shared':
+      '@agent-team-runtime/shared':
         specifier: workspace:*
         version: link:../shared
       '@modelcontextprotocol/sdk':
@@ -251,7 +251,7 @@ importers:
 
   packages/web:
     dependencies:
-      '@cat-cafe/shared':
+      '@agent-team-runtime/shared':
         specifier: workspace:*
         version: link:../shared
       '@codemirror/lang-css':

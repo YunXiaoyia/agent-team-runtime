@@ -1,4 +1,4 @@
-import type { ConnectorThreadBinding } from '@cat-cafe/shared';
+import type { ConnectorThreadBinding } from '@agent-team-runtime/shared';
 
 export interface IConnectorThreadBindingStore {
   bind(

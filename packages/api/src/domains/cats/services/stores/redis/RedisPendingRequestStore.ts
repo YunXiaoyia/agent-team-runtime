@@ -10,8 +10,8 @@
  * IMPORTANT: ioredis keyPrefix auto-prefixes ALL commands.
  */
 
-import type { CatId, PendingRequestRecord, RespondScope } from '@cat-cafe/shared';
-import type { RedisClient } from '@cat-cafe/shared/utils';
+import type { CatId, PendingRequestRecord, RespondScope } from '@agent-team-runtime/shared';
+import type { RedisClient } from '@agent-team-runtime/shared/utils';
 import { generateSortableId } from '../ports/MessageStore.js';
 import type { CreatePendingInput, IPendingRequestStore } from '../ports/PendingRequestStore.js';
 import { PendingReqKeys } from '../redis-keys/authorization-keys.js';

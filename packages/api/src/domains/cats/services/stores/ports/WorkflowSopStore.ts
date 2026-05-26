@@ -1,4 +1,4 @@
-import type { UpdateWorkflowSopInput, WorkflowSop } from '@cat-cafe/shared';
+import type { UpdateWorkflowSopInput, WorkflowSop } from '@agent-team-runtime/shared';
 
 export class VersionConflictError extends Error {
   readonly currentState: WorkflowSop;

@@ -291,9 +291,9 @@ interface CallbackTool<T> {
 - [x] AC-A1: `AuthFailureReason` 类型 + `VerifyResult` 落地（`InvocationRegistry.ts`）
 - [x] AC-A2: `verify()` 返回 `VerifyResult`，所有调用点更新（preHandler / wecom / lark / community-issues / wiring test）
 - [x] AC-A3: preHandler 401 响应 body 包含 `reason` 字段（`callback-auth-prehandler.ts` + `callback-errors.ts`）
-- [x] AC-A4: `stale_invocation` 与 `expired` 在 reason 上明确分开（taxonomy in `@cat-cafe/shared`）
+- [x] AC-A4: `stale_invocation` 与 `expired` 在 reason 上明确分开（taxonomy in `@agent-team-runtime/shared`）
 - [x] AC-A5: 客户端 `callbackPost`/`callbackGet` 解析 `reason`（typed marker `[reason=X]`），不再用 regex 字符串匹配
-- **Bonus**（Maine Coon review reminder #2）: reason taxonomy 抽到 `@cat-cafe/shared/types/callback-auth-reasons.ts` 单一真相源 + contract test 防漂移
+- **Bonus**（Maine Coon review reminder #2）: reason taxonomy 抽到 `@agent-team-runtime/shared/types/callback-auth-reasons.ts` 单一真相源 + contract test 防漂移
 
 ### Phase B（Persistence）— ✅ merged PR #1363
 - [x] AC-B1: `InvocationRegistry` 支持 Redis backend，schema 设计参考 `RedisInvocationRecordStore.ts` 的 Hash + Lua 模式

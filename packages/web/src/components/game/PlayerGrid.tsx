@@ -1,6 +1,6 @@
 'use client';
 
-import type { ActionStatus, SeatId, SeatView } from '@cat-cafe/shared';
+import type { ActionStatus, SeatId, SeatView } from '@agent-team-runtime/shared';
 
 interface SeatStatusInput {
   alive: boolean;

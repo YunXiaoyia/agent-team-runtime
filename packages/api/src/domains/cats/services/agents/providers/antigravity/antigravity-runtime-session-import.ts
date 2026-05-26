@@ -1,5 +1,5 @@
 import { existsSync, readFileSync } from 'node:fs';
-import type { CatId, SessionRecord } from '@cat-cafe/shared';
+import type { CatId, SessionRecord } from '@agent-team-runtime/shared';
 import type { RuntimeSessionMetadata } from '../../../runtime-session/RuntimeSessionMetadata.js';
 import type { IRuntimeSessionStore } from '../../../runtime-session/RuntimeSessionStore.js';
 import type { ISessionChainStore } from '../../../stores/ports/SessionChainStore.js';

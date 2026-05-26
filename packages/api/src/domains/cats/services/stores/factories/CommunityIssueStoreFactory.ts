@@ -4,7 +4,7 @@
  * No Redis → InMemoryCommunityIssueStore
  */
 
-import type { RedisClient } from '@cat-cafe/shared/utils';
+import type { RedisClient } from '@agent-team-runtime/shared/utils';
 import { InMemoryCommunityIssueStore } from '../memory/InMemoryCommunityIssueStore.js';
 import type { ICommunityIssueStore } from '../ports/CommunityIssueStore.js';
 import { RedisCommunityIssueStore } from '../redis/RedisCommunityIssueStore.js';

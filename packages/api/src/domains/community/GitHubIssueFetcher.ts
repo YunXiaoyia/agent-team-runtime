@@ -1,4 +1,4 @@
-import type { IssueState, IssueType } from '@cat-cafe/shared';
+import type { IssueState, IssueType } from '@agent-team-runtime/shared';
 
 export interface GhIssueFull {
   number: number;

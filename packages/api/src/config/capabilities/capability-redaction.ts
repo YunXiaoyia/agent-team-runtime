@@ -1,4 +1,4 @@
-import type { CapabilityAuditEntry, CapabilityEntry, McpInstallPreview } from '@cat-cafe/shared';
+import type { CapabilityAuditEntry, CapabilityEntry, McpInstallPreview } from '@agent-team-runtime/shared';
 
 export const REDACTED_CAPABILITY_SECRET = '••••••';
 

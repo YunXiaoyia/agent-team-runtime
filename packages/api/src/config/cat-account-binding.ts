@@ -1,4 +1,4 @@
-import type { CatConfig } from '@cat-cafe/shared';
+import type { CatConfig } from '@agent-team-runtime/shared';
 
 function trimBinding(value: unknown): string | undefined {
   if (typeof value !== 'string') return undefined;

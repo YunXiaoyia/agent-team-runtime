@@ -6,7 +6,7 @@
  * aggregation — preserves full sequence for FM-1/FM-2/FM-5 computation.
  */
 
-import type { RedisClient } from '@cat-cafe/shared/utils';
+import type { RedisClient } from '@agent-team-runtime/shared/utils';
 import { createModuleLogger } from '../../../../infrastructure/logger.js';
 import { TOOL_EVENT_LOG_TTL_SECONDS, toolEventLogKey } from '../stores/redis-keys/tool-event-log-keys.js';
 import type { NudgeFollowupAnalysis, ToolEvent } from './event-log-types.js';

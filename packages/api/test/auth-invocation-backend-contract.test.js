@@ -29,7 +29,7 @@ if (_redisUrl && !_redisUrl.includes(':6399')) {
   backends.push([
     'redis',
     async () => {
-      const { createRedisClient } = await import('@cat-cafe/shared/utils');
+      const { createRedisClient } = await import('@agent-team-runtime/shared/utils');
       const { RedisAuthInvocationBackend } = await import(
         '../dist/domains/cats/services/agents/invocation/RedisAuthInvocationBackend.js'
       );

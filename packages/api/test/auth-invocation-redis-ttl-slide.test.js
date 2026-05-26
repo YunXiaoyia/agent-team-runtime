@@ -24,7 +24,7 @@ describe('F174 Phase B — Redis latest pointer TTL slide (P1: gpt52 #1363)', ()
   }
 
   test('verify() extends BOTH record TTL and latest pointer TTL', async () => {
-    const { createRedisClient } = await import('@cat-cafe/shared/utils');
+    const { createRedisClient } = await import('@agent-team-runtime/shared/utils');
     const { RedisAuthInvocationBackend } = await import(
       '../dist/domains/cats/services/agents/invocation/RedisAuthInvocationBackend.js'
     );
@@ -100,7 +100,7 @@ describe('F174 Phase B — Redis latest pointer TTL slide (P1: gpt52 #1363)', ()
   // the dedup set when the original create-time TTL expires, and previously-
   // claimed clientMessageIds become first-seen again — dedup contract broken.
   test('verifyLatest() extends msgs key TTL (cloud P2 #1368)', async () => {
-    const { createRedisClient } = await import('@cat-cafe/shared/utils');
+    const { createRedisClient } = await import('@agent-team-runtime/shared/utils');
     const { RedisAuthInvocationBackend } = await import(
       '../dist/domains/cats/services/agents/invocation/RedisAuthInvocationBackend.js'
     );

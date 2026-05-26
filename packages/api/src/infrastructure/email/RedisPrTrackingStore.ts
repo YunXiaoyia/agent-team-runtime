@@ -1,4 +1,4 @@
-import type { RedisClient } from '@cat-cafe/shared/utils';
+import type { RedisClient } from '@agent-team-runtime/shared/utils';
 import type {
   CiStateFields,
   ConflictStateFields,

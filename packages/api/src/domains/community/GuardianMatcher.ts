@@ -1,5 +1,5 @@
-import type { CatId, ReviewPolicy, Roster } from '@cat-cafe/shared';
-import { createCatId } from '@cat-cafe/shared';
+import type { CatId, ReviewPolicy, Roster } from '@agent-team-runtime/shared';
+import { createCatId } from '@agent-team-runtime/shared';
 import { getDefaultCatId, getReviewPolicy, getRoster } from '../../config/cat-config-loader.js';
 
 export interface GuardianMatchOptions {

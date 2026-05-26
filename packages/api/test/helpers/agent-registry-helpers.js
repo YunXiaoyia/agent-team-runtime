@@ -36,7 +36,7 @@ function ensureTestGlobalConfigRoot() {
  * avoid stale catalog overlays).
  */
 export async function ensureCatRegistryPopulated() {
-  const { catRegistry } = await import('@cat-cafe/shared');
+  const { catRegistry } = await import('@agent-team-runtime/shared');
   // setup-cat-registry.js (--import hook) already registered all cats
   if (catRegistry.has('opus')) return;
   const { loadCatConfig, toAllCatConfigs } = await import('../../dist/config/cat-config-loader.js');

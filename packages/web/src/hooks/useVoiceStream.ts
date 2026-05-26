@@ -1,6 +1,6 @@
 'use client';
 
-import type { VoiceChunkEvent, VoiceStreamEndEvent, VoiceStreamStartEvent } from '@cat-cafe/shared';
+import type { VoiceChunkEvent, VoiceStreamEndEvent, VoiceStreamStartEvent } from '@agent-team-runtime/shared';
 import { useCallback, useEffect } from 'react';
 import { PlaybackManager } from '@/services/PlaybackManager';
 import { useVoiceSessionStore } from '@/stores/voiceSessionStore';

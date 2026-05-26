@@ -1,5 +1,5 @@
 import crypto from 'node:crypto';
-import type { ContentScanFinding, SkillFingerprint, SkillSecurityEntry } from '@cat-cafe/shared';
+import type { ContentScanFinding, SkillFingerprint, SkillSecurityEntry } from '@agent-team-runtime/shared';
 
 interface RegisterInput {
   source: string;

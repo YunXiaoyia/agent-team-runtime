@@ -12,7 +12,7 @@
  *   - System prompt: prepended to prompt text (same as GeminiAgentService)
  */
 
-import type { CatId } from '@cat-cafe/shared';
+import type { CatId } from '@agent-team-runtime/shared';
 import { createModuleLogger } from '../../../../../../infrastructure/logger.js';
 import { createPromptDigest } from '../../../context/prompt-digest.js';
 import type { AgentMessage, AgentService, AgentServiceOptions, MessageMetadata } from '../../../types.js';

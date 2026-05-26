@@ -11,7 +11,7 @@
  * POST   /api/threads/:threadId/cancel/:catId       → F122B AC-B9: Per-cat cancel
  */
 
-import type { CatId } from '@cat-cafe/shared';
+import type { CatId } from '@agent-team-runtime/shared';
 import type { FastifyPluginAsync, FastifyReply, FastifyRequest } from 'fastify';
 import { z } from 'zod';
 import { getThreadLiveInvocations } from '../domains/cats/services/agents/invocation/getThreadLiveInvocations.js';

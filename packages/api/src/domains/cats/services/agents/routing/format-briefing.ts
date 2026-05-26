@@ -1,6 +1,6 @@
 // F148 Phase E: Pure function to format context briefing content.
 
-import type { RichCardBlock, RichMessageExtra } from '@cat-cafe/shared';
+import type { RichCardBlock, RichMessageExtra } from '@agent-team-runtime/shared';
 import type { AppendMessageInput } from '../../stores/ports/MessageStore.js';
 import type { RecentArtifact } from './artifact-tracking.js';
 import type { CoverageMap } from './context-transport.js';

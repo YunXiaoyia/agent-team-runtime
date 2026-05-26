@@ -58,8 +58,8 @@ Why: {一句话}
 {quality-gate 自检报告摘要}
 
 ### 测试结果
-pnpm --filter @cat-cafe/api test       # X passed, 0 failed
-pnpm --filter @cat-cafe/web test       # X passed, 0 failed
+pnpm --filter @agent-team-runtime/api test       # X passed, 0 failed
+pnpm --filter @agent-team-runtime/web test       # X passed, 0 failed
 pnpm -r --if-present run build         # 成功
 
 ### 相关文档

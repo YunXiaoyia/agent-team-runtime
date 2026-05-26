@@ -1,4 +1,4 @@
-import type { VoiceChunkEvent, VoiceStreamEndEvent, VoiceStreamStartEvent } from '@cat-cafe/shared';
+import type { VoiceChunkEvent, VoiceStreamEndEvent, VoiceStreamStartEvent } from '@agent-team-runtime/shared';
 
 export type PlaybackManagerState = 'idle' | 'playing' | 'paused';
 

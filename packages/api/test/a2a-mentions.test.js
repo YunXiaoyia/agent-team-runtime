@@ -6,7 +6,7 @@ import assert from 'node:assert/strict';
 import { dirname, resolve } from 'node:path';
 import { describe, it } from 'node:test';
 import { fileURLToPath } from 'node:url';
-import { catRegistry } from '@cat-cafe/shared';
+import { catRegistry } from '@agent-team-runtime/shared';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 // Explicit path to the repo template — immune to CAT_TEMPLATE_PATH drift across tests.

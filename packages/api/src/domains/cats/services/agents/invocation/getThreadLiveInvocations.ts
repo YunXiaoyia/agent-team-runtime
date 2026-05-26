@@ -50,7 +50,7 @@
  * mistakenly killed.
  */
 
-import type { CatId } from '@cat-cafe/shared';
+import type { CatId } from '@agent-team-runtime/shared';
 import type { DraftRecord } from '../../stores/ports/DraftStore.js';
 import type { InvocationRecord } from '../../stores/ports/InvocationRecordStore.js';
 import type { ActiveSlotInfo } from './InvocationTracker.js';

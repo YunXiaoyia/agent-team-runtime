@@ -4,7 +4,7 @@
  * 无 → undefined (read state requires Redis)
  */
 
-import type { RedisClient } from '@cat-cafe/shared/utils';
+import type { RedisClient } from '@agent-team-runtime/shared/utils';
 import type { IThreadReadStateStore } from '../ports/ThreadReadStateStore.js';
 import { RedisThreadReadStateStore } from '../redis/RedisThreadReadStateStore.js';
 

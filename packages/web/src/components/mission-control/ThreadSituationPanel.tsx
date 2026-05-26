@@ -1,6 +1,6 @@
 'use client';
 
-import type { BacklogItem, CatId } from '@cat-cafe/shared';
+import type { BacklogItem, CatId } from '@agent-team-runtime/shared';
 import Link from 'next/link';
 import { extractFeatureId } from './FeatureBirdEyePanel';
 

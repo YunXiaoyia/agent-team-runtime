@@ -27,8 +27,8 @@ import type {
   CatFamily,
   McpToolInfo,
   SkillHealthSummary,
-} from '@cat-cafe/shared';
-import { catRegistry } from '@cat-cafe/shared';
+} from '@agent-team-runtime/shared';
+import { catRegistry } from '@agent-team-runtime/shared';
 import type { FastifyPluginAsync, FastifyRequest } from 'fastify';
 import { parse as parseYaml } from 'yaml';
 import { appendAuditEntry } from '../config/capabilities/capability-audit.js';

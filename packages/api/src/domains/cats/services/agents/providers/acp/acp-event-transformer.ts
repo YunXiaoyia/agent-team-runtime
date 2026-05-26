@@ -13,7 +13,7 @@
  * re-emit tool_use (KD-5). Final判定仅认 `status ∈ {completed, failed}` (KD-6).
  */
 
-import type { CatId } from '@cat-cafe/shared';
+import type { CatId } from '@agent-team-runtime/shared';
 import { createModuleLogger } from '../../../../../../infrastructure/logger.js';
 import type { AgentMessage, MessageMetadata } from '../../../types.js';
 import type { AcpSessionUpdate } from './types.js';

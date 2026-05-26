@@ -4,7 +4,7 @@
  * All tools proxy to the standalone audio-service (Python, default :9881).
  */
 
-import { createMeetingContextBlock } from '@cat-cafe/shared';
+import { createMeetingContextBlock } from '@agent-team-runtime/shared';
 import { z } from 'zod';
 import type { ToolResult } from './file-tools.js';
 import { errorResult, successResult } from './file-tools.js';

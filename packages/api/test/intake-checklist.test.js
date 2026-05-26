@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { describe, test } from 'node:test';
 
-const { DEFAULT_INTAKE_CHECKLIST, validateIntakeChecklist } = await import('@cat-cafe/shared');
+const { DEFAULT_INTAKE_CHECKLIST, validateIntakeChecklist } = await import('@agent-team-runtime/shared');
 
 describe('IntakeChecklist validation', () => {
   test('rejects checklist with no evidence on required items', () => {

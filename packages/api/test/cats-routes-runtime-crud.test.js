@@ -7,7 +7,7 @@ import { fileURLToPath } from 'node:url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
-import { catRegistry, createCatId } from '@cat-cafe/shared';
+import { catRegistry, createCatId } from '@agent-team-runtime/shared';
 import './helpers/setup-cat-registry.js';
 
 const { parseA2AMentions } = await import('../dist/domains/cats/services/agents/routing/a2a-mentions.js');

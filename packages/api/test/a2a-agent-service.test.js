@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
-import { createCatId } from '@cat-cafe/shared';
+import { createCatId } from '@agent-team-runtime/shared';
 import { A2AAgentService } from '../dist/domains/cats/services/agents/providers/A2AAgentService.js';
 import {
   extractTextFromParts,

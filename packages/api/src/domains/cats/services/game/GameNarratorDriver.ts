@@ -1,4 +1,4 @@
-import type { CatId, GameRuntime, SeatId } from '@cat-cafe/shared';
+import type { CatId, GameRuntime, SeatId } from '@agent-team-runtime/shared';
 import type { IGameStore } from '../stores/ports/GameStore.js';
 import { buildFirstWakeBriefing, buildResumeCapsule } from './briefing.js';
 import type { GameDriver } from './GameDriver.js';

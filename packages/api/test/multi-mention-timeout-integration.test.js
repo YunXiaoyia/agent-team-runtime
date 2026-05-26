@@ -6,7 +6,7 @@
 
 import assert from 'node:assert/strict';
 import { beforeEach, describe, test } from 'node:test';
-import { createCatId } from '@cat-cafe/shared';
+import { createCatId } from '@agent-team-runtime/shared';
 import './helpers/setup-cat-registry.js';
 
 const { MultiMentionOrchestrator } = await import(

@@ -13,8 +13,8 @@ import { existsSync, statSync } from 'node:fs';
 import { mkdir, readdir, readFile, writeFile } from 'node:fs/promises';
 import { homedir } from 'node:os';
 import { delimiter, extname, join, relative, resolve, sep } from 'node:path';
-import type { CapabilitiesConfig, CapabilityEntry, McpServerDescriptor } from '@cat-cafe/shared';
-import { catRegistry } from '@cat-cafe/shared';
+import type { CapabilitiesConfig, CapabilityEntry, McpServerDescriptor } from '@agent-team-runtime/shared';
+import { catRegistry } from '@agent-team-runtime/shared';
 import {
   cleanStaleClaudeProjectOverrides,
   readAntigravityMcpConfig,

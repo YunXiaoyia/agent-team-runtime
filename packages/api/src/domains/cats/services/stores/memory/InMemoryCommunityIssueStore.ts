@@ -3,8 +3,8 @@
  * Used for tests and as fallback when Redis is unavailable.
  */
 
-import type { CommunityIssueItem, CreateCommunityIssueInput, UpdateCommunityIssueInput } from '@cat-cafe/shared';
-import { generateId } from '@cat-cafe/shared';
+import type { CommunityIssueItem, CreateCommunityIssueInput, UpdateCommunityIssueInput } from '@agent-team-runtime/shared';
+import { generateId } from '@agent-team-runtime/shared';
 import type { ICommunityIssueStore } from '../ports/CommunityIssueStore.js';
 
 export class InMemoryCommunityIssueStore implements ICommunityIssueStore {

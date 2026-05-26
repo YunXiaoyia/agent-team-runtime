@@ -27,7 +27,7 @@ describe('scheduler reply userid backfill', { skip: redisIsolationSkipReason(RED
     const invocationModule = await import('../dist/domains/cats/services/stores/redis/RedisInvocationRecordStore.js');
     const threadModule = await import('../dist/domains/cats/services/stores/redis/RedisThreadStore.js');
     const backfillModule = await import('../dist/infrastructure/scheduler/scheduler-reply-userid-backfill.js');
-    const redisModule = await import('@cat-cafe/shared/utils');
+    const redisModule = await import('@agent-team-runtime/shared/utils');
 
     RedisMessageStore = messageModule.RedisMessageStore;
     RedisInvocationRecordStore = invocationModule.RedisInvocationRecordStore;

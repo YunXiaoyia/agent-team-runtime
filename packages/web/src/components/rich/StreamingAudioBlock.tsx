@@ -1,6 +1,6 @@
 'use client';
 
-import type { TtsStreamRequest } from '@cat-cafe/shared';
+import type { TtsStreamRequest } from '@agent-team-runtime/shared';
 import { useEffect, useRef } from 'react';
 import { useStreamingAudio } from '@/hooks/useStreamingAudio';
 

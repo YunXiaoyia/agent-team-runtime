@@ -8,7 +8,7 @@
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import os from 'node:os';
 import { resolve } from 'node:path';
-import { catRegistry } from '@cat-cafe/shared';
+import { catRegistry } from '@agent-team-runtime/shared';
 import type { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify';
 import { z } from 'zod';
 import { collectConfigSnapshot } from '../config/ConfigRegistry.js';

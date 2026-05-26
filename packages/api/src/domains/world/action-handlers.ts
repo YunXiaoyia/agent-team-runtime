@@ -1,4 +1,4 @@
-import type { CharacterRecord, WorldAction, WorldEventEntry, WorldEventType } from '@cat-cafe/shared';
+import type { CharacterRecord, WorldAction, WorldEventEntry, WorldEventType } from '@agent-team-runtime/shared';
 import type { IWorldStore } from './interfaces.js';
 import { applyPatch } from './json-patch.js';
 

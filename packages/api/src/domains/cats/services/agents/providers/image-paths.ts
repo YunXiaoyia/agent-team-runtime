@@ -4,7 +4,7 @@
  */
 
 import { resolve } from 'node:path';
-import type { MessageContent } from '@cat-cafe/shared';
+import type { MessageContent } from '@agent-team-runtime/shared';
 import { getDefaultUploadDir } from '../../../../../utils/upload-paths.js';
 
 /**

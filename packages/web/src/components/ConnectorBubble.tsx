@@ -1,7 +1,7 @@
 'use client';
 
-import type { ConnectorTailwindTheme } from '@cat-cafe/shared';
-import { getConnectorDefinition } from '@cat-cafe/shared';
+import type { ConnectorTailwindTheme } from '@agent-team-runtime/shared';
+import { getConnectorDefinition } from '@agent-team-runtime/shared';
 import { useCallback, useState } from 'react';
 import type { ChatMessage as ChatMessageType, MessageContent } from '@/stores/chatStore';
 import { API_URL, apiFetch } from '@/utils/api-client';

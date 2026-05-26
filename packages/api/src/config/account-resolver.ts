@@ -12,12 +12,12 @@ import {
   builtinAccountIdForClient,
   type ClientId,
   protocolForClient,
-} from '@cat-cafe/shared';
+} from '@agent-team-runtime/shared';
 import { readCatalogAccounts } from './catalog-accounts.js';
 import { readCredential } from './credentials.js';
 
 // ── Types surviving from provider-profiles.types.ts (F136 Phase 4d) ──
-export { type BuiltinAccountClient, builtinAccountIdForClient } from '@cat-cafe/shared';
+export { type BuiltinAccountClient, builtinAccountIdForClient } from '@agent-team-runtime/shared';
 export type ProviderProfileKind = 'builtin' | 'api_key';
 
 export interface RuntimeProviderProfile {

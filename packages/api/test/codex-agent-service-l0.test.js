@@ -15,7 +15,7 @@ import assert from 'node:assert/strict';
 import { EventEmitter } from 'node:events';
 import { PassThrough } from 'node:stream';
 import { mock, test } from 'node:test';
-import { createCatId } from '@cat-cafe/shared';
+import { createCatId } from '@agent-team-runtime/shared';
 
 const { CodexAgentService } = await import('../dist/domains/cats/services/agents/providers/CodexAgentService.js');
 

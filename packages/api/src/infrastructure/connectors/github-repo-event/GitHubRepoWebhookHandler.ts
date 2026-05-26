@@ -3,7 +3,7 @@
  *
  * Pipeline: HMAC → event filter → allowlist → validate → dedup → normalize → bind thread → deliver → trigger → confirm
  */
-import type { CatId, ConnectorSource } from '@cat-cafe/shared';
+import type { CatId, ConnectorSource } from '@agent-team-runtime/shared';
 import type { WebhookHandleResult } from '../../../routes/connector-webhooks.js';
 import type {
   ConnectorDeliveryDeps,

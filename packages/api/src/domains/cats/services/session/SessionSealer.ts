@@ -10,7 +10,7 @@
  * SessionSealer is responsible for the lifecycle state machine.
  */
 
-import type { CatId, SealResult, SessionStatus } from '@cat-cafe/shared';
+import type { CatId, SealResult, SessionStatus } from '@agent-team-runtime/shared';
 import { createModuleLogger } from '../../../../infrastructure/logger.js';
 import { extractRecentArtifacts } from '../agents/routing/artifact-tracking.js';
 import { AuditEventTypes, getEventAuditLog } from '../orchestration/EventAuditLog.js';

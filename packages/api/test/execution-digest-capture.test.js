@@ -11,7 +11,7 @@ const ctx = {
   userId: 'user1',
 };
 
-/** @type {import('@cat-cafe/shared').DispatchMissionPack} */
+/** @type {import('@agent-team-runtime/shared').DispatchMissionPack} */
 const missionPack = {
   mission: 'Fix the login bug',
   workItem: 'BUG-42',

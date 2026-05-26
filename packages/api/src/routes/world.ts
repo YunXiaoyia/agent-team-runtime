@@ -1,4 +1,4 @@
-import { WorldActionEnvelopeSchema } from '@cat-cafe/shared';
+import { WorldActionEnvelopeSchema } from '@agent-team-runtime/shared';
 import type { FastifyPluginAsync } from 'fastify';
 import { z } from 'zod';
 import type { IWorldStore } from '../domains/world/interfaces.js';

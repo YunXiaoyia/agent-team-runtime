@@ -1,6 +1,6 @@
 'use client';
 
-import type { ReplyPreview } from '@cat-cafe/shared';
+import type { ReplyPreview } from '@agent-team-runtime/shared';
 import { useCallback, useEffect, useRef } from 'react';
 import { deriveBubbleId, getBubbleInvocationId } from '@/debug/bubbleIdentity';
 import { recordBubbleInvariantViolation } from '@/debug/bubbleInvariantDiagnostics';

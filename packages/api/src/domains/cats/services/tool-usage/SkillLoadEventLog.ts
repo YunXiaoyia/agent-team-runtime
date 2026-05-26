@@ -6,7 +6,7 @@
  * count doesn't (and avoids dedup).
  */
 
-import type { RedisClient } from '@cat-cafe/shared/utils';
+import type { RedisClient } from '@agent-team-runtime/shared/utils';
 import { createModuleLogger } from '../../../../infrastructure/logger.js';
 import { skillLoadLogKey, TOOL_EVENT_LOG_TTL_SECONDS } from '../stores/redis-keys/tool-event-log-keys.js';
 import type { SkillLoadedEvent } from './event-log-types.js';

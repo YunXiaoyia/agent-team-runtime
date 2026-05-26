@@ -9,7 +9,7 @@
  *   3. Whitespace collapse + trim
  */
 
-import { escapeRegExp } from '@cat-cafe/shared';
+import { escapeRegExp } from '@agent-team-runtime/shared';
 import terms from './voice-terms.json';
 
 export type TermEntry = readonly [RegExp, string];

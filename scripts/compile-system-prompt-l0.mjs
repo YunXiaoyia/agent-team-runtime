@@ -26,7 +26,7 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { catRegistry } from '@cat-cafe/shared';
+import { catRegistry } from '@agent-team-runtime/shared';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = resolve(__dirname, '..');
@@ -98,7 +98,7 @@ export function filterAvailableTeammates(allConfigs, currentCatId, isAvailableFn
 }
 
 // TODO(F203/Phase-C): replace with `import { WORKFLOW_TRIGGERS } from
-// '@cat-cafe/api/.../SystemPromptBuilder'` once exported.
+// '@agent-team-runtime/api/.../SystemPromptBuilder'` once exported.
 const WORKFLOW_TRIGGERS_INLINE = {
   ragdoll: [
     '## 工作流（主动 @ 触发点）',

@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { describe, it, mock } from 'node:test';
-import { SCHEDULER_TRIGGER_PREFIX } from '@cat-cafe/shared';
+import { SCHEDULER_TRIGGER_PREFIX } from '@agent-team-runtime/shared';
 import { reminderTemplate } from '../dist/infrastructure/scheduler/templates/reminder.js';
 
 describe('reminderTemplate', () => {

@@ -5,7 +5,7 @@
  * Includes high-level POST /api/game/start for frontend-driven game creation.
  */
 
-import { catRegistry } from '@cat-cafe/shared';
+import { catRegistry } from '@agent-team-runtime/shared';
 import type { FastifyPluginAsync } from 'fastify';
 import { z } from 'zod';
 import { createGameDriver } from '../domains/cats/services/game/createGameDriver.js';
@@ -180,7 +180,7 @@ export const gameRoutes: FastifyPluginAsync<GameRoutesOptions> = async (app, opt
       const seats = buildGameSeats({ humanRole, userId, catIds, playerCount: clampedCount });
 
       // Validate detectiveCatId maps to an actual seat BEFORE creating any persistent resources
-      let resolvedDetectiveSeatId: import('@cat-cafe/shared').SeatId | undefined;
+      let resolvedDetectiveSeatId: import('@agent-team-runtime/shared').SeatId | undefined;
       if (humanRole === 'detective' && detectiveCatId) {
         const seat = seats.find((s) => s.actorId === detectiveCatId);
         if (!seat) {
@@ -329,7 +329,7 @@ export const gameRoutes: FastifyPluginAsync<GameRoutesOptions> = async (app, opt
 
       const view = GameViewBuilder.buildView(
         runtime,
-        viewer as import('@cat-cafe/shared').SeatId | 'god' | `detective:${string}`,
+        viewer as import('@agent-team-runtime/shared').SeatId | 'god' | `detective:${string}`,
       );
       return view;
     },
@@ -365,7 +365,7 @@ export const gameRoutes: FastifyPluginAsync<GameRoutesOptions> = async (app, opt
     }
 
     try {
-      const action: import('@cat-cafe/shared').GameAction = {
+      const action: import('@agent-team-runtime/shared').GameAction = {
         seatId: seatId as `P${number}`,
         actionName,
         submittedAt: Date.now(),

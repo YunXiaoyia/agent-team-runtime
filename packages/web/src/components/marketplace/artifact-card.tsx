@@ -1,6 +1,6 @@
 'use client';
 
-import type { MarketplaceSearchResult } from '@cat-cafe/shared';
+import type { MarketplaceSearchResult } from '@agent-team-runtime/shared';
 import { EcosystemBadge, TrustBadge } from './marketplace-badges';
 
 export function ArtifactCard({

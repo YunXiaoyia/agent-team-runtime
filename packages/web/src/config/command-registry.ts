@@ -8,7 +8,7 @@
  * That's it — the "命令速查" tab picks it up automatically.
  */
 
-import { CORE_COMMANDS, type CommandSource, type CommandSurface } from '@cat-cafe/shared';
+import { CORE_COMMANDS, type CommandSource, type CommandSurface } from '@agent-team-runtime/shared';
 
 export type CommandCategory = 'general' | 'memory' | 'knowledge' | 'game' | 'task' | 'vote' | 'connector';
 

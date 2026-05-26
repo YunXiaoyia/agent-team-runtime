@@ -3,7 +3,7 @@
  * Fire-and-forget Redis INCR for tool_use events + aggregation reader.
  */
 
-import type { RedisClient } from '@cat-cafe/shared/utils';
+import type { RedisClient } from '@agent-team-runtime/shared/utils';
 import { createModuleLogger } from '../../../../infrastructure/logger.js';
 import { TOOL_USAGE_SCAN_ALL, TOOL_USAGE_TTL_SECONDS, toolUsageKey } from '../stores/redis-keys/tool-usage-keys.js';
 import { classifyTool, type ToolCategory } from './classify.js';

@@ -1,7 +1,7 @@
 import { existsSync } from 'node:fs';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
-import type { SignalSourceConfig } from '@cat-cafe/shared';
-import { SignalSourceConfigSchema } from '@cat-cafe/shared';
+import type { SignalSourceConfig } from '@agent-team-runtime/shared';
+import { SignalSourceConfigSchema } from '@agent-team-runtime/shared';
 import { parse, stringify } from 'yaml';
 import { DEFAULT_SIGNAL_SOURCES } from './default-sources.js';
 import type { SignalPaths } from './signal-paths.js';

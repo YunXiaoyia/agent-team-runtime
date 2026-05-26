@@ -1,4 +1,4 @@
-import { catRegistry } from '@cat-cafe/shared';
+import { catRegistry } from '@agent-team-runtime/shared';
 import { bootstrapCatCatalog, resolveCatCatalogPath } from './cat-catalog-store.js';
 import { loadCatConfig, toAllCatConfigs } from './cat-config-loader.js';
 import { resolveProjectTemplatePath } from './project-template-path.js';

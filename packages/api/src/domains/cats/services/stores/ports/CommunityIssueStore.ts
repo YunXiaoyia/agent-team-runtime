@@ -3,7 +3,7 @@
  * Repo-agnostic community issue lifecycle tracking.
  */
 
-import type { CommunityIssueItem, CreateCommunityIssueInput, UpdateCommunityIssueInput } from '@cat-cafe/shared';
+import type { CommunityIssueItem, CreateCommunityIssueInput, UpdateCommunityIssueInput } from '@agent-team-runtime/shared';
 
 export interface ICommunityIssueStore {
   create(input: CreateCommunityIssueInput): Promise<CommunityIssueItem | null>;

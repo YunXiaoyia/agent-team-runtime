@@ -8,7 +8,7 @@
  * the script.
  */
 
-import type { RedisClient } from '@cat-cafe/shared/utils';
+import type { RedisClient } from '@agent-team-runtime/shared/utils';
 import { RuntimeSessionKeys } from '../stores/redis-keys/runtime-session-keys.js';
 import {
   normalizeRuntimeSessionMetadata,

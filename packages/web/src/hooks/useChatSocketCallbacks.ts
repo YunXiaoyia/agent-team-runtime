@@ -1,4 +1,4 @@
-import type { GameView } from '@cat-cafe/shared';
+import type { GameView } from '@agent-team-runtime/shared';
 import { useMemo } from 'react';
 import type { SocketCallbacks } from '@/hooks/useSocket';
 import { type Thread, useChatStore } from '@/stores/chatStore';

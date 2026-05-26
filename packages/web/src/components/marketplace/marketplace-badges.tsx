@@ -1,6 +1,6 @@
 'use client';
 
-import type { InstallMode, MarketplaceEcosystem, TrustLevel } from '@cat-cafe/shared';
+import type { InstallMode, MarketplaceEcosystem, TrustLevel } from '@agent-team-runtime/shared';
 import { HubIcon } from '../hub-icons';
 
 const ECOSYSTEM_STYLES: Record<MarketplaceEcosystem, { bg: string; text: string; label: string }> = {

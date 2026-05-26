@@ -21,7 +21,7 @@ import { createReadStream } from 'node:fs';
 import { readdir, readFile, stat } from 'node:fs/promises';
 import { dirname, extname, isAbsolute, join, relative, resolve, sep } from 'node:path';
 import { promisify } from 'node:util';
-import { isAbsoluteFilesystemPath, normalizeWorkspaceRelativePath } from '@cat-cafe/shared/utils';
+import { isAbsoluteFilesystemPath, normalizeWorkspaceRelativePath } from '@agent-team-runtime/shared/utils';
 import type { FastifyPluginAsync } from 'fastify';
 import {
   addLinkedRoot,

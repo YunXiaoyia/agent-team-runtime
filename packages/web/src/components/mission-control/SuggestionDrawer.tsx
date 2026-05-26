@@ -1,6 +1,6 @@
 'use client';
 
-import type { BacklogItem, MissionHubSelfClaimScope, ThreadPhase } from '@cat-cafe/shared';
+import type { BacklogItem, MissionHubSelfClaimScope, ThreadPhase } from '@agent-team-runtime/shared';
 import Link from 'next/link';
 import { useEffect, useMemo, useState } from 'react';
 import { formatCatName, useCatData } from '@/hooks/useCatData';

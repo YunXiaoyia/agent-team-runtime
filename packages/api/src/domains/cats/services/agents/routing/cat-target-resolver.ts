@@ -1,5 +1,5 @@
-import type { CatAlternative, CatId, CatRoutingError } from '@cat-cafe/shared';
-import { catRegistry } from '@cat-cafe/shared';
+import type { CatAlternative, CatId, CatRoutingError } from '@agent-team-runtime/shared';
+import { catRegistry } from '@agent-team-runtime/shared';
 import { getRoster } from '../../../../../config/cat-config-loader.js';
 
 function buildAlts(excludeId: string | null, preferFamily?: string): CatAlternative[] {

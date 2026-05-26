@@ -1,6 +1,6 @@
 'use client';
 
-import type { TaskItem } from '@cat-cafe/shared';
+import type { TaskItem } from '@agent-team-runtime/shared';
 import { useState } from 'react';
 import { CatAvatar } from './CatAvatar';
 

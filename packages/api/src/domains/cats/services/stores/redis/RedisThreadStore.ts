@@ -10,9 +10,9 @@
  * 默认持久化；用户可见状态禁止默认 TTL（LL-048）。
  */
 
-import type { CatId, ThreadPhase } from '@cat-cafe/shared';
-import { generateThreadId } from '@cat-cafe/shared';
-import type { RedisClient } from '@cat-cafe/shared/utils';
+import type { CatId, ThreadPhase } from '@agent-team-runtime/shared';
+import { generateThreadId } from '@agent-team-runtime/shared';
+import type { RedisClient } from '@agent-team-runtime/shared/utils';
 import type {
   BootcampStateV1,
   ConnectorHubStateV1,

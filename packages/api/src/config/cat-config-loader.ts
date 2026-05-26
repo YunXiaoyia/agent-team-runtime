@@ -19,8 +19,8 @@ import type {
   MissionHubSelfClaimScope,
   ReviewPolicy,
   Roster,
-} from '@cat-cafe/shared';
-import { type ClientId, catRegistry, createCatId, normalizeCliEffortForProvider } from '@cat-cafe/shared';
+} from '@agent-team-runtime/shared';
+import { type ClientId, catRegistry, createCatId, normalizeCliEffortForProvider } from '@agent-team-runtime/shared';
 import { z } from 'zod';
 import { createModuleLogger } from '../infrastructure/logger.js';
 import { bootstrapCatCatalog, readCatCatalogRaw, resolveCatCatalogPath } from './cat-catalog-store.js';
@@ -185,7 +185,7 @@ const reviewPolicySchema = z.object({
   excludeUnavailable: z.boolean(),
 });
 
-// Note: Roster, RosterEntry, ReviewPolicy types imported from @cat-cafe/shared above
+// Note: Roster, RosterEntry, ReviewPolicy types imported from @agent-team-runtime/shared above
 
 /** F067: Owner config schema */
 const coCreatorConfigSchema = z.object({

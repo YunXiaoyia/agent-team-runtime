@@ -11,8 +11,8 @@
  * 6. 只在猫回复完整结束后解析 (由调用方保证)
  */
 
-import type { CatId, CatRoutingError } from '@cat-cafe/shared';
-import { catRegistry } from '@cat-cafe/shared';
+import type { CatId, CatRoutingError } from '@agent-team-runtime/shared';
+import { catRegistry } from '@agent-team-runtime/shared';
 import { isCatAvailable } from '../../../../../config/cat-config-loader.js';
 import { resolveCatTarget } from './cat-target-resolver.js';
 

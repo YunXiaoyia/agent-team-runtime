@@ -465,7 +465,7 @@ describe('Multi-Mention Routes', () => {
     // Manually set up orchestrator state: opus created a multi-mention targeting codex
     const { getMultiMentionOrchestrator } = await import('../dist/routes/callback-multi-mention-routes.js');
     const orch = getMultiMentionOrchestrator();
-    const { createCatId } = await import('@cat-cafe/shared');
+    const { createCatId } = await import('@agent-team-runtime/shared');
     const req = orch.create({
       threadId: 'thread-1',
       initiator: createCatId('opus'),

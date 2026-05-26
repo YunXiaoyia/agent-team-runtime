@@ -13,7 +13,7 @@
  */
 
 import { randomUUID } from 'node:crypto';
-import type { CatId, ConnectorSource } from '@cat-cafe/shared';
+import type { CatId, ConnectorSource } from '@agent-team-runtime/shared';
 import type { IInvocationRecordStore, InvocationRecord } from '../../stores/ports/InvocationRecordStore.js';
 import type { AppendMessageInput } from '../../stores/ports/MessageStore.js';
 import type { TaskProgressStore } from './TaskProgressStore.js';

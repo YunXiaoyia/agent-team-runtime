@@ -1,4 +1,4 @@
-import type { WorldActionEnvelope, WorldEventEntry } from '@cat-cafe/shared';
+import type { WorldActionEnvelope, WorldEventEntry } from '@agent-team-runtime/shared';
 import { type ActionContext, getActionHandler } from './action-handlers.js';
 import type { IWorldStore } from './interfaces.js';
 

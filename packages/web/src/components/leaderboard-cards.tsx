@@ -1,6 +1,6 @@
 'use client';
 
-import type { RankedCat, StreakCat } from '@cat-cafe/shared';
+import type { RankedCat, StreakCat } from '@agent-team-runtime/shared';
 import { type ReactNode } from 'react';
 import { useCatData } from '@/hooks/useCatData';
 import typographyTokens from '@/styles/typography-tokens.json';

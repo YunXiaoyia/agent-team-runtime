@@ -5,7 +5,7 @@ import type {
   BubbleOriginPhase,
   BubbleRecoveryAction,
   BubbleSourcePath,
-} from '@cat-cafe/shared';
+} from '@agent-team-runtime/shared';
 import {
   deriveBubbleKindFromMessage,
   findBubbleStoreInvariantViolations,

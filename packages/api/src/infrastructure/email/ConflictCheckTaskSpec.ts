@@ -9,8 +9,8 @@
  * KD-9: Gate passes ALL mergeState results (including MERGEABLE) so ConflictRouter
  *       can clear fingerprints for re-conflict detection.
  */
-import type { CatId, TaskItem } from '@cat-cafe/shared';
-import { parsePrSubjectKey } from '@cat-cafe/shared';
+import type { CatId, TaskItem } from '@agent-team-runtime/shared';
+import { parsePrSubjectKey } from '@agent-team-runtime/shared';
 import type { ITaskStore } from '../../domains/cats/services/stores/ports/TaskStore.js';
 import type { ExecuteContext, TaskSpec_P1 } from '../scheduler/types.js';
 import type { ConflictAutoExecutor } from './ConflictAutoExecutor.js';

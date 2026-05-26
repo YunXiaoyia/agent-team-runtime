@@ -13,7 +13,7 @@ import assert from 'node:assert/strict';
 import { afterEach, beforeEach, describe, test } from 'node:test';
 
 // Shared registry + helpers
-import { catRegistry } from '@cat-cafe/shared';
+import { catRegistry } from '@agent-team-runtime/shared';
 import './helpers/setup-cat-registry.js';
 
 /** Mock cat config (similar structure to built-in cats) */
@@ -84,14 +84,14 @@ describe('F32-a Mock Agent Integration', () => {
 
   describe('catIdSchema: dynamic validation', () => {
     test('accepts registered mock-cat', async () => {
-      const { catIdSchema } = await import('@cat-cafe/shared');
+      const { catIdSchema } = await import('@agent-team-runtime/shared');
       const schema = catIdSchema();
       const result = schema.safeParse('mock-cat');
       assert.ok(result.success, 'mock-cat should be valid');
     });
 
     test('accepts built-in cats', async () => {
-      const { catIdSchema } = await import('@cat-cafe/shared');
+      const { catIdSchema } = await import('@agent-team-runtime/shared');
       const schema = catIdSchema();
       for (const id of ['opus', 'codex', 'gemini']) {
         const result = schema.safeParse(id);
@@ -100,7 +100,7 @@ describe('F32-a Mock Agent Integration', () => {
     });
 
     test('rejects unregistered cat', async () => {
-      const { catIdSchema } = await import('@cat-cafe/shared');
+      const { catIdSchema } = await import('@agent-team-runtime/shared');
       const schema = catIdSchema();
       const result = schema.safeParse('nonexistent-cat');
       assert.ok(!result.success, 'nonexistent-cat should be invalid');
@@ -175,7 +175,7 @@ describe('F32-a Mock Agent Integration', () => {
   describe('SystemPromptBuilder with mock-cat', () => {
     test('buildStaticIdentity includes mock-cat identity', async () => {
       const { buildStaticIdentity } = await import('../dist/domains/cats/services/context/SystemPromptBuilder.js');
-      const { createCatId } = await import('@cat-cafe/shared');
+      const { createCatId } = await import('@agent-team-runtime/shared');
       const identity = buildStaticIdentity(createCatId('mock-cat'));
       assert.ok(identity.includes('模拟猫'), 'should include display name');
       assert.ok(identity.includes('mock'), 'should include provider');
@@ -183,7 +183,7 @@ describe('F32-a Mock Agent Integration', () => {
 
     test('buildInvocationContext includes mock-cat teammates', async () => {
       const { buildInvocationContext } = await import('../dist/domains/cats/services/context/SystemPromptBuilder.js');
-      const { createCatId } = await import('@cat-cafe/shared');
+      const { createCatId } = await import('@agent-team-runtime/shared');
       const context = buildInvocationContext({
         catId: createCatId('opus'),
         mode: 'independent',
@@ -199,7 +199,7 @@ describe('F32-a Mock Agent Integration', () => {
   describe('A2A mentions detect mock-cat', () => {
     test('parseA2AMentions detects @模拟猫', async () => {
       const { parseA2AMentions } = await import('../dist/domains/cats/services/agents/routing/a2a-mentions.js');
-      const { createCatId } = await import('@cat-cafe/shared');
+      const { createCatId } = await import('@agent-team-runtime/shared');
       const mentions = parseA2AMentions('@模拟猫 请确认这个改动', createCatId('opus'));
       assert.ok(
         mentions.some((m) => m === 'mock-cat'),
@@ -209,7 +209,7 @@ describe('F32-a Mock Agent Integration', () => {
 
     test('parseA2AMentions detects @mock-cat', async () => {
       const { parseA2AMentions } = await import('../dist/domains/cats/services/agents/routing/a2a-mentions.js');
-      const { createCatId } = await import('@cat-cafe/shared');
+      const { createCatId } = await import('@agent-team-runtime/shared');
       const mentions = parseA2AMentions('@mock-cat please review', createCatId('opus'));
       assert.ok(
         mentions.some((m) => m === 'mock-cat'),

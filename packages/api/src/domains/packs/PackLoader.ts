@@ -8,8 +8,8 @@
 
 import { readFile, stat } from 'node:fs/promises';
 import { join } from 'node:path';
-import type { PackManifest } from '@cat-cafe/shared';
-import { PackManifestSchema } from '@cat-cafe/shared';
+import type { PackManifest } from '@agent-team-runtime/shared';
+import { PackManifestSchema } from '@agent-team-runtime/shared';
 import { parse } from 'yaml';
 import { checkGrowthBoundary } from './GrowthBoundary.js';
 import type { PackSecurityGuard, SecurityResult } from './PackSecurityGuard.js';

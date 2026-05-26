@@ -10,9 +10,9 @@
  * TTL 默认 0 (persistent, 铁律 #5).
  */
 
-import type { CommunityIssueItem, CreateCommunityIssueInput, UpdateCommunityIssueInput } from '@cat-cafe/shared';
-import { generateId } from '@cat-cafe/shared';
-import type { RedisClient } from '@cat-cafe/shared/utils';
+import type { CommunityIssueItem, CreateCommunityIssueInput, UpdateCommunityIssueInput } from '@agent-team-runtime/shared';
+import { generateId } from '@agent-team-runtime/shared';
+import type { RedisClient } from '@agent-team-runtime/shared/utils';
 import type { ICommunityIssueStore } from '../ports/CommunityIssueStore.js';
 import { CommunityIssueKeys } from '../redis-keys/community-issue-keys.js';
 

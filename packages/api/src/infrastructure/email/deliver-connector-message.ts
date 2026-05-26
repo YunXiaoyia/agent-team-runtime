@@ -1,4 +1,4 @@
-import type { CatId, ConnectorSource } from '@cat-cafe/shared';
+import type { CatId, ConnectorSource } from '@agent-team-runtime/shared';
 import type { IMessageStore } from '../../domains/cats/services/stores/ports/MessageStore.js';
 
 export interface ConnectorDeliveryDeps {

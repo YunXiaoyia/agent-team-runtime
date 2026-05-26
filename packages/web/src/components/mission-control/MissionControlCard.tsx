@@ -1,6 +1,6 @@
 'use client';
 
-import type { BacklogItem } from '@cat-cafe/shared';
+import type { BacklogItem } from '@agent-team-runtime/shared';
 
 interface MissionControlCardProps {
   item: BacklogItem;

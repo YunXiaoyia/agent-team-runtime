@@ -1,4 +1,4 @@
-import { DEFAULT_INSTALL_POLICY, type InstallPolicy, type PolicyEvaluation, type TrustLevel } from '@cat-cafe/shared';
+import { DEFAULT_INSTALL_POLICY, type InstallPolicy, type PolicyEvaluation, type TrustLevel } from '@agent-team-runtime/shared';
 
 interface PolicyInput {
   trustLevel?: TrustLevel;

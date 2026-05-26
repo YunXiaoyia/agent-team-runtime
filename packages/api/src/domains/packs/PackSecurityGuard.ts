@@ -17,7 +17,7 @@ import {
   PackMaskSchema,
   PackWorkflowSchema,
   PackWorldDriverSchema,
-} from '@cat-cafe/shared';
+} from '@agent-team-runtime/shared';
 import { parse } from 'yaml';
 import type { ZodError } from 'zod';
 

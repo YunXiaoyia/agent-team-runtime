@@ -1,4 +1,4 @@
-import type { BubbleInvariantViolation } from '@cat-cafe/shared';
+import type { BubbleInvariantViolation } from '@agent-team-runtime/shared';
 import { recordDebugEvent } from './invocationEventDebug';
 
 export type BubbleInvariantLogLevel = 'warn' | 'error';

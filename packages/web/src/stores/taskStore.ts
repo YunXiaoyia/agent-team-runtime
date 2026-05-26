@@ -1,7 +1,7 @@
-import type { TaskItem } from '@cat-cafe/shared';
+import type { TaskItem } from '@agent-team-runtime/shared';
 import { create } from 'zustand';
 
-export type { TaskItem } from '@cat-cafe/shared';
+export type { TaskItem } from '@agent-team-runtime/shared';
 
 interface TaskState {
   tasks: TaskItem[];

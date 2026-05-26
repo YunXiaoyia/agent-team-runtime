@@ -25,7 +25,7 @@ describe('RedisAuthorizationRuleStore', { skip: redisIsolationSkipReason(REDIS_U
     assertRedisIsolationOrThrow(REDIS_URL, 'RedisAuthorizationRuleStore');
     const storeModule = await import('../dist/domains/cats/services/stores/redis/RedisAuthorizationRuleStore.js');
     RedisAuthorizationRuleStore = storeModule.RedisAuthorizationRuleStore;
-    const redisModule = await import('@cat-cafe/shared/utils');
+    const redisModule = await import('@agent-team-runtime/shared/utils');
     createRedisClient = redisModule.createRedisClient;
     redis = createRedisClient({ url: REDIS_URL });
     try {
@@ -179,7 +179,7 @@ describe('RedisPendingRequestStore', { skip: redisIsolationSkipReason(REDIS_URL)
     assertRedisIsolationOrThrow(REDIS_URL, 'RedisPendingRequestStore');
     const storeModule = await import('../dist/domains/cats/services/stores/redis/RedisPendingRequestStore.js');
     RedisPendingRequestStore = storeModule.RedisPendingRequestStore;
-    const redisModule = await import('@cat-cafe/shared/utils');
+    const redisModule = await import('@agent-team-runtime/shared/utils');
     createRedisClient = redisModule.createRedisClient;
     redis = createRedisClient({ url: REDIS_URL });
     try {
@@ -369,7 +369,7 @@ describe('RedisAuthorizationAuditStore', { skip: redisIsolationSkipReason(REDIS_
     assertRedisIsolationOrThrow(REDIS_URL, 'RedisAuthorizationAuditStore');
     const storeModule = await import('../dist/domains/cats/services/stores/redis/RedisAuthorizationAuditStore.js');
     RedisAuthorizationAuditStore = storeModule.RedisAuthorizationAuditStore;
-    const redisModule = await import('@cat-cafe/shared/utils');
+    const redisModule = await import('@agent-team-runtime/shared/utils');
     createRedisClient = redisModule.createRedisClient;
     redis = createRedisClient({ url: REDIS_URL });
     try {

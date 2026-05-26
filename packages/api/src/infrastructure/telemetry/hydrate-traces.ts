@@ -8,7 +8,7 @@
  * reconstruction is deferred to a follow-up slice.
  */
 
-import type { RedisClient } from '@cat-cafe/shared/utils';
+import type { RedisClient } from '@agent-team-runtime/shared/utils';
 import { safeParseExtra } from '../../domains/cats/services/stores/redis/redis-message-parsers.js';
 import { MessageKeys } from '../../domains/cats/services/stores/redis-keys/message-keys.js';
 import { createModuleLogger } from '../logger.js';

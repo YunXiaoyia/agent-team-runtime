@@ -1,4 +1,4 @@
-import type { ContentScanFinding } from '@cat-cafe/shared';
+import type { ContentScanFinding } from '@agent-team-runtime/shared';
 
 interface ScanPattern {
   regex: RegExp;

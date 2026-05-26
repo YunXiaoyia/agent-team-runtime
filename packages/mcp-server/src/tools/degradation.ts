@@ -14,8 +14,8 @@
  *        state on a superseded invocation. Surface the structured reason.
  */
 
-import type { CallbackAuthFailureReason } from '@cat-cafe/shared';
-import { CALLBACK_AUTH_FAILURE_REASONS, isCallbackAuthFailureReason } from '@cat-cafe/shared';
+import type { CallbackAuthFailureReason } from '@agent-team-runtime/shared';
+import { CALLBACK_AUTH_FAILURE_REASONS, isCallbackAuthFailureReason } from '@agent-team-runtime/shared';
 import type { ToolResult } from './file-tools.js';
 
 const KNOWN_REASONS: ReadonlySet<CallbackAuthFailureReason> = new Set(CALLBACK_AUTH_FAILURE_REASONS);

@@ -1,4 +1,4 @@
-import type { SignalSource } from '@cat-cafe/shared';
+import type { SignalSource } from '@agent-team-runtime/shared';
 
 export interface RawArticle {
   readonly url: string;

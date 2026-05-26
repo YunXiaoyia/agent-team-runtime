@@ -1,4 +1,4 @@
-import type { RedisClient } from '@cat-cafe/shared/utils';
+import type { RedisClient } from '@agent-team-runtime/shared/utils';
 import type { ILabelStore, ThreadLabel } from '../ports/ThreadStore.js';
 import { LabelKeys } from '../redis-keys/label-keys.js';
 

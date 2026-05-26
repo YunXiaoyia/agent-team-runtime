@@ -8,7 +8,7 @@ import assert from 'node:assert/strict';
 import { dirname, resolve } from 'node:path';
 import { describe, test } from 'node:test';
 import { fileURLToPath } from 'node:url';
-import { catRegistry } from '@cat-cafe/shared';
+import { catRegistry } from '@agent-team-runtime/shared';
 
 const REPO_ROOT_TEMPLATE = resolve(dirname(fileURLToPath(import.meta.url)), '../../..', 'cat-template.json');
 const CAT_TEMPLATE_PATH = REPO_ROOT_TEMPLATE;

@@ -19,14 +19,14 @@
 
 import { readdir, readFile, stat } from 'node:fs/promises';
 import { join } from 'node:path';
-import type { CompiledPackBlocks, PackOnDisk } from '@cat-cafe/shared';
+import type { CompiledPackBlocks, PackOnDisk } from '@agent-team-runtime/shared';
 import {
   PackDefaultsSchema,
   PackGuardrailsSchema,
   PackMaskSchema,
   PackWorkflowSchema,
   PackWorldDriverSchema,
-} from '@cat-cafe/shared';
+} from '@agent-team-runtime/shared';
 import { parse } from 'yaml';
 
 export class PackCompiler {

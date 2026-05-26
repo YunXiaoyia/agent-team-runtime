@@ -160,7 +160,7 @@ Alternatives: @gemini, @opus-45.
 ## Acceptance Criteria
 
 ### Phase A（错误契约 + Resolver 闸）
-- [x] AC-A1: `CatRoutingError` 类型 export 到 `@cat-cafe/shared`，**两种** kind（`cat_not_found` / `cat_disabled`）— `cat_no_quota` 不在范围（KD-5）
+- [x] AC-A1: `CatRoutingError` 类型 export 到 `@agent-team-runtime/shared`，**两种** kind（`cat_not_found` / `cat_disabled`）— `cat_no_quota` 不在范围（KD-5）
 - [x] AC-A2: `resolveCatTarget()` 单点 resolver 实现 — **纯函数 ≤40 行**（KD-8）；单元测试覆盖两种错误路径 + alternatives 排序（同族 + lead 优先 + dedupe + 稳定排序避免竞态）；`cat_not_found` 路径必须先查 roster 区分"不在 roster"和"在 roster 但 disabled"两种情况，**不能直接复用 `isCatAvailable`**（KD-9）
 - [x] AC-A3: Resolver 接入 **5 个入口**（KD-4）：文本 @ parser / `targetCats` / `multi_mention.targets+callbackTo` / `start_vote.voters` / `register_scheduled_task.params.targetCatId`。a2a-mentions.ts:92 改造（pattern building 阶段）和 AgentRouter.ts:415 改造（match-time skip）**分别处理**（KD-10）；保留向后兼容（mentions 列表不变，新增 errors 列表）
 

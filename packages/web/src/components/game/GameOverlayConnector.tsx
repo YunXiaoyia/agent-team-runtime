@@ -1,6 +1,6 @@
 'use client';
 
-import type { GameView, SeatId } from '@cat-cafe/shared';
+import type { GameView, SeatId } from '@agent-team-runtime/shared';
 import type { GodNightStep, GodSeat } from '@/stores/gameStore';
 import { GameOverlay } from './GameOverlay';
 

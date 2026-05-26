@@ -61,7 +61,7 @@ Name: "cli_kimi";     Description: "Kimi CLI (Moonshot)";             Types: ful
 [Files]
 ; Deploy artifacts from `pnpm deploy` — flat, hoisted node_modules with real files.
 ; These supersede the old tarball + source approach. Workspace package source is
-; already inlined (as real copies) inside each deploy's node_modules/@cat-cafe/*.
+; already inlined (as real copies) inside each deploy's node_modules/@agent-team-runtime/*.
 Source: "..\..\bundled\deploy\api\*";            DestDir: "{app}\packages\api"; \
   Flags: recursesubdirs createallsubdirs; Components: core
 Source: "..\..\bundled\deploy\web\*";            DestDir: "{app}\packages\web"; \

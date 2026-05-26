@@ -4,7 +4,7 @@ import type {
   MarketplaceEcosystem,
   MarketplaceSearchQuery,
   MarketplaceSearchResult,
-} from '@cat-cafe/shared';
+} from '@agent-team-runtime/shared';
 
 export class AdapterRegistry {
   private adapters = new Map<string, MarketplaceAdapter>();

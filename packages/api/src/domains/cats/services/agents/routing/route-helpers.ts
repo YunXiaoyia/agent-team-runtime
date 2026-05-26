@@ -3,7 +3,7 @@
  * Shared types, interfaces, and helper functions for route-serial and route-parallel.
  */
 
-import type { CatId, MessageContent, RichBlock, RichBlockBase } from '@cat-cafe/shared';
+import type { CatId, MessageContent, RichBlock, RichBlockBase } from '@agent-team-runtime/shared';
 import { getCatContextBudget } from '../../../../../config/cat-budgets.js';
 import { DEFAULT_HIERARCHICAL_CONTEXT } from '../../../../../config/hierarchical-context-config.js';
 import { createModuleLogger } from '../../../../../infrastructure/logger.js';
@@ -76,7 +76,7 @@ export interface PersistenceContext {
   /** Error details for diagnostics */
   errors: Array<{ catId: string; error: string }>;
   /** F088-P3: Rich blocks consumed during this invocation, for outbound delivery */
-  richBlocks?: import('@cat-cafe/shared').RichBlock[];
+  richBlocks?: import('@agent-team-runtime/shared').RichBlock[];
 }
 
 /** Common options for both strategies */

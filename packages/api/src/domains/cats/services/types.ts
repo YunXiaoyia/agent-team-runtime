@@ -3,7 +3,7 @@
  * Agent 服务的共享类型定义
  */
 
-import type { CatId, MessageContent, ReplyPreview } from '@cat-cafe/shared';
+import type { CatId, MessageContent, ReplyPreview } from '@agent-team-runtime/shared';
 import type { Span } from '@opentelemetry/api';
 import type { CliSpawnOptions } from '../../../utils/cli-types.js';
 

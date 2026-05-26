@@ -6,7 +6,7 @@ import type {
   MarketplaceEcosystem,
   MarketplaceSearchResult,
   TrustLevel,
-} from '@cat-cafe/shared';
+} from '@agent-team-runtime/shared';
 import { create } from 'zustand';
 import { apiFetch } from '@/utils/api-client';
 

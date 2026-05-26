@@ -1,5 +1,5 @@
 {
-  "name": "@cat-cafe/web",
+  "name": "@agent-team-runtime/web",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -15,7 +15,7 @@
     "test:lint-rules": "node eslint-plugins/no-hardcoded-colors.test.js"
   },
   "dependencies": {
-    "@cat-cafe/shared": "workspace:*",
+    "@agent-team-runtime/shared": "workspace:*",
     "@codemirror/lang-css": "^6.3.1",
     "@codemirror/lang-html": "^6.4.11",
     "@codemirror/lang-javascript": "^6.2.5",

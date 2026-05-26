@@ -2,7 +2,7 @@
  * F085 Phase 4 — ActivityTracker
  * 平台级活跃时长追踪：per-user in-memory state, 5min gap detection.
  */
-import type { BrakeCheckinResponse, BrakeSettings, BrakeState } from '@cat-cafe/shared';
+import type { BrakeCheckinResponse, BrakeSettings, BrakeState } from '@agent-team-runtime/shared';
 
 const GAP_THRESHOLD_MS = 5 * 60_000; // 5 minutes = break
 const BYPASS_WINDOW_MS = 4 * 60 * 60_000; // 4h window for bypass escalation (AC13)

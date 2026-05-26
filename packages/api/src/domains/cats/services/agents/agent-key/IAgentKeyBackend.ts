@@ -1,4 +1,4 @@
-import type { AgentKeyRecord, AgentKeyVerifyResult } from '@cat-cafe/shared';
+import type { AgentKeyRecord, AgentKeyVerifyResult } from '@agent-team-runtime/shared';
 
 export type AgentKeyInput = Omit<AgentKeyRecord, 'lastUsedAt'>;
 

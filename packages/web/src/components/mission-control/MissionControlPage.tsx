@@ -1,6 +1,6 @@
 'use client';
 
-import type { BacklogItem, CatId, ExternalProject, MissionHubSelfClaimScope, ThreadPhase } from '@cat-cafe/shared';
+import type { BacklogItem, CatId, ExternalProject, MissionHubSelfClaimScope, ThreadPhase } from '@agent-team-runtime/shared';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useExternalProjectStore } from '@/stores/externalProjectStore';
 import { useMissionControlStore } from '@/stores/missionControlStore';

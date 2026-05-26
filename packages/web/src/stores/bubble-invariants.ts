@@ -6,7 +6,7 @@ import type {
   BubbleSourcePath,
   BubbleStableIdentity,
   BubbleViolationKind,
-} from '@cat-cafe/shared';
+} from '@agent-team-runtime/shared';
 import { getBubbleInvocationId } from '@/debug/bubbleIdentity';
 import type { ChatMessage } from './chat-types';
 import { crossesUserTurnBoundary } from './turn-boundary';

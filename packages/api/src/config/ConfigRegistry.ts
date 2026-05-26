@@ -6,7 +6,7 @@
  * 安全：Redis URL 不暴露，只显示连接状态。
  */
 
-import { catRegistry } from '@cat-cafe/shared';
+import { catRegistry } from '@agent-team-runtime/shared';
 import { DEFAULT_CLI_TIMEOUT_MS, readCliTimeoutMsFromEnv } from '../utils/cli-timeout.js';
 import { configStore } from './ConfigStore.js';
 import { getAllCatBudgets } from './cat-budgets.js';

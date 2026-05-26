@@ -1,4 +1,4 @@
-import type { CareLoopHint, CharacterRecord, WorldEventEntry } from '@cat-cafe/shared';
+import type { CareLoopHint, CharacterRecord, WorldEventEntry } from '@agent-team-runtime/shared';
 
 export interface CareLoopConfig {
   minEventsBetweenChecks: number;

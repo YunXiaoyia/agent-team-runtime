@@ -5,7 +5,7 @@ import type {
   WorldActorRef,
   WorldEventEntry,
   WorldRecord,
-} from '@cat-cafe/shared';
+} from '@agent-team-runtime/shared';
 import Database from 'better-sqlite3';
 import type { IWorldStore } from './interfaces.js';
 import { applyMigrations } from './schema.js';

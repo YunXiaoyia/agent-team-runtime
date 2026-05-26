@@ -1110,7 +1110,7 @@ created: 2026-02-26
 - 状态：validated
 - 更新时间：2026-05-07
 
-- 坑：F193 Phase A Task 3 写 `post-message-kd1-mcp-handler.test.js` 时漏 `beforeEach` mock fetch；跑 `pnpm --filter @cat-cafe/mcp-server test` 时，`node:test` 子进程继承了 Claude Code agent process 自带的 callback env (`CAT_CAFE_API_URL=http://127.0.0.1:3004` + `CAT_CAFE_INVOCATION_ID` + `CAT_CAFE_CALLBACK_TOKEN`)。测试里那行 `handlePostMessage({ content: 'hi' })` **用了猫自己当前 invocation 的真身份**，把 'hi' 发到当前对话 thread。跑 6 次 = 6 条假 hi 出现在铲屎官 thread 里，签名"Ragdoll (Opus 4.7)"，看起来像 cron job。
+- 坑：F193 Phase A Task 3 写 `post-message-kd1-mcp-handler.test.js` 时漏 `beforeEach` mock fetch；跑 `pnpm --filter @agent-team-runtime/mcp-server test` 时，`node:test` 子进程继承了 Claude Code agent process 自带的 callback env (`CAT_CAFE_API_URL=http://127.0.0.1:3004` + `CAT_CAFE_INVOCATION_ID` + `CAT_CAFE_CALLBACK_TOKEN`)。测试里那行 `handlePostMessage({ content: 'hi' })` **用了猫自己当前 invocation 的真身份**，把 'hi' 发到当前对话 thread。跑 6 次 = 6 条假 hi 出现在铲屎官 thread 里，签名"Ragdoll (Opus 4.7)"，看起来像 cron job。
 - 根因：
   1. **根因 A（猫疏忽）**：unit test 文件没写 `beforeEach` mock + env override；只 mock 在用到的 test case 里 → 漏 mock 的 case fall-through 到真 fetch
   2. **根因 B（结构性）**：cat agent process 自身 env 就有 callback config（这是 MCP `post_message` 工具能跑的前提），跑 child process 时**默认全继承**——和 worktree 隔离无关，main / worktree / 任何 cwd 都一样会泄漏。原先以为问题是"worktree env 泄漏"是误诊

@@ -7,8 +7,8 @@
  */
 
 import { createHash } from 'node:crypto';
-import type { CatId } from '@cat-cafe/shared';
-import { catRegistry } from '@cat-cafe/shared';
+import type { CatId } from '@agent-team-runtime/shared';
+import { catRegistry } from '@agent-team-runtime/shared';
 import { isCatAvailable } from '../../../../../config/cat-config-loader.js';
 import {
   AFTER_HANDOFF_RE,

@@ -12,7 +12,7 @@ import assert from 'node:assert/strict';
 import { EventEmitter } from 'node:events';
 import { writeFileSync } from 'node:fs';
 import { test } from 'node:test';
-import { createCatId } from '@cat-cafe/shared';
+import { createCatId } from '@agent-team-runtime/shared';
 import {
   CarrierError,
   ClaudeBgCarrierService,

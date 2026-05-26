@@ -158,7 +158,7 @@ Step 6: RUN — 运行验证命令（必须这次真实运行）
   pnpm check                             # 0 errors（biome 格式 + lint）
   pnpm -r --if-present run build         # exit 0
   # Redis 相关改动额外跑：
-  pnpm --filter @cat-cafe/api test:redis
+  pnpm --filter @agent-team-runtime/api test:redis
   # ⚠️ pnpm check 包含 biome format + lint 规则。
   # 如果有 format 问题，先跑 pnpm check:fix 自动修复。
   # 不能带着 biome errors 提 review！（2026-03-12 铲屎官定调）

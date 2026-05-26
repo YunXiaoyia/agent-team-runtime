@@ -21,7 +21,7 @@ describe('ExternalProjectStore (Redis)', { skip: shouldSkipSuite ? 'Redis isolat
   before(async () => {
     const storeModule = await import('../dist/domains/projects/external-project-store.js');
     ExternalProjectStore = storeModule.ExternalProjectStore;
-    const redisModule = await import('@cat-cafe/shared/utils');
+    const redisModule = await import('@agent-team-runtime/shared/utils');
     createRedisClient = redisModule.createRedisClient;
 
     redis = createRedisClient({ url: REDIS_URL });

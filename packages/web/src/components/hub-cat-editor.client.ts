@@ -1,6 +1,6 @@
 'use client';
 
-import { AVATAR_RAW_FILE_LIMIT_BYTES } from '@cat-cafe/shared';
+import { AVATAR_RAW_FILE_LIMIT_BYTES } from '@agent-team-runtime/shared';
 import { apiFetch } from '@/utils/api-client';
 
 export async function uploadAvatarAsset(file: File): Promise<string> {

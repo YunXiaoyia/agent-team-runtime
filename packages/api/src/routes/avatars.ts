@@ -1,7 +1,7 @@
 import { randomUUID } from 'node:crypto';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
-import { AVATAR_RAW_FILE_LIMIT_BYTES } from '@cat-cafe/shared';
+import { AVATAR_RAW_FILE_LIMIT_BYTES } from '@agent-team-runtime/shared';
 import multipart from '@fastify/multipart';
 import type { FastifyPluginAsync } from 'fastify';
 import { getDefaultUploadDir } from '../utils/upload-paths.js';

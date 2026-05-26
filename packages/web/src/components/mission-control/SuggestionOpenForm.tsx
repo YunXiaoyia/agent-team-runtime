@@ -1,6 +1,6 @@
 'use client';
 
-import type { ThreadPhase } from '@cat-cafe/shared';
+import type { ThreadPhase } from '@agent-team-runtime/shared';
 
 export interface SuggestionCatOption {
   id: string;

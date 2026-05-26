@@ -4,7 +4,7 @@ import {
   type CliEffortValue,
   getCliEffortOptionsForProvider,
   builtinAccountIdForClient as sharedBuiltinAccountIdForClient,
-} from '@cat-cafe/shared';
+} from '@agent-team-runtime/shared';
 import type { CatData } from '@/hooks/useCatData';
 import type { BuiltinAccountClient, ProfileItem } from './hub-accounts.types';
 import type { CatStrategyEntry, StrategyType } from './hub-strategy-types';

@@ -4,7 +4,7 @@ import type {
   MarketplaceArtifactKind,
   MarketplaceSearchQuery,
   MarketplaceSearchResult,
-} from '@cat-cafe/shared';
+} from '@agent-team-runtime/shared';
 
 export interface CodexCatalogEntry {
   id: string;

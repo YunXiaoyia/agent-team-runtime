@@ -1,4 +1,4 @@
-import type { CatId, RichCardBlock } from '@cat-cafe/shared';
+import type { CatId, RichCardBlock } from '@agent-team-runtime/shared';
 import type { AgentMessage, MessageMetadata } from '../../../types.js';
 import type { AntigravitySideEffectJournalEntry } from './AntigravitySideEffectJournal.js';
 import type { AntigravityRecoveryDecision } from './antigravity-recovery-policy.js';

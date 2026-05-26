@@ -1,4 +1,4 @@
-import type { SignalArticle, SignalArticleStatus } from '@cat-cafe/shared';
+import type { SignalArticle, SignalArticleStatus } from '@agent-team-runtime/shared';
 import { SignalTierBadge } from './SignalTierBadge';
 
 const statusLabelMap: Record<SignalArticleStatus, string> = {

@@ -31,7 +31,7 @@ describe('RedisThreadStore', { skip: redisIsolationSkipReason(REDIS_URL) }, () =
 
     const storeModule = await import('../dist/domains/cats/services/stores/redis/RedisThreadStore.js');
     RedisThreadStore = storeModule.RedisThreadStore;
-    const redisModule = await import('@cat-cafe/shared/utils');
+    const redisModule = await import('@agent-team-runtime/shared/utils');
     createRedisClient = redisModule.createRedisClient;
 
     redis = createRedisClient({ url: REDIS_URL });
@@ -497,7 +497,7 @@ describe('ThreadStoreFactory', () => {
         '../dist/domains/cats/services/stores/factories/ThreadStoreFactory.js'
       );
       const { RedisThreadStore } = await import('../dist/domains/cats/services/stores/redis/RedisThreadStore.js');
-      const { createRedisClient } = await import('@cat-cafe/shared/utils');
+      const { createRedisClient } = await import('@agent-team-runtime/shared/utils');
       const redis = createRedisClient({ url: REDIS_URL });
       try {
         const store = createThreadStore(redis);

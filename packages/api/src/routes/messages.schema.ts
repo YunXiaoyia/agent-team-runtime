@@ -4,7 +4,7 @@
  * Extracted from parse-multipart.ts for better organization.
  */
 
-import { catIdSchema } from '@cat-cafe/shared';
+import { catIdSchema } from '@agent-team-runtime/shared';
 import { z } from 'zod';
 
 /**

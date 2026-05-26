@@ -5,7 +5,7 @@ import { chmod, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { homedir, tmpdir } from 'node:os';
 import { join, sep } from 'node:path';
 import { afterEach, beforeEach, describe, it } from 'node:test';
-import { catRegistry } from '@cat-cafe/shared';
+import { catRegistry } from '@agent-team-runtime/shared';
 import './helpers/setup-cat-registry.js';
 import {
   bootstrapCapabilities,
@@ -2394,11 +2394,11 @@ describe('generateCliConfigs', () => {
   });
 
   it('resolves pencil once and reuses the result across providers', async () => {
-    /** @type {import('@cat-cafe/shared').McpServerDescriptor[]} */
+    /** @type {import('@agent-team-runtime/shared').McpServerDescriptor[]} */
     const anthro = [{ name: 'pencil', command: '', args: [], enabled: true, source: 'external', resolver: 'pencil' }];
-    /** @type {import('@cat-cafe/shared').McpServerDescriptor[]} */
+    /** @type {import('@agent-team-runtime/shared').McpServerDescriptor[]} */
     const openai = [{ name: 'pencil', command: '', args: [], enabled: true, source: 'external', resolver: 'pencil' }];
-    /** @type {import('@cat-cafe/shared').McpServerDescriptor[]} */
+    /** @type {import('@agent-team-runtime/shared').McpServerDescriptor[]} */
     const google = [{ name: 'pencil', command: '', args: [], enabled: true, source: 'external', resolver: 'pencil' }];
 
     let calls = 0;

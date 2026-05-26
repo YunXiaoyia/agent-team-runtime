@@ -121,7 +121,7 @@ Action Needed 必须标注级别：
 | 两个 session 都要改 BACKLOG | 先完成的先改 + commit push → 后来的 git pull 再改 |
 | 两个 session 改同一源文件 | Claim 协议 → 一个先改，另一个等 |
 | 两个 session 改同一 feature doc | 改不同字段没事 → 改同一字段用 Claim |
-| shared 包改动 | 改的人负责通知所有活跃 session → `[ACTION] pnpm --filter @cat-cafe/shared build` |
+| shared 包改动 | 改的人负责通知所有活跃 session → `[ACTION] pnpm --filter @agent-team-runtime/shared build` |
 
 ## Step 4: 确认
 

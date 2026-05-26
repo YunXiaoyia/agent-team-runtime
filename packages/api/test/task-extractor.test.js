@@ -4,7 +4,7 @@
 
 import assert from 'node:assert/strict';
 import { afterEach, beforeEach, describe, it } from 'node:test';
-import { catRegistry } from '@cat-cafe/shared';
+import { catRegistry } from '@agent-team-runtime/shared';
 import { extractTasks, toCreateTaskInputs } from '../dist/domains/cats/services/orchestration/TaskExtractor.js';
 
 // Mock AgentService that returns valid JSON

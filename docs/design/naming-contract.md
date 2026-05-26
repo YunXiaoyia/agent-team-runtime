@@ -17,14 +17,14 @@
 
 | 层面 | 用什么名字 | 例子 | 负责方 |
 |------|-----------|------|--------|
-| **内部代码** | `cat-cafe` | `@cat-cafe/api`, `cat-cafe-skills/`, `cat-cafe:session:*` | 开发者，**不改** |
+| **内部代码** | `cat-cafe` | `@agent-team-runtime/api`, `cat-cafe-skills/`, `cat-cafe:session:*` | 开发者，**不改** |
 | **内部日常** | Cat Café / 猫咖 | Linear 项目名、团队沟通、内部文档 | 团队惯例，**不改** |
 | **对外品牌** | Clowder AI | GitHub org/repo README、官网标题、社交媒体 | sync 脚本 + 公开模板 |
 | **桥接语** | Clowder AI, from Cat Café | README Origin Story、About 页面 | 文档模板 |
 | **UI 标题** | 公开版 → Clowder AI | `<title>`, header `<h1>`, PWA title | sync transform |
 | **UI 标题** | 内部版 → Cat Cafe | 保持现状 | **不改** |
 | **Logo 文件** | 源仓 `cat-cafe-logo-*` → 开源仓 `clowder-ai-logo-*` | sync script rename | sync transform |
-| **npm 包名** | `@cat-cafe/*` | `@cat-cafe/api`, `@cat-cafe/shared` | **不改** |
+| **npm 包名** | `@agent-team-runtime/*` | `@agent-team-runtime/api`, `@agent-team-runtime/shared` | **不改** |
 | **MCP 工具前缀** | `cat_cafe_*` | `cat_cafe_post_message` | **不改** |
 | **Redis key** | `cat-cafe:*` | `cat-cafe:session:*`, `cat-cafe:thread:*` | **不改** |
 | **localStorage** | `cat-cafe-*` | `cat-cafe-userId` | **不改** |
@@ -58,7 +58,7 @@
 
 | 不能改的 | 原因 |
 |---------|------|
-| `@cat-cafe/*` npm scope | 所有 import 路径断裂 |
+| `@agent-team-runtime/*` npm scope | 所有 import 路径断裂 |
 | `cat_cafe_*` MCP 工具名 | 所有猫的 prompt/config 全炸 |
 | `cat-cafe:*` Redis key | 线上数据 orphan |
 | `cat-cafe-runtime/` | 绝对路径断裂 |

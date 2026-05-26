@@ -1,5 +1,5 @@
-import type { SignalArticle, SignalArticleStatus, SignalTier } from '@cat-cafe/shared';
-import { SignalArticleSchema } from '@cat-cafe/shared';
+import type { SignalArticle, SignalArticleStatus, SignalTier } from '@agent-team-runtime/shared';
+import { SignalArticleSchema } from '@agent-team-runtime/shared';
 import type { SignalPaths } from '../config/signal-paths.js';
 import { resolveSignalPaths } from '../config/signal-paths.js';
 import {

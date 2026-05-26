@@ -11,7 +11,7 @@
  * corresponding Cat Cafe SessionRecord via `getByCliSessionId()`.
  */
 
-import type { SessionRecord } from '@cat-cafe/shared';
+import type { SessionRecord } from '@agent-team-runtime/shared';
 import type { FastifyInstance, FastifyPluginOptions } from 'fastify';
 import { z } from 'zod';
 import { getSessionStrategy } from '../config/session-strategy.js';

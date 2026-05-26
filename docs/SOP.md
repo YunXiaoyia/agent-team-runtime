@@ -125,7 +125,7 @@ Phase N merge → 碰头（不是"要不要继续"，是"方向对不对"）→ 
 |------|------|------|
 | Biome | `pnpm check` / `pnpm check:fix` | 开发中 + Step ② |
 | TypeScript | `pnpm lint` | Step ② 必跑 |
-| shared rebuild | `pnpm --filter @cat-cafe/shared build` | shared 包改后 |
+| shared rebuild | `pnpm --filter @agent-team-runtime/shared build` | shared 包改后 |
 | 目录卫生 | `pnpm check:dir-size` + `pnpm check:deps` | 新增文件时 |
 
 详见 ADR-010（目录卫生）。
@@ -185,7 +185,7 @@ Phase N merge → 碰头（不是"要不要继续"，是"方向对不对"）→ 
 
 硬规则：
 1. 先在 `cat-cafe` 导出同一份同步产物到 **temp target**
-2. 在 temp target 跑完整 public gate：`pnpm check`、`pnpm lint`、`build`、`pnpm --filter @cat-cafe/api run test:public`、startup acceptance
+2. 在 temp target 跑完整 public gate：`pnpm check`、`pnpm lint`、`build`、`pnpm --filter @agent-team-runtime/api run test:public`、startup acceptance
 3. **只有 temp target public gate 全绿，才允许碰真实 `clowder-ai`**
 4. 本机 README/macOS smoke 不属于 full sync 主路径；它必须是 sync 完成后的独立步骤，且必须显式隔离端口/Redis
 

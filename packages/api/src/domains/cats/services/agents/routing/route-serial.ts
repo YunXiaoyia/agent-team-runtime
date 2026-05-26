@@ -10,7 +10,7 @@
  * A2A only triggers here in routeSerial; routeParallel never chains (MVP safety boundary).
  */
 
-import { type CatConfig, type CatId, catRegistry, createCatId, resolveWorkflowSopSkill } from '@cat-cafe/shared';
+import { type CatConfig, type CatId, catRegistry, createCatId, resolveWorkflowSopSkill } from '@agent-team-runtime/shared';
 import type { Span } from '@opentelemetry/api';
 import { context, trace } from '@opentelemetry/api';
 import { getCatContextBudget } from '../../../../../config/cat-budgets.js';
@@ -420,7 +420,7 @@ export async function* routeSerial(
       // lose identity/家规 entirely (云端 Codex P1-cloud-1, 2026-05-16).
       const mcpAvailable = (catConfig?.mcpSupport ?? false) && !!mcpServerPath;
       // F129: Load active pack blocks (best-effort, failure does not block invocation)
-      let packBlocks: import('@cat-cafe/shared').CompiledPackBlocks | null = null;
+      let packBlocks: import('@agent-team-runtime/shared').CompiledPackBlocks | null = null;
       if (deps.packStore) {
         const { getActivePackBlocks } = await import('../../../../packs/getActivePackBlocks.js');
         packBlocks = await getActivePackBlocks(deps.packStore);
@@ -484,7 +484,7 @@ export async function* routeSerial(
       }
 
       // F093: Resolve world context for thread (fail-open)
-      let worldContext: import('@cat-cafe/shared').WorldContextEnvelope | undefined;
+      let worldContext: import('@agent-team-runtime/shared').WorldContextEnvelope | undefined;
       if (deps.worldStore && deps.worldContextProvider) {
         try {
           const activeWorld = await deps.worldStore.getWorldForThread(threadId);
@@ -714,7 +714,7 @@ export async function* routeSerial(
       const pendingToolResults: string[] = [];
       const structuredTargetCats = new Set<string>();
       // F060: Collect rich blocks emitted inline via system_info (not MCP buffer)
-      const streamRichBlocks: import('@cat-cafe/shared').RichBlock[] = [];
+      const streamRichBlocks: import('@agent-team-runtime/shared').RichBlock[] = [];
       // F22 R2 P1-1: Capture own invocationId from stream (not getLatestId)
       let ownInvocationId: string | undefined;
       // F111 Phase B: Streaming TTS chunker for real-time voice (voiceMode only)

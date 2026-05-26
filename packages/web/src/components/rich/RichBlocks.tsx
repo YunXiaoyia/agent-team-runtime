@@ -1,6 +1,6 @@
 'use client';
 
-import type { ConnectorSource } from '@cat-cafe/shared';
+import type { ConnectorSource } from '@agent-team-runtime/shared';
 import type { RichBlock, RichInteractiveBlock } from '@/stores/chat-types';
 import { AudioBlock } from './AudioBlock';
 import { CallbackAuthFailureBlock } from './CallbackAuthFailureBlock';

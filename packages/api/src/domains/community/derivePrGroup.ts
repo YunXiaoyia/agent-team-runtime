@@ -10,7 +10,7 @@
  *   conflict.mergeState = 'CONFLICTING' | 'MERGEABLE' | 'UNKNOWN'
  */
 
-import type { AutomationState, PrBoardGroup, TaskStatus } from '@cat-cafe/shared';
+import type { AutomationState, PrBoardGroup, TaskStatus } from '@agent-team-runtime/shared';
 
 export function derivePrGroup(automationState?: AutomationState | null, taskStatus?: TaskStatus): PrBoardGroup {
   if (taskStatus === 'done') return 'completed';

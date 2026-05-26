@@ -1,6 +1,6 @@
 'use client';
 
-import type { IntentCard, RiskSignal, SourceTag } from '@cat-cafe/shared';
+import type { IntentCard, RiskSignal, SourceTag } from '@agent-team-runtime/shared';
 import { useState } from 'react';
 import { apiFetch } from '@/utils/api-client';
 

@@ -3,8 +3,8 @@
  * All cats respond independently to the same message.
  */
 
-import type { CatConfig, CatId } from '@cat-cafe/shared';
-import { catRegistry, resolveWorkflowSopSkill } from '@cat-cafe/shared';
+import type { CatConfig, CatId } from '@agent-team-runtime/shared';
+import { catRegistry, resolveWorkflowSopSkill } from '@agent-team-runtime/shared';
 import { getCatContextBudget } from '../../../../../config/cat-budgets.js';
 import { getConfigSessionStrategy, isSessionChainEnabled } from '../../../../../config/cat-config-loader.js';
 import { createModuleLogger } from '../../../../../infrastructure/logger.js';
@@ -176,7 +176,7 @@ export async function* routeParallel(
       // mcpAvailable still gates the per-message HTTP callback fallback.
       const mcpAvailable = (catConfig?.mcpSupport ?? false) && !!mcpServerPath;
       // F129: Load active pack blocks (best-effort)
-      let packBlocks: import('@cat-cafe/shared').CompiledPackBlocks | null = null;
+      let packBlocks: import('@agent-team-runtime/shared').CompiledPackBlocks | null = null;
       if (deps.packStore) {
         const { getActivePackBlocks } = await import('../../../../packs/getActivePackBlocks.js');
         packBlocks = await getActivePackBlocks(deps.packStore);
@@ -447,7 +447,7 @@ export async function* routeParallel(
   const catSawUserFacingSystemInfo = new Map<string, boolean>();
   const catToolEvents = new Map<string, StoredToolEvent[]>();
   // F060: Collect inline rich blocks per cat from system_info stream
-  const catStreamRichBlocks = new Map<string, import('@cat-cafe/shared').RichBlock[]>();
+  const catStreamRichBlocks = new Map<string, import('@agent-team-runtime/shared').RichBlock[]>();
   const catErrorText = new Map<string, string>();
   const catHadError = new Set<string>();
   // #267: track errors that happened BEFORE abort — only these are real provider failures

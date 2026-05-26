@@ -1,4 +1,4 @@
-import type { ReplyPreview, SchedulerMessageExtra } from '@cat-cafe/shared';
+import type { ReplyPreview, SchedulerMessageExtra } from '@agent-team-runtime/shared';
 
 /** Content block types matching backend MessageContent */
 export interface TextContent {

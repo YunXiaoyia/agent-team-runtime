@@ -1,6 +1,6 @@
-import type { SchedulerLifecycleEvent, SchedulerMessageExtra, SchedulerToastPayload } from '@cat-cafe/shared';
+import type { SchedulerLifecycleEvent, SchedulerMessageExtra, SchedulerToastPayload } from '@agent-team-runtime/shared';
 
-export type { SchedulerLifecycleEvent, SchedulerMessageExtra, SchedulerToastPayload } from '@cat-cafe/shared';
+export type { SchedulerLifecycleEvent, SchedulerMessageExtra, SchedulerToastPayload } from '@agent-team-runtime/shared';
 
 // ─── F139: Unified Schedule Abstraction ────────────────────
 

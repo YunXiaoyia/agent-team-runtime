@@ -16,7 +16,7 @@ import './helpers/setup-cat-registry.js';
 import assert from 'node:assert/strict';
 import { describe, test } from 'node:test';
 import { fileURLToPath } from 'node:url';
-import { catRegistry } from '@cat-cafe/shared';
+import { catRegistry } from '@agent-team-runtime/shared';
 
 const REPO_TEMPLATE_PATH = fileURLToPath(new URL('../../../cat-template.json', import.meta.url));
 

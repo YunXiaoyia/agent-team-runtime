@@ -1,6 +1,6 @@
 'use client';
 
-import type { GameResultStats } from '@cat-cafe/shared';
+import type { GameResultStats } from '@agent-team-runtime/shared';
 
 interface GameResultScreenProps {
   stats: GameResultStats;

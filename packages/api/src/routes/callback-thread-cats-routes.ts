@@ -3,7 +3,7 @@
  * Delegates to shared categorizeThreadCats() (F142). Auth: invocationId + callbackToken.
  */
 
-import { catRegistry } from '@cat-cafe/shared';
+import { catRegistry } from '@agent-team-runtime/shared';
 import type { FastifyInstance } from 'fastify';
 import { isCatAvailable } from '../config/cat-config-loader.js';
 import type { IThreadStore } from '../domains/cats/services/stores/ports/ThreadStore.js';

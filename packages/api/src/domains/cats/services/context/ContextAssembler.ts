@@ -6,7 +6,7 @@
  * formatMessage() 也被 export route 复用 (聊天记录导出)。
  */
 
-import { catRegistry } from '@cat-cafe/shared';
+import { catRegistry } from '@agent-team-runtime/shared';
 import { estimateTokens } from '../../../../utils/token-counter.js';
 import { isDelivered, type StoredMessage } from '../stores/ports/MessageStore.js';
 

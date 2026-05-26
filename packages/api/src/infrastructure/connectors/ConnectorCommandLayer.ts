@@ -1,4 +1,4 @@
-import { normalizeCatId, parseCommand } from '@cat-cafe/shared';
+import { normalizeCatId, parseCommand } from '@agent-team-runtime/shared';
 import type { CommandRegistry } from '../commands/CommandRegistry.js';
 import type { IConnectorPermissionStore } from './ConnectorPermissionStore.js';
 import type { IConnectorThreadBindingStore } from './ConnectorThreadBindingStore.js';

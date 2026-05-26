@@ -13,7 +13,7 @@ import type {
   ReplyPreview,
   RichMessageExtra,
   SchedulerMessageExtra,
-} from '@cat-cafe/shared';
+} from '@agent-team-runtime/shared';
 import type { MessageMetadata } from '../../types.js';
 import { isSystemUserMessage } from '../visibility.js';
 // Single source of truth: ThreadStore.ts owns DEFAULT_THREAD_ID

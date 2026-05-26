@@ -1,7 +1,7 @@
 import { chmod, mkdir, writeFile } from 'node:fs/promises';
 import { homedir } from 'node:os';
 import { dirname, join } from 'node:path';
-import { createCatId } from '@cat-cafe/shared';
+import { createCatId } from '@agent-team-runtime/shared';
 import type { AgentKeyRegistry } from './AgentKeyRegistry.js';
 
 const DEFAULT_ANTIGRAVITY_AGENT_KEY_DIR = join(homedir(), '.cat-cafe', 'agent-keys');

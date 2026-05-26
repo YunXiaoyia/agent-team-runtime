@@ -1,4 +1,4 @@
-import type { SignalArticleStatus, StudyMeta } from '@cat-cafe/shared';
+import type { SignalArticleStatus, StudyMeta } from '@agent-team-runtime/shared';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { MarkdownContent } from '@/components/MarkdownContent';
 import { getThreadHref } from '@/components/ThreadSidebar/thread-navigation';

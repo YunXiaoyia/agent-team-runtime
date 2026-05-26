@@ -1,6 +1,6 @@
 'use client';
 
-import type { ReplyPreview, SchedulerMessageExtra } from '@cat-cafe/shared';
+import type { ReplyPreview, SchedulerMessageExtra } from '@agent-team-runtime/shared';
 import { useCallback, useEffect, useLayoutEffect, useRef } from 'react';
 import { getBubbleInvocationId, shouldForceReplaceHydrationForCachedMessages } from '@/debug/bubbleIdentity';
 import { recordDebugEvent } from '@/debug/invocationEventDebug';

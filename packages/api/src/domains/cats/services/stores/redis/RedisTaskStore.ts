@@ -13,8 +13,8 @@
  * TTL: 30 days default. pr_tracking tasks with status!=done have no TTL.
  */
 
-import type { AutomationState, CatId, CreateTaskInput, TaskItem, TaskKind, UpdateTaskInput } from '@cat-cafe/shared';
-import type { RedisClient } from '@cat-cafe/shared/utils';
+import type { AutomationState, CatId, CreateTaskInput, TaskItem, TaskKind, UpdateTaskInput } from '@agent-team-runtime/shared';
+import type { RedisClient } from '@agent-team-runtime/shared/utils';
 import { generateSortableId } from '../ports/MessageStore.js';
 import { createSubjectOwnershipConflict, type ITaskStore } from '../ports/TaskStore.js';
 import { TaskKeys } from '../redis-keys/task-keys.js';

@@ -1,6 +1,6 @@
 'use client';
 
-import type { SourceTag, TriageBucket } from '@cat-cafe/shared';
+import type { SourceTag, TriageBucket } from '@agent-team-runtime/shared';
 
 const BUCKET_STYLES: Record<TriageBucket, { bg: string; text: string; label: string }> = {
   build_now: { bg: 'bg-conn-green-bg', text: 'text-green-800', label: 'Build Now' },

@@ -1,4 +1,4 @@
-import { protocolForClient as sharedProtocolForClient } from '@cat-cafe/shared';
+import { protocolForClient as sharedProtocolForClient } from '@agent-team-runtime/shared';
 import type { ClientId } from './hub-cat-editor.model';
 
 export function protocolForClient(client: ClientId): 'anthropic' | 'openai' | 'google' | 'kimi' | null {

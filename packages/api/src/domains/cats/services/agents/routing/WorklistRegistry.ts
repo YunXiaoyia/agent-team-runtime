@@ -14,7 +14,7 @@
  * and MAX_A2A_DEPTH limit.
  */
 
-import type { CatId } from '@cat-cafe/shared';
+import type { CatId } from '@agent-team-runtime/shared';
 import { l1StreakBreakCount, l1StreakWarnCount } from '../../../../../infrastructure/telemetry/instruments.js';
 
 /** F122: Structured result from pushToWorklist — reason explains empty adds */

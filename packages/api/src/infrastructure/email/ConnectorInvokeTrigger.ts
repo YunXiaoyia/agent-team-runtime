@@ -9,7 +9,7 @@
  * BACKLOG #97 Phase 3b
  */
 
-import { type CatId, type MessageContent } from '@cat-cafe/shared';
+import { type CatId, type MessageContent } from '@agent-team-runtime/shared';
 import type { FastifyBaseLogger } from 'fastify';
 import { getDefaultCatId } from '../../config/cat-config-loader.js';
 import type { InvocationQueue } from '../../domains/cats/services/agents/invocation/InvocationQueue.js';

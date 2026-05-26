@@ -1,4 +1,4 @@
-import type { RedisClient } from '@cat-cafe/shared/utils';
+import type { RedisClient } from '@agent-team-runtime/shared/utils';
 import type { IThreadStore } from '../../domains/cats/services/stores/ports/ThreadStore.js';
 import { RedisInvocationRecordStore } from '../../domains/cats/services/stores/redis/RedisInvocationRecordStore.js';
 import { RedisMessageStore } from '../../domains/cats/services/stores/redis/RedisMessageStore.js';

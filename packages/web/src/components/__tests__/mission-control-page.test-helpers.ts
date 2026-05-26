@@ -1,4 +1,4 @@
-import type { BacklogLease, CatId, MissionHubSelfClaimScope, ThreadPhase } from '@cat-cafe/shared';
+import type { BacklogLease, CatId, MissionHubSelfClaimScope, ThreadPhase } from '@agent-team-runtime/shared';
 
 export interface MutableBacklogSuggestion {
   catId: CatId;

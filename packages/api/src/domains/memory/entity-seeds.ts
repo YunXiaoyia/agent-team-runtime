@@ -3,7 +3,7 @@
 import { existsSync, readFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import type { CatCafeConfig, CatConfig } from '@cat-cafe/shared';
+import type { CatCafeConfig, CatConfig } from '@agent-team-runtime/shared';
 import { loadCatConfig, toAllCatConfigs } from '../../config/cat-config-loader.js';
 import { normalizeEntityAlias } from './EntityRegistry.js';
 import type { EntityProvenance, EntityRecord, EntityType } from './interfaces.js';

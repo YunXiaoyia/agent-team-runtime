@@ -15,7 +15,7 @@
  * so observability is uniform regardless of which hook detected the failure.
  */
 
-import type { CallbackAuthFailureReason } from '@cat-cafe/shared';
+import type { CallbackAuthFailureReason } from '@agent-team-runtime/shared';
 import { AGENT_ID, CALLBACK_REASON, CALLBACK_TOOL } from '../infrastructure/telemetry/genai-semconv.js';
 import { callbackAuthFailures } from '../infrastructure/telemetry/instruments.js';
 

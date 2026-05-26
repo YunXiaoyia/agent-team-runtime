@@ -38,8 +38,8 @@
 
 ## Test Evidence
 
-pnpm --filter @cat-cafe/api test       # X passed, 0 failed
-pnpm --filter @cat-cafe/web test       # X passed, 0 failed
+pnpm --filter @agent-team-runtime/api test       # X passed, 0 failed
+pnpm --filter @agent-team-runtime/web test       # X passed, 0 failed
 pnpm -r --if-present run build         # 成功
 
 ## Open Questions

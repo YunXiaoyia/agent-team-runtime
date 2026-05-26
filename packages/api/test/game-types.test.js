@@ -6,7 +6,7 @@
 import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
 
-import { isGameEvent, isSeatId, isValidScope } from '@cat-cafe/shared';
+import { isGameEvent, isSeatId, isValidScope } from '@agent-team-runtime/shared';
 
 describe('Game type guards', () => {
   describe('isSeatId', () => {

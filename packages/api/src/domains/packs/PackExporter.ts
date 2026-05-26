@@ -21,7 +21,7 @@ import type {
   PackMask,
   PackWorkflow,
   PackWorldDriver,
-} from '@cat-cafe/shared';
+} from '@agent-team-runtime/shared';
 import { parse as parseYaml, stringify } from 'yaml';
 
 export interface ExportConfig {

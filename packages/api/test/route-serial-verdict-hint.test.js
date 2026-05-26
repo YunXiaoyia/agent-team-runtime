@@ -16,7 +16,7 @@
 
 import assert from 'node:assert/strict';
 import { describe, test } from 'node:test';
-import { catRegistry } from '@cat-cafe/shared';
+import { catRegistry } from '@agent-team-runtime/shared';
 
 let catRegistryLock = Promise.resolve();
 

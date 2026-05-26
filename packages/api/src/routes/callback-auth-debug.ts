@@ -21,7 +21,7 @@
  * extended (F156 future work) — better fail-closed than silently public.
  */
 
-import { createCatId } from '@cat-cafe/shared';
+import { createCatId } from '@agent-team-runtime/shared';
 import type { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify';
 import { z } from 'zod';
 import type { CallbackAuthSystemMessageNotifier } from './callback-auth-system-message.js';

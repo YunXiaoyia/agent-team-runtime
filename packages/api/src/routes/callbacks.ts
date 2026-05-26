@@ -3,14 +3,14 @@
  * 安全: 每个请求都需要 invocationId + callbackToken 验证。
  */
 
-import type { CatId, CatRoutingError, RichBlock } from '@cat-cafe/shared';
+import type { CatId, CatRoutingError, RichBlock } from '@agent-team-runtime/shared';
 import {
   catRegistry,
   createCatId,
   normalizeRichBlock,
   normalizeSopDefinitionId,
   resolveWorkflowSopSkill,
-} from '@cat-cafe/shared';
+} from '@agent-team-runtime/shared';
 import type { FastifyBaseLogger, FastifyPluginAsync } from 'fastify';
 import { z } from 'zod';
 import { resolveFrontendBaseUrl } from '../config/frontend-origin.js';

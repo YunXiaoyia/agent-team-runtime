@@ -1,6 +1,6 @@
 'use client';
 
-import type { InstallPlan, MarketplaceSearchResult } from '@cat-cafe/shared';
+import type { InstallPlan, MarketplaceSearchResult } from '@agent-team-runtime/shared';
 import { useCallback, useState } from 'react';
 import { HubIcon } from '../hub-icons';
 import { EcosystemBadge, InstallModeBadge, TrustBadge } from './marketplace-badges';

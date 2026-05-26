@@ -2,7 +2,7 @@
 
 import { rmSync } from 'node:fs';
 import { dirname } from 'node:path';
-import { type CatId, createCatId } from '@cat-cafe/shared';
+import { type CatId, createCatId } from '@agent-team-runtime/shared';
 import { getCatModel } from '../../../../../config/cat-models.js';
 import { createModuleLogger } from '../../../../../infrastructure/logger.js';
 import { formatCliExitError } from '../../../../../utils/cli-format.js';

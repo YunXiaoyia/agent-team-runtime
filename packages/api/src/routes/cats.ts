@@ -16,7 +16,7 @@ import {
   getDefaultCliEffortForProvider,
   isValidCliEffortForProvider,
   type RosterEntry,
-} from '@cat-cafe/shared';
+} from '@agent-team-runtime/shared';
 import type { FastifyPluginAsync } from 'fastify';
 import { z } from 'zod';
 import {

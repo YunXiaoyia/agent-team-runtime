@@ -9,8 +9,8 @@
  * Redis SessionStore 可用时走 Redis，否则降级到内存 Map (LRU)。
  */
 
-import type { CatId } from '@cat-cafe/shared';
-import type { SessionStore } from '@cat-cafe/shared/utils';
+import type { CatId } from '@agent-team-runtime/shared';
+import type { SessionStore } from '@agent-team-runtime/shared/utils';
 
 /** Maximum number of sessions to keep in memory (fallback mode only) */
 const MAX_SESSIONS = 1000;

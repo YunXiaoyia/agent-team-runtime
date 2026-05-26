@@ -98,15 +98,15 @@ if (-not $SkipBundleDeps) {
                 $deployed = $false
                 for ($attempt = 1; $attempt -le 3; $attempt++) {
                     if ($attempt -gt 1) {
-                        Write-Host "  Retry $attempt/3 for @cat-cafe/$pkg ..." -ForegroundColor Yellow
+                        Write-Host "  Retry $attempt/3 for @agent-team-runtime/$pkg ..." -ForegroundColor Yellow
                         Start-Sleep -Seconds 10
                     }
                     if (Test-Path $out) { Remove-Item $out -Recurse -Force }
-                    Write-Host "  Deploying @cat-cafe/$pkg ..." -ForegroundColor Gray
-                    pnpm --filter "@cat-cafe/$pkg" --prod --config.node-linker=hoisted deploy $out 2>&1
+                    Write-Host "  Deploying @agent-team-runtime/$pkg ..." -ForegroundColor Gray
+                    pnpm --filter "@agent-team-runtime/$pkg" --prod --config.node-linker=hoisted deploy $out 2>&1
                     if ($LASTEXITCODE -eq 0) { $deployed = $true; break }
                 }
-                if (-not $deployed) { throw "pnpm deploy @cat-cafe/$pkg failed after 3 attempts" }
+                if (-not $deployed) { throw "pnpm deploy @agent-team-runtime/$pkg failed after 3 attempts" }
             }
         } finally {
             Pop-Location

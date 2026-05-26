@@ -1,4 +1,4 @@
-import type { BubbleInvariantViolation } from '@cat-cafe/shared';
+import type { BubbleInvariantViolation } from '@agent-team-runtime/shared';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { recordBubbleInvariantViolation } from '../bubbleInvariantDiagnostics';
 import { clearDebugEvents, configureDebug, dumpBubbleTimeline } from '../invocationEventDebug';

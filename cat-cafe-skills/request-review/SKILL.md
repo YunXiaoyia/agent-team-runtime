@@ -156,7 +156,7 @@ Reviewer 不只审代码质量，还要判断"这是铲屎官要的吗？"
 
 请先修复，再发请求：
   pnpm test                              # 必须 0 failures
-  pnpm --filter @cat-cafe/api test:redis # Redis 改动额外跑
+  pnpm --filter @agent-team-runtime/api test:redis # Redis 改动额外跑
 
 Reviewer 不应该是第一个发现测试失败的人。
 ```

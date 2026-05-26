@@ -1,4 +1,4 @@
-import type { SkillPermissionSet, SkillSecurityStatus } from '@cat-cafe/shared';
+import type { SkillPermissionSet, SkillSecurityStatus } from '@agent-team-runtime/shared';
 
 interface PermissionContext {
   isExternal: boolean;

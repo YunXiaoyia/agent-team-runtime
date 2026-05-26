@@ -8,7 +8,7 @@
 
 import { lstat, mkdir, readdir, readFile, readlink, stat, symlink, writeFile } from 'node:fs/promises';
 import { dirname, join, relative, resolve, sep } from 'node:path';
-import type { BootstrapAction, BootstrapReport } from '@cat-cafe/shared';
+import type { BootstrapAction, BootstrapReport } from '@agent-team-runtime/shared';
 import { pathsEqual } from '../../utils/project-path.js';
 import type { Provider } from './governance-pack.js';
 import {

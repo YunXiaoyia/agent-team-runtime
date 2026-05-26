@@ -1,4 +1,4 @@
-import type { ConsensusResult, DirectionCardPayload, IssueState, TriageEntry } from '@cat-cafe/shared';
+import type { ConsensusResult, DirectionCardPayload, IssueState, TriageEntry } from '@agent-team-runtime/shared';
 import type { ICommunityIssueStore } from '../cats/services/stores/ports/CommunityIssueStore.js';
 import type { IThreadStore } from '../cats/services/stores/ports/ThreadStore.js';
 import { resolveConsensus } from './resolveConsensus.js';

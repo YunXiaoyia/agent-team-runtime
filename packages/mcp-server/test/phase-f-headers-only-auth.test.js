@@ -3,7 +3,7 @@
  *
  * Lives in mcp-server because it tests mcp-server's callbackPost/callbackGet
  * directly. Cloud Codex P2 (PR #1388): API tests must not depend on
- * mcp-server/dist (clean-workspace `pnpm --filter @cat-cafe/api test`
+ * mcp-server/dist (clean-workspace `pnpm --filter @agent-team-runtime/api test`
  * would module-not-found).
  */
 

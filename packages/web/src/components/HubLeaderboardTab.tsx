@@ -1,6 +1,6 @@
 'use client';
 
-import type { LeaderboardRange, LeaderboardStatsResponse } from '@cat-cafe/shared';
+import type { LeaderboardRange, LeaderboardStatsResponse } from '@agent-team-runtime/shared';
 import localFont from 'next/font/local';
 import { useCallback, useEffect, useState } from 'react';
 import { apiFetch } from '@/utils/api-client';

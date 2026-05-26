@@ -1,6 +1,6 @@
 'use client';
 
-import type { BrakeEvent } from '@cat-cafe/shared';
+import type { BrakeEvent } from '@agent-team-runtime/shared';
 import { create } from 'zustand';
 import { apiFetch } from '@/utils/api-client';
 

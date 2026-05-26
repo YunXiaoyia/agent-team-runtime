@@ -6,7 +6,7 @@ import { TaskStore } from '../../dist/domains/cats/services/stores/ports/TaskSto
 
 /**
  * Creates a TaskStore with a helper to register PR tracking entries.
- * @returns {{ taskStore: InstanceType<typeof TaskStore>, register: (input: { repoFullName: string, prNumber: number, catId: string, threadId: string, userId: string, ciTrackingEnabled?: boolean }) => import('@cat-cafe/shared').TaskItem }}
+ * @returns {{ taskStore: InstanceType<typeof TaskStore>, register: (input: { repoFullName: string, prNumber: number, catId: string, threadId: string, userId: string, ciTrackingEnabled?: boolean }) => import('@agent-team-runtime/shared').TaskItem }}
  */
 export function createPrTrackingTaskStore() {
   const taskStore = new TaskStore();

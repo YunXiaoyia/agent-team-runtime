@@ -13,7 +13,7 @@ import { fileURLToPath } from 'node:url';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 import { afterEach, before, beforeEach, describe, it, mock } from 'node:test';
-import { catRegistry } from '@cat-cafe/shared';
+import { catRegistry } from '@agent-team-runtime/shared';
 
 async function collect(iterable) {
   const msgs = [];

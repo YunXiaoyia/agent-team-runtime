@@ -1,6 +1,6 @@
 'use client';
 
-import type { BacklogPriority } from '@cat-cafe/shared';
+import type { BacklogPriority } from '@agent-team-runtime/shared';
 import { useState } from 'react';
 import { useIMEGuard } from '@/hooks/useIMEGuard';
 

@@ -7,7 +7,7 @@ import type {
   Slice,
   SourceTag,
   TriageBucket,
-} from '@cat-cafe/shared';
+} from '@agent-team-runtime/shared';
 
 interface GovernanceHealthProps {
   cards: IntentCard[];

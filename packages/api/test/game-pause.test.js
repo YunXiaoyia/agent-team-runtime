@@ -3,7 +3,7 @@ import { describe, it } from 'node:test';
 
 describe('GameRuntime paused status', () => {
   it('paused is a valid game status alongside lobby/playing/finished', () => {
-    /** @type {import('@cat-cafe/shared').GameRuntime['status']} */
+    /** @type {import('@agent-team-runtime/shared').GameRuntime['status']} */
     const status = 'paused';
     // If TypeScript compilation fails, 'paused' is not in the union
     assert.ok(['lobby', 'playing', 'paused', 'finished'].includes(status));

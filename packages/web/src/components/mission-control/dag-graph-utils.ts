@@ -1,4 +1,4 @@
-import type { BacklogItem, BacklogStatus } from '@cat-cafe/shared';
+import type { BacklogItem, BacklogStatus } from '@agent-team-runtime/shared';
 import dagre from '@dagrejs/dagre';
 import { type Edge, MarkerType, type Node } from '@xyflow/react';
 import typographyTokens from '@/styles/typography-tokens.json';

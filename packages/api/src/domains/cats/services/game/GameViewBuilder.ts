@@ -14,8 +14,8 @@ import type {
   PendingAction,
   SeatId,
   SeatView,
-} from '@cat-cafe/shared';
-import { catRegistry } from '@cat-cafe/shared';
+} from '@agent-team-runtime/shared';
+import { catRegistry } from '@agent-team-runtime/shared';
 import { GameStatsRecorder } from './GameStatsRecorder.js';
 
 export class GameViewBuilder {

@@ -1,4 +1,4 @@
-import type { WorldContextEnvelope } from '@cat-cafe/shared';
+import type { WorldContextEnvelope } from '@agent-team-runtime/shared';
 import type { IWorldStore } from './interfaces.js';
 import type { WorldKnowledgeAdapter } from './WorldKnowledgeAdapter.js';
 

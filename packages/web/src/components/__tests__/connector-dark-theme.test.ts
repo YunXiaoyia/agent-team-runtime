@@ -1,4 +1,4 @@
-import { getAllConnectorDefinitions } from '@cat-cafe/shared';
+import { getAllConnectorDefinitions } from '@agent-team-runtime/shared';
 import { describe, expect, it } from 'vitest';
 
 import tailwindConfig from '../../../tailwind.config';

@@ -11,8 +11,8 @@
  * 或修改 repo 根 `cat-template.json` / 运行时 `.cat-cafe/cat-catalog.json`
  */
 
-import type { ContextBudget } from '@cat-cafe/shared';
-import { catRegistry } from '@cat-cafe/shared';
+import type { ContextBudget } from '@agent-team-runtime/shared';
+import { catRegistry } from '@agent-team-runtime/shared';
 import { resolveBreedId } from './breed-resolver.js';
 import { getAllCatIdsFromConfig, getDefaultVariant, loadCatConfig } from './cat-config-loader.js';
 

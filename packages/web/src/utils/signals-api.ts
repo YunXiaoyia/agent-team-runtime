@@ -1,4 +1,4 @@
-import type { SignalArticle, SignalArticleStatus, SignalSource, SignalTier, StudyMeta } from '@cat-cafe/shared';
+import type { SignalArticle, SignalArticleStatus, SignalSource, SignalTier, StudyMeta } from '@agent-team-runtime/shared';
 import { apiFetch } from '@/utils/api-client';
 
 export interface SignalArticleDetail extends SignalArticle {
@@ -289,25 +289,25 @@ export interface PodcastScript {
 export async function fetchPodcastScript(
   articleId: string,
   artifactId: string,
-): Promise<{ artifact: import('@cat-cafe/shared').StudyArtifact; script: PodcastScript }> {
+): Promise<{ artifact: import('@agent-team-runtime/shared').StudyArtifact; script: PodcastScript }> {
   const response = await apiFetch(
     `/api/signals/articles/${encodeURIComponent(articleId)}/podcast/${encodeURIComponent(artifactId)}`,
   );
   await requireOk(response);
-  return (await response.json()) as { artifact: import('@cat-cafe/shared').StudyArtifact; script: PodcastScript };
+  return (await response.json()) as { artifact: import('@agent-team-runtime/shared').StudyArtifact; script: PodcastScript };
 }
 
 export async function generatePodcast(
   articleId: string,
   mode: 'essence' | 'deep' = 'essence',
-): Promise<{ artifact: import('@cat-cafe/shared').StudyArtifact }> {
+): Promise<{ artifact: import('@agent-team-runtime/shared').StudyArtifact }> {
   const response = await apiFetch(`/api/signals/articles/${encodeURIComponent(articleId)}/podcast`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ mode }),
   });
   await requireOk(response);
-  return (await response.json()) as { artifact: import('@cat-cafe/shared').StudyArtifact };
+  return (await response.json()) as { artifact: import('@agent-team-runtime/shared').StudyArtifact };
 }
 
 // --- F091 Phase 4: Timeline API ---

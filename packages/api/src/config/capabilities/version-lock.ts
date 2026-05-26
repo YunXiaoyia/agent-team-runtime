@@ -1,4 +1,4 @@
-import type { LockVersion } from '@cat-cafe/shared';
+import type { LockVersion } from '@agent-team-runtime/shared';
 
 interface LockVersionInput {
   source: LockVersion['source'];

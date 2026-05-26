@@ -17,7 +17,7 @@
  * The helper is read-only; cleanup runs in the background.
  */
 
-import type { CatId } from '@cat-cafe/shared';
+import type { CatId } from '@agent-team-runtime/shared';
 import type { IInvocationRecordStore } from '../../stores/ports/InvocationRecordStore.js';
 import type { ZombieRecord } from './getThreadLiveInvocations.js';
 import type { TaskProgressStore } from './TaskProgressStore.js';

@@ -6,7 +6,7 @@
  * proper EOF validation. Strict streaming fail-closed — no non-streaming fallback.
  */
 
-import type { CatConfig, CatId } from '@cat-cafe/shared';
+import type { CatConfig, CatId } from '@agent-team-runtime/shared';
 import { getCatModel } from '../../../../../../config/cat-models.js';
 import { createModuleLogger } from '../../../../../../infrastructure/logger.js';
 import type { AgentMessage, AgentService, AgentServiceOptions, MessageMetadata, TokenUsage } from '../../../types.js';

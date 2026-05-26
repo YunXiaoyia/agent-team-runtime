@@ -1,6 +1,6 @@
 import { existsSync, mkdirSync, readFileSync, renameSync, unlinkSync, writeFileSync } from 'node:fs';
 import { dirname, relative, resolve, sep } from 'node:path';
-import type { CatCafeConfig, ClientId, RosterEntry } from '@cat-cafe/shared';
+import type { CatCafeConfig, ClientId, RosterEntry } from '@agent-team-runtime/shared';
 import { builtinAccountIdForClient, resolveBuiltinClientForProvider } from './account-resolver.js';
 
 const CONFIG_SUBDIR = '.cat-cafe';

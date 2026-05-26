@@ -12,8 +12,8 @@
 
 import { existsSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { type CatId, type ConnectorSource, catRegistry } from '@cat-cafe/shared';
-import type { RedisClient } from '@cat-cafe/shared/utils';
+import { type CatId, type ConnectorSource, catRegistry } from '@agent-team-runtime/shared';
+import type { RedisClient } from '@agent-team-runtime/shared/utils';
 import * as lark from '@larksuiteoapi/node-sdk';
 import type { FastifyBaseLogger } from 'fastify';
 import { isCatAvailable } from '../../config/cat-config-loader.js';

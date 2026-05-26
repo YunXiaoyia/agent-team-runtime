@@ -5,7 +5,7 @@ import { dirname, resolve } from 'node:path';
 import { PassThrough } from 'node:stream';
 import { after, before, describe, it, mock } from 'node:test';
 import { fileURLToPath } from 'node:url';
-import { catRegistry } from '@cat-cafe/shared';
+import { catRegistry } from '@agent-team-runtime/shared';
 import { OpenCodeAgentService } from '../dist/domains/cats/services/agents/providers/OpenCodeAgentService.js';
 import { parseA2AMentions } from '../dist/domains/cats/services/agents/routing/a2a-mentions.js';
 import {

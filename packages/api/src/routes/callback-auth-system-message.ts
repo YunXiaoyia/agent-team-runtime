@@ -27,7 +27,7 @@
  */
 
 import { randomUUID } from 'node:crypto';
-import type { CatId, ConnectorSource } from '@cat-cafe/shared';
+import type { CatId, ConnectorSource } from '@agent-team-runtime/shared';
 import type { AuthFailureReason } from '../domains/cats/services/agents/invocation/InvocationRegistry.js';
 import type { IMessageStore } from '../domains/cats/services/stores/ports/MessageStore.js';
 

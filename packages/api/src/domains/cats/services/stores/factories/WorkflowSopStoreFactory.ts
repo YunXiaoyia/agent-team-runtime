@@ -1,4 +1,4 @@
-import type { RedisClient } from '@cat-cafe/shared/utils';
+import type { RedisClient } from '@agent-team-runtime/shared/utils';
 import type { IWorkflowSopStore } from '../ports/WorkflowSopStore.js';
 import { RedisWorkflowSopStore } from '../redis/RedisWorkflowSopStore.js';
 

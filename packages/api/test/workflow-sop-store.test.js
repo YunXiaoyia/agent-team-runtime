@@ -28,7 +28,7 @@ describe(
       RedisWorkflowSopStore = storeModule.RedisWorkflowSopStore;
       const portModule = await import('../dist/domains/cats/services/stores/ports/WorkflowSopStore.js');
       VersionConflictError = portModule.VersionConflictError;
-      const redisModule = await import('@cat-cafe/shared/utils');
+      const redisModule = await import('@agent-team-runtime/shared/utils');
       createRedisClient = redisModule.createRedisClient;
 
       redis = createRedisClient({ url: REDIS_URL });

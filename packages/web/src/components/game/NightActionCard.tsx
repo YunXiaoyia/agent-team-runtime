@@ -1,6 +1,6 @@
 'use client';
 
-import type { SeatId, SeatView } from '@cat-cafe/shared';
+import type { SeatId, SeatView } from '@agent-team-runtime/shared';
 
 interface NightActionCardProps {
   roleName: string;

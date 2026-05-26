@@ -1,6 +1,6 @@
 import { appendFile, mkdir, readFile } from 'node:fs/promises';
 import { join } from 'node:path';
-import type { CapabilityAuditEntry } from '@cat-cafe/shared';
+import type { CapabilityAuditEntry } from '@agent-team-runtime/shared';
 import { sanitizeCapabilityAuditEntry } from './capability-redaction.js';
 
 const AUDIT_DIR = '.cat-cafe';

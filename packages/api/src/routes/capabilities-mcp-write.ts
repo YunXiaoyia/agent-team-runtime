@@ -7,7 +7,7 @@
  * GET /api/capabilities/audit — audit log reader
  */
 
-import type { CapabilityEntry, McpInstallRequest } from '@cat-cafe/shared';
+import type { CapabilityEntry, McpInstallRequest } from '@agent-team-runtime/shared';
 import type { FastifyPluginAsync, FastifyReply, FastifyRequest } from 'fastify';
 import { appendAuditEntry, readAuditLog } from '../config/capabilities/capability-audit.js';
 import { buildInstallPreview } from '../config/capabilities/capability-install.js';

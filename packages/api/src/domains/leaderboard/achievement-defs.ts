@@ -2,7 +2,7 @@
  * F075 Phase C — Achievement badge definitions
  * Static catalog of all unlockable achievements (CVO + daily).
  */
-import type { Achievement } from '@cat-cafe/shared';
+import type { Achievement } from '@agent-team-runtime/shared';
 
 type AchievementDef = Omit<Achievement, 'unlockedAt'>;
 

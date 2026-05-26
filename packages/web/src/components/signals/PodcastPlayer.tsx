@@ -1,4 +1,4 @@
-import type { StudyArtifact } from '@cat-cafe/shared';
+import type { StudyArtifact } from '@agent-team-runtime/shared';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { getPlaybackManager } from '@/hooks/useVoiceStream';
 import { apiFetch } from '@/utils/api-client';
